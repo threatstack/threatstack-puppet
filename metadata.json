@@ -1,0 +1,24 @@
+{
+  "name": "threatstack-threatstack",
+  "version": "1.0.0",
+  "author": "Threat Stack",
+  "license": "Apache 2.0",
+  "summary": "Installs the Threat Stack agent",
+  "source": "https://github.com/threatstack/threatstack-puppet",
+  "issues_url": "https://github.com/threatstack/threatstack-puppet/issues",
+  "tags": ["threatstack"],
+  "operatingsystem_support": [
+    {
+    "operatingsystem":"RedHat",
+    "operatingsystemrelease":[ "6.0", "6.5" ]
+    },
+    {
+    "operatingsystem":"CentOS",
+    "operatingsystemrelease":[ "6.0", "6.5" ]
+    },
+    {
+    "operatingsystem": "Ubuntu",
+    "operatingsystemrelease": [ "14.04", "12.04", "10.04" ]
+    }
+   ]
+}
