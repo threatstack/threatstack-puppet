@@ -6,7 +6,7 @@ provisioner:
   name: puppet_apply
   modules_path: modules
   manifests_path: manifests
-  require_chef_for_busser: false
+  require_chef_for_busser: true
 
 platforms:
   - name: ubuntu-10.04
