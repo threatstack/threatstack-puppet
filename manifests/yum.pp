@@ -1,3 +1,9 @@
+# Setup yum repo and install the threatstack agent
+#
+# == Authors
+#
+# Pete Cheslock
+#
 class threatstack::yum {
   yumrepo { 'threatstack':
     descr    => 'Threat Stack Package Repository',

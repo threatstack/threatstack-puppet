@@ -1,3 +1,9 @@
+# Setup apt repo and install the threatstack agent
+#
+# == Authors
+#
+# Pete Cheslock
+#
 class threatstack::apt {
   $apt_source_file = '/etc/apt/sources.list.d/threatstack.list'
 

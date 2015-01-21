@@ -1,3 +1,12 @@
+# == Class: threatstack
+#
+# This module installs and configures the
+# Threat Stack host based agent
+#
+# == Authors
+#
+# Pete Cheslock
+#
 class threatstack(
   $deploy_key = 'none',
   $policy     = 'Default Policy',
