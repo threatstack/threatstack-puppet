@@ -10,6 +10,7 @@ exclude_paths = [
 
 PuppetLint.configuration.log_format = '%{path}:%{linenumber}:%{check}:%{KIND}:%{message}'
 PuppetLint.configuration.ignore_paths = exclude_paths
+PuppetLint.configuration.send('disable_80chars')
 PuppetLint.configuration.send('disable_autoloader_layout')
 PuppetSyntax.exclude_paths = exclude_paths
 
@@ -22,4 +23,5 @@ task :test => [
   :syntax,
   :lint,
   :metadata,
+  :spec,
 ]
