@@ -1,0 +1,9 @@
+.bundle
+.git
+.gitignore
+.kitchen
+.kitchen.yml
+Gemfile
+Gemfile.lock
+manifests/site.pp
+.DS_Store

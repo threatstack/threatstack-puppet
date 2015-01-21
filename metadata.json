@@ -7,6 +7,7 @@
   "source": "https://github.com/threatstack/threatstack-puppet",
   "issues_url": "https://github.com/threatstack/threatstack-puppet/issues",
   "tags": ["threatstack"],
+  "dependencies": [],
   "operatingsystem_support": [
     {
     "operatingsystem":"RedHat",

@@ -1,6 +1,10 @@
 class threatstack::apt {
   $apt_source_file = '/etc/apt/sources.list.d/threatstack.list'
 
+  package { 'curl':
+    ensure => installed
+  }
+
   package { $threatstack::ts_package:
     ensure  => installed,
     require => [
@@ -26,6 +30,7 @@ class threatstack::apt {
   exec { 'Threat Stack GPG Import':
     command => "/usr/bin/curl ${threatstack::gpg_key} | /usr/bin/apt-key add -",
     unless  => '/usr/bin/apt-key list | grep "Threat Stack"',
-    notify  => Exec['ts-agent-apt-get-update']
+    notify  => Exec['ts-agent-apt-get-update'],
+    require => Package['curl']
   }
 }

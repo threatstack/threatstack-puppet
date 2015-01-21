@@ -1,0 +1,24 @@
+---
+driver:
+  name: vagrant
+
+provisioner:
+  name: puppet_apply
+  modules_path: modules
+  manifests_path: manifests
+  require_chef_for_busser: false
+
+platforms:
+  - name: ubuntu-10.04
+  - name: ubuntu-10.04-i386
+  - name: ubuntu-12.04
+  - name: ubuntu-12.04-i386
+  - name: ubuntu-14.04
+  - name: ubuntu-14.04-i386
+  - name: centos-6.5
+  - name: centos-6.5-i386
+
+suites:
+  - name: default
+    provisioner:
+      manifest: site.pp
