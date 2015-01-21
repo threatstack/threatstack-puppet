@@ -2,7 +2,7 @@
   "name": "threatstack-threatstack",
   "version": "1.0.0",
   "author": "Threat Stack",
-  "license": "Apache 2.0",
+  "license": "Apache-2.0",
   "summary": "Installs the Threat Stack agent",
   "source": "https://github.com/threatstack/threatstack-puppet",
   "issues_url": "https://github.com/threatstack/threatstack-puppet/issues",

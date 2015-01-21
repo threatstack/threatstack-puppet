@@ -1,9 +1,9 @@
 class threatstack(
-  $deploy_key = '',
+  $deploy_key = 'none',
   $policy     = 'Default Policy',
   $ts_package = 'threatstack-agent'
 ) {
-  if $deploy_key == '' {
+  if $deploy_key == 'none' {
     fail('deploy_key must be defined.')
   }
 
