@@ -1,6 +1,6 @@
 {
   "name": "threatstack-threatstack",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "author": "Threat Stack",
   "license": "Apache-2.0",
   "summary": "Installs the Threat Stack agent",
