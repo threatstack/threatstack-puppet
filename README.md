@@ -24,3 +24,19 @@ Parameters
 
 * `threatstack::deploy_key` [required] - Set the deploy key for registering the agent
 * `threatstack::policy` [optional] - Set the policy the node will be added to (Defaults to 'Default Policy')
+
+Testing
+=======
+
+To test setup a site.pp in the manifests folder with your depoy key (and optional policy)
+```
+class { 'threatstack':
+  deploy_key => 'xKkRzesqgkNPGwNNkmx4zHqTYCTUidDdMmNfcZqbxRLWLs3VyE',
+}
+```
+
+Then run:
+```
+bundle install
+bundle exec kitchen test
+```
