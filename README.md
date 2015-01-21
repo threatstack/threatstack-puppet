@@ -1,6 +1,12 @@
 Threat Stack Puppet Module
 ================
 
+[![Build Status](https://travis-ci.org/threatstack/threatstack-chef.svg?branch=master)][travis]
+[![Puppet Forge](http://img.shields.io/puppetforge/v/threatstack/threatstack.svg)][module]
+
+[travis]: https://travis-ci.org/threatstack/threatstack-puppet
+[module]: https://forge.puppetlabs.com/threatstack/threatstack
+
 Puppet manifests to deploy the Threat Stack server agent
 
 Platforms
