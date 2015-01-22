@@ -5,4 +5,5 @@ manifests/site.pp
 .tmp/
 modules/
 pkg
+Gemfile.lock
 vendor
