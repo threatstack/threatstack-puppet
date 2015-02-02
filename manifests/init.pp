@@ -8,9 +8,10 @@
 # Pete Cheslock
 #
 class threatstack(
-  $deploy_key = 'none',
-  $policy     = 'Default Policy',
-  $ts_package = 'threatstack-agent'
+  $deploy_key   = 'none',
+  $policy       = 'Default Policy',
+  $ts_package   = 'threatstack-agent',
+  $ts_hostname  = $fqdn
 ) {
   if $deploy_key == 'none' {
     fail('deploy_key must be defined.')

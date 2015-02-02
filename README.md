@@ -34,10 +34,12 @@ Parameters
 Testing
 =======
 
-To test setup a site.pp in the manifests folder with your depoy key (and optional policy)
+To test setup a site.pp in the manifests folder with your deploy key (and optional policy &/or hostname)
 ```
 class { 'threatstack':
   deploy_key => 'xKkRzesqgkNPGwNNkmx4zHqTYCTUidDdMmNfcZqbxRLWLs3VyE',
+  policy => 'Default Policy',
+  ts_hostname => 'My-server-1'
 }
 ```
 
