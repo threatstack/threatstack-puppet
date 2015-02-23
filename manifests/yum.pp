@@ -10,7 +10,7 @@ class threatstack::yum {
     enabled  => 1,
     baseurl  => $threatstack::repo_url,
     gpgcheck => 1,
-    gpgkey   => 'https://www.threatstack.com/RPM-GPG-KEY-THREATSTACK',
+    gpgkey   => $threatstack::gpg_key
   }
 
   package { $threatstack::ts_package:

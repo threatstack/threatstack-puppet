@@ -11,7 +11,7 @@ describe 'threatstack::apt' do
       :command => '/usr/bin/apt-get update'
     )}
     it { should contain_exec('Threat Stack GPG Import').with(
-      :command => '/usr/bin/curl https://www.threatstack.com/APT-GPG-KEY-THREATSTACK | /usr/bin/apt-key add -'
+      :command => '/usr/bin/curl https://app.threatstack.com/APT-GPG-KEY-THREATSTACK | /usr/bin/apt-key add -'
     )}
   end
 

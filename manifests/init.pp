@@ -19,7 +19,7 @@ class threatstack(
 
   case $::osfamily {
     'RedHat', 'CentOS', 'Amazon': {
-      $gpg_key    = 'https://www.threatstack.com/RPM-GPG-KEY-THREATSTACK'
+      $gpg_key    = 'https://app.threatstack.com/RPM-GPG-KEY-THREATSTACK'
 
       if $::osfamily == 'Amazon' {
         $repo_url        = 'https://pkg.threatstack.com/Amazon'
@@ -32,7 +32,7 @@ class threatstack(
       include threatstack::configure
     }
     'Debian': {
-      $gpg_key    = 'https://www.threatstack.com/APT-GPG-KEY-THREATSTACK'
+      $gpg_key    = 'https://app.threatstack.com/APT-GPG-KEY-THREATSTACK'
       $repo_url   = 'https://pkg.threatstack.com/Ubuntu'
 
       include threatstack::apt
