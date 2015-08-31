@@ -9,7 +9,7 @@
 #
 class threatstack(
   $deploy_key   = 'none',
-  $ruleset = 'Base Rule Set',
+  $ruleset = ['Base Rule Set'],
   $ts_package   = 'threatstack-agent',
   $ts_hostname  = $fqdn
 ) {

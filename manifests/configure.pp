@@ -8,8 +8,10 @@
 class threatstack::configure {
 
   exec { 'configure-threatstack-agent':
-    command     => "/opt/threatstack/bin/cloudsight setup --deploy-key=${threatstack::deploy_key} --ruleset='${threatstack::ruleset}' --hostname='${threatstack::ts_hostname}'",
+    command => inline_template("/opt/threatstack/bin/cloudsight setup --deploy-key='<%= scope.lookupvar('threatstack::deploy_key')%>' --hostname='<%= scope.lookupvar('threatstack::ts_hostname')%>' <% scope.lookupvar('threatstack::ruleset').each do |ruleset| -%> --ruleset='<%= ruleset %>' <% end -%>"),
     subscribe   => Package[$threatstack::ts_package],
     refreshonly => true,
+    path => '/usr/bin'
   }
+
 }
