@@ -29,7 +29,7 @@ Parameters
 =====
 
 * `threatstack::deploy_key` [required] - Set the deploy key for registering the agent
-* `threatstack::policy` [optional] - Set the policy the node will be added to (Defaults to 'Default Policy')
+* `threatstack::policy` [optional array] - Set the policy or policies the node will be added to (Defaults to 'Default Policy')
 
 Testing
 =======
@@ -38,7 +38,7 @@ To test setup a site.pp in the manifests folder with your deploy key (and option
 ```
 class { 'threatstack':
   deploy_key => 'xKkRzesqgkNPGwNNkmx4zHqTYCTUidDdMmNfcZqbxRLWLs3VyE',
-  policy => 'Default Policy',
+  policy => ['Default Policy'],
   ts_hostname => 'My-server-1'
 }
 ```
