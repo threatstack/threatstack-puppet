@@ -5,41 +5,18 @@ script: bundle install && bundle exec rake validate && bundle exec rake test SPE
 cache: bundler
 sudo: false
 rvm:
-- 1.9.3
-- 2.0.0
 - 2.1.0
 before_install:
 - gem update --system 2.1.11
 - gem --version
 env:
-- PUPPET_VERSION="~> 2.7.0"
-- PUPPET_VERSION="~> 3.1.0"
 - PUPPET_VERSION="~> 3.2.0"
 - PUPPET_VERSION="~> 3.3.0"
 - PUPPET_VERSION="~> 3.4.0"
 - PUPPET_VERSION="~> 3.5.0"
 - PUPPET_VERSION="~> 3.6.0"
 - PUPPET_VERSION="~> 3.7.0"
-matrix:
-  exclude:
-  - rvm: 1.9.3
-    env: PUPPET_VERSION="~> 2.7.0"
-  - rvm: 2.0.0
-    env: PUPPET_VERSION="~> 2.7.0"
-  - rvm: 2.0.0
-    env: PUPPET_VERSION="~> 3.1.0"
-  - rvm: 2.1.0
-    env: PUPPET_VERSION="~> 2.7.0"
-  - rvm: 2.1.0
-    env: PUPPET_VERSION="~> 3.0.0"
-  - rvm: 2.1.0
-    env: PUPPET_VERSION="~> 3.1.0"
-  - rvm: 2.1.0
-    env: PUPPET_VERSION="~> 3.2.0"
-  - rvm: 2.1.0
-    env: PUPPET_VERSION="~> 3.3.0"
-  - rvm: 2.1.0
-    env: PUPPET_VERSION="~> 3.4.0"
+- PUPPET_VERSION="~> 3.8.0"
 notifications:
   slack:
     secure: fIRcyLQ5G7XmPV5n06Q4NPAiQ1E5VwsoL4GuwIZQ79/c85yxUXk7Y2rDVFnzjtJnWBZ4cTxbz1GATn0PmSDV6fEh5pS31nLwZ7LJUWfLz8Kr86XFTkJpo5fnUxik9BYIwx/WyxAhCtHinFxWS9S2MweABhsDX8vIEFcraASpdHs=
