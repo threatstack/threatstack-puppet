@@ -4,7 +4,7 @@ source ENV['GEM_SOURCE'] || 'https://rubygems.org'
 
 group :development, :unit_tests do
   gem 'rake',                        :require => false
-  gem 'rspec-puppet',                :require => false, :git => 'https://github.com/rodjek/rspec-puppet.git', :tag => 'v2.0.0'
+  gem 'rspec-puppet', "2.2.0",       :require => false
   gem 'puppetlabs_spec_helper',      :require => false
   gem 'puppet-lint', "1.0.1",        :require => false
   gem 'simplecov',                   :require => false
@@ -31,7 +31,7 @@ end
 if puppetversion = ENV['PUPPET_VERSION']
   gem 'puppet', puppetversion, :require => false
 else
-  gem 'puppet', :require => false
+  gem 'puppet', '3.8.2', :require => false
 end
 
 # vim:ft=ruby
