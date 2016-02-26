@@ -40,7 +40,7 @@ include ::stdlib
 
 class { 'threatstack':
   deploy_key => 'xKkRzesqg',
-  ruleset => ['Default Ruleset'],
+  ruleset => ['Default Ruleset', 'Service Ruleset'],
   ts_hostname => 'test-host'
 }
 ```
