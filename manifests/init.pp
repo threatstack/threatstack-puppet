@@ -12,7 +12,6 @@ class threatstack (
   $gpg_key      = $::threatstack::params::gpg_key,
   $repo_url     = $::threatstack::params::repo_url,
   $ruleset      = $::threatstack::params::ruleset,
-  $ts_package   = $::threatstack::params::ts_package,
   $ts_hostname  = $::fqdn
 ) inherits ::threatstack::params {
 
