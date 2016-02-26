@@ -7,9 +7,7 @@
 class threatstack::apt {
   $apt_source_file = '/etc/apt/sources.list.d/threatstack.list'
 
-  package { 'curl':
-    ensure => installed
-  }
+  ensure_resource( 'package','curl', { 'ensure' => 'installed' } )
 
   package { $threatstack::ts_package:
     ensure  => installed,
