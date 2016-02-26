@@ -7,6 +7,10 @@
 class threatstack::apt {
   $apt_source_file = '/etc/apt/sources.list.d/threatstack.list'
 
+  Exec {
+    path => ['/usr/bin']
+  }
+
   ensure_resource( 'package','curl', { 'ensure' => 'installed' } )
 
   package { $threatstack::ts_package:
@@ -27,13 +31,13 @@ class threatstack::apt {
   }
 
   exec { 'ts-agent-apt-get-update':
-    command     => '/usr/bin/apt-get update',
+    command     => 'apt-get update',
     refreshonly => true
   }
 
   exec { 'Threat Stack GPG Import':
-    command => "/usr/bin/curl ${threatstack::gpg_key} | /usr/bin/apt-key add -",
-    unless  => '/usr/bin/apt-key list | grep "Threat Stack"',
+    command => "curl ${threatstack::gpg_key} | apt-key add -",
+    unless  => 'apt-key list | grep "Threat Stack"',
     notify  => Exec['ts-agent-apt-get-update'],
     require => Package['curl']
   }
