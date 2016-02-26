@@ -6,7 +6,7 @@ class threatstack::params {
   $ruleset    = ['Base Rule Set']
 
   case $::osfamily {
-    'RedHat', 'CentOS', 'Amazon': {
+    'RedHat', 'Amazon': {
       $repo_class = '::threatstack::yum'
       $gpg_key    = 'https://app.threatstack.com/RPM-GPG-KEY-THREATSTACK'
 
