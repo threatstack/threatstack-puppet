@@ -17,7 +17,7 @@ class threatstack::apt {
     ensure  => installed,
     require => [
       File[$apt_source_file],
-      Exec['Threat Stack GPG Import'],
+      Exec['ts-gpg-import'],
       Exec['ts-agent-apt-get-update']
     ]
   }
@@ -35,7 +35,7 @@ class threatstack::apt {
     refreshonly => true
   }
 
-  exec { 'Threat Stack GPG Import':
+  exec { 'ts-gpg-import':
     command => "curl ${threatstack::gpg_key} | apt-key add -",
     unless  => 'apt-key list | grep "Threat Stack"',
     notify  => Exec['ts-agent-apt-get-update'],
