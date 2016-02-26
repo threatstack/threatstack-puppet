@@ -39,7 +39,9 @@ class threatstack(
     }
   }
 
-  include threatstack::package
-  include threatstack::configure
+  anchor { '::threatstack::start': } ->
+  class { '::threatstack::package': } ->
+  class { '::threatstack::configure': } ->
+  anchor { '::threatstack::end': }
 
 }
