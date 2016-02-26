@@ -17,7 +17,7 @@ describe 'threatstack::yum' do
   end
 
   context 'on CentOS' do
-    let(:facts) { {:osfamily => 'CentOS'} }
+    let(:facts) { {:osfamily => 'RedHat'} }
 
     context 'default' do
       it { should contain_yumrepo('threatstack').with(
