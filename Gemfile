@@ -7,6 +7,7 @@ group :development, :unit_tests do
   gem 'rspec-puppet', "2.2.0",       :require => false
   gem 'puppetlabs_spec_helper',      :require => false
   gem 'puppet-lint', "1.0.1",        :require => false
+  gem 'librarian-puppet',            :require => false
   gem 'simplecov',                   :require => false
   gem 'json',                        :require => false
   gem 'puppet-syntax',               :require => false

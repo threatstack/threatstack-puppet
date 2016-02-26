@@ -1,6 +1,7 @@
 .kitchen/
 .bundle
 .kitchen.local.yml
+.librarian/
 manifests/site.pp
 .tmp/
 modules/
