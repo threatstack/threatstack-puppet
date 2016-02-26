@@ -39,9 +39,9 @@ To test setup a site.pp in the manifests folder with your deploy key (and option
 include ::stdlib
 
 class { 'threatstack':
-  deploy_key => 'xKkRzesqgkNPGwNNkmx4zHqTYCTUidDdMmNfcZqbxRLWLs3VyE',
+  deploy_key => 'xKkRzesqg',
   ruleset => ['Default Ruleset'],
-  ts_hostname => 'My-server-1'
+  ts_hostname => 'test-host'
 }
 ```
 
