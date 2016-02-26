@@ -7,7 +7,9 @@
   "source": "https://github.com/threatstack/threatstack-puppet",
   "issues_url": "https://github.com/threatstack/threatstack-puppet/issues",
   "tags": ["threatstack"],
-  "dependencies": [],
+  "dependencies": [
+    { "name": "puppetlabs/stdlib", "version_requirement": ">= 2.5.0" }
+  ],
   "operatingsystem_support": [
     {
     "operatingsystem":"RedHat",
