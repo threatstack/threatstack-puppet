@@ -7,4 +7,5 @@ manifests/site.pp
 modules/
 pkg
 Gemfile.lock
+Puppetfile.lock
 vendor
