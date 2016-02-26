@@ -13,15 +13,6 @@ class threatstack::apt {
 
   ensure_resource( 'package','curl', { 'ensure' => 'installed' } )
 
-  package { $threatstack::ts_package:
-    ensure  => installed,
-    require => [
-      File[$apt_source_file],
-      Exec['ts-gpg-import'],
-      Exec['ts-agent-apt-get-update']
-    ]
-  }
-
   file { $apt_source_file:
     owner   => 'root',
     group   => 'root',

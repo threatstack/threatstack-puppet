@@ -28,19 +28,18 @@ class threatstack(
         $repo_url        = 'https://pkg.threatstack.com/CentOS'
       }
 
-      include threatstack::yum
-      include threatstack::configure
     }
     'Debian': {
       $gpg_key    = 'https://app.threatstack.com/APT-GPG-KEY-THREATSTACK'
       $repo_url   = 'https://pkg.threatstack.com/Ubuntu'
 
-      include threatstack::apt
-      include threatstack::configure
     }
     default: {
       fail("Module ${module_name} does not support ${::operatingsystem}")
     }
   }
+
+  include threatstack::package
+  include threatstack::configure
 
 }

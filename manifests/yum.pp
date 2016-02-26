@@ -12,9 +12,4 @@ class threatstack::yum {
     gpgcheck => 1,
     gpgkey   => $threatstack::gpg_key
   }
-
-  package { $threatstack::ts_package:
-    ensure  => installed,
-    require => [ Yumrepo['threatstack'] ]
-  }
 }
