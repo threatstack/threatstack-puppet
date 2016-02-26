@@ -8,8 +8,8 @@ class threatstack::yum {
   yumrepo { 'threatstack':
     descr    => 'Threat Stack Package Repository',
     enabled  => 1,
-    baseurl  => $threatstack::repo_url,
+    baseurl  => $::threatstack::repo_url,
     gpgcheck => 1,
-    gpgkey   => $threatstack::gpg_key
+    gpgkey   => $::threatstack::gpg_key
   }
 }
