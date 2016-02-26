@@ -36,6 +36,8 @@ Testing
 
 To test setup a site.pp in the manifests folder with your deploy key (and optional ruleset &/or hostname)
 ```
+include ::stdlib
+
 class { 'threatstack':
   deploy_key => 'xKkRzesqgkNPGwNNkmx4zHqTYCTUidDdMmNfcZqbxRLWLs3VyE',
   ruleset => ['Default Ruleset'],
