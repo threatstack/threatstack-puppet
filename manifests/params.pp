@@ -1,6 +1,6 @@
 # Common module parameters
 #
-class ::threatstack::params {
+class threatstack::params {
 
   $ts_package = 'threatstack-agent'
   $ruleset    = ['Base Rule Set']
