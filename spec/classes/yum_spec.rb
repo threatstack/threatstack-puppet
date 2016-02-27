@@ -4,6 +4,7 @@ describe 'threatstack::yum' do
 
   context 'on RedHat' do
     let(:facts) { {:osfamily => 'RedHat'} }
+    let(:pre_condition) { 'class { "threatstack": deploy_key => "xKkRzesqg" }' }
 
     context 'default' do
       it { should contain_yumrepo('threatstack').with(
@@ -18,6 +19,7 @@ describe 'threatstack::yum' do
 
   context 'on CentOS' do
     let(:facts) { {:osfamily => 'RedHat'} }
+    let(:pre_condition) { 'class { "threatstack": deploy_key => "xKkRzesqg" }' }
 
     context 'default' do
       it { should contain_yumrepo('threatstack').with(
@@ -32,6 +34,7 @@ describe 'threatstack::yum' do
 
   context 'on Amazon' do
     let(:facts) { {:osfamily => 'Amazon'} }
+    let(:pre_condition) { 'class { "threatstack": deploy_key => "xKkRzesqg" }' }
 
     context 'default' do
       it { should contain_yumrepo('threatstack').with(

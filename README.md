@@ -33,19 +33,7 @@ Parameters
 
 Testing
 =======
-
-To test setup a site.pp in the manifests folder with your deploy key (and optional ruleset &/or hostname)
-```
-include ::stdlib
-
-class { 'threatstack':
-  deploy_key => 'xKkRzesqg',
-  ruleset => ['Default Ruleset', 'Service Ruleset'],
-  ts_hostname => 'test-host'
-}
-```
-
-Then run:
+Run the following:
 ```
 bundle install
 bundle exec kitchen test
