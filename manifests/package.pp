@@ -20,7 +20,7 @@ class threatstack::package {
   class { $::threatstack::repo_class: }
 
   package { $::threatstack::ts_package:
-    ensure  => installed,
+    ensure  => $::threatstack::package_version,
     require => Class[$::threatstack::repo_class]
   }
 
