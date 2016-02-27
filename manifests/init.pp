@@ -1,11 +1,31 @@
 # == Class: threatstack
 #
-# This module installs and configures the
-# Threat Stack host based agent
+# Installs and configures the Threat Stack host based agent.
 #
-# == Authors
+# === Examples
 #
-# Pete Cheslock
+# Standard usage:
+# class { '::threatstack':
+#   deploy_key => 'MyDeployKey',
+#   ruleset    => ['MyRuleset']
+# }
+#
+# Package mirror usage:
+# class { '::threatstack':
+#   deploy_key => 'MyDeployKey',
+#   ruleset    => ['MyRuleset'],
+#   repo_url   => 'https://my-mirror.example.com/centos-6'
+#   gpg_key    => 'https://my-mirror.example.com/RPM-GPG-KEY-THREATSTACK'
+# }
+#
+# === Authors
+#
+# Pete Cheslock <pete.cheslock@threatstack.com>
+# Tom McLaughlin <tom.mclaughlin@threatstack.com>
+#
+# === Copyright
+#
+# Copyright 2016 Threat Stack, Inc.
 #
 class threatstack (
   $deploy_key   = 'none',

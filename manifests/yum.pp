@@ -1,8 +1,20 @@
-# Setup yum repo and install the threatstack agent
+# == Class: threatstack::yum
 #
-# == Authors
+# Setup Threat Stack YUM repo.
 #
-# Pete Cheslock
+# === Examples
+#
+# This class is not meant to be directly realized outside of
+# Class['::threatstack'].
+#
+# === Authors
+#
+# Pete Cheslock <pete.cheslock@threatstack.com>
+# Tom McLaughlin <tom.mclaughlin@threatstack.com>
+#
+# === Copyright
+#
+# Copyright 2016 Threat Stack, Inc.
 #
 class threatstack::yum {
   yumrepo { 'threatstack':

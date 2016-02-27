@@ -1,4 +1,19 @@
-# Common module parameters
+# == Class: threatstack::params
+#
+# Common module parameters.
+#
+# === Examples
+#
+# class threatstack ( .. ) inherits threatstack::params { .. }
+#
+# === Authors
+#
+# Pete Cheslock <pete.cheslock@threatstack.com>
+# Tom McLaughlin <tom.mclaughlin@threatstack.com>
+#
+# === Copyright
+#
+# Copyright 2016 Threat Stack, Inc.
 #
 class threatstack::params {
 

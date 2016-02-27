@@ -1,8 +1,19 @@
-# Install Threat Stack agent package.
+# == Class: threatstack::package
 #
-# == Authors
+# Install Threat Stack Agent package.
 #
-# Tom McLaughlin
+# === Examples
+#
+# class threatstack ( .. ) inherits threatstack::params { .. }
+#
+# === Authors
+#
+# Pete Cheslock <pete.cheslock@threatstack.com>
+# Tom McLaughlin <tom.mclaughlin@threatstack.com>
+#
+# === Copyright
+#
+# Copyright 2016 Threat Stack, Inc.
 #
 class threatstack::package {
 
