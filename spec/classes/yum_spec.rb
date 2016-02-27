@@ -44,9 +44,4 @@ describe 'threatstack::yum' do
     end
   end
 
-  context 'package' do
-    let(:facts) { {:osfamily => 'RedHat'} }
-    it { should contain_package('threatstack-agent').with_ensure('installed') }
-  end
-
 end
