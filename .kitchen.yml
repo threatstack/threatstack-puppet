@@ -7,6 +7,8 @@ provisioner:
   modules_path: modules
   manifests_path: manifests
   require_chef_for_busser: true
+  custom_facts:
+    ts_test_kitchen: true
 
 platforms:
   - name: ubuntu-10.04
