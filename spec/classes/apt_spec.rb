@@ -6,12 +6,11 @@ describe 'threatstack::apt' do
     let(:facts) { {:osfamily => 'Debian'} }
 
     it { should contain_package('curl').with_ensure('installed') }
-    it { should contain_package('threatstack-agent').with_ensure('installed') }
     it { should contain_exec('ts-agent-apt-get-update').with(
-      :command => '/usr/bin/apt-get update'
+      :command => 'apt-get update'
     )}
-    it { should contain_exec('Threat Stack GPG Import').with(
-      :command => '/usr/bin/curl https://app.threatstack.com/APT-GPG-KEY-THREATSTACK | /usr/bin/apt-key add -'
+    it { should contain_exec('ts-gpg-import').with(
+      :command => 'curl https://app.threatstack.com/APT-GPG-KEY-THREATSTACK | apt-key add -'
     )}
   end
 
