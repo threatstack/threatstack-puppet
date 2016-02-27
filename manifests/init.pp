@@ -28,7 +28,7 @@
 # Copyright 2016 Threat Stack, Inc.
 #
 class threatstack (
-  $deploy_key   = 'none',
+  $deploy_key   = undef,
   $gpg_key      = $::threatstack::params::gpg_key,
   $repo_url     = $::threatstack::params::repo_url,
   $ruleset      = $::threatstack::params::ruleset,
@@ -37,7 +37,7 @@ class threatstack (
 
   $ts_package = $::threatstack::params::ts_package
 
-  if $deploy_key == 'none' {
+  if $deploy_key == undef {
     fail('deploy_key must be defined.')
   }
 
