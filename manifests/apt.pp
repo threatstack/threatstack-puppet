@@ -20,7 +20,7 @@ class threatstack::apt {
   $apt_source_file = '/etc/apt/sources.list.d/threatstack.list'
 
   Exec {
-    path => ['/usr/bin']
+    path => ['/bin', '/usr/bin']
   }
 
   ensure_resource( 'package','curl', { 'ensure' => 'installed' } )
