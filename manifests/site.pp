@@ -21,7 +21,8 @@ if $::osfamily == 'RedHat' {
   $package_version = "1.4.2.0${pkg_os}14.1"
 }
 
+# See .kitchen.yml for setting this fact.
 class { '::threatstack':
-  deploy_key      => 'MyKey',
+  deploy_key      => $::ts_deploy_key,
   package_version => $package_version
 }

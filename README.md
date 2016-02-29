@@ -33,8 +33,15 @@ Parameters
 
 Testing
 =======
-Run the following:
+Run the following to perform basic spec testing.
 ```
 bundle install
+bundle exec rake spec
+```
+
+Integration testing requires setting `TS_DEPLOY_KEY` in the environment to a valid key value for tests to succeed.
+```
+export TS_DEPLOY_KEY='<deploy_key>'
 bundle exec kitchen test
 ```
+
