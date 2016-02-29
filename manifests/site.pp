@@ -15,7 +15,7 @@ include ::stdlib
 
 # Used to test package_version parameter works.
 if $::osfamily == 'RedHat' {
-  $package_version = "1.4.3-1.1.el${::operatingsystemmajrelease}"
+  $package_version = "1.4.3-1.0.el${::operatingsystemmajrelease}"
 } elsif $operatingsystem == 'Debian' {
   $package_version = "1.4.3.0debian${::operatingsystemmajrelease}.0"
 } elsif $operatingsystem == 'Ubuntu' {
