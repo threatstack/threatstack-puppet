@@ -15,10 +15,20 @@ include ::stdlib
 
 # Used to test package_version parameter works.
 if $::osfamily == 'RedHat' {
-  $package_version = "1.4.2-1.1.el${::operatingsystemmajrelease}"
-} elsif $::osfamily == 'Debian' {
-  $pkg_os = downcase($::operatingsystem)
-  $package_version = "1.4.2.0${pkg_os}14.1"
+  $package_version = "1.4.3-1.1.el${::operatingsystemmajrelease}"
+} elsif $operatingsystem == 'Debian' {
+  $package_version = "1.4.3.0debian${::operatingsystemmajrelease}.0"
+} elsif $operatingsystem == 'Ubuntu' {
+  $os_ver = split($::operatingsystemmajrelease, '\.')
+  $os_maj_ver = $os_ver[0]
+  $package_version = "1.4.3.0ubuntu${os_maj_ver}.0"
+}
+
+if $::operatingsystem == 'Debian' {
+  package { 'apt-transport-https':
+    ensure => installed,
+    before => Class['::threatstack']
+  }
 }
 
 # See .kitchen.yml for setting this fact.

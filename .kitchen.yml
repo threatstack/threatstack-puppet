@@ -11,14 +11,10 @@ provisioner:
     ts_deploy_key: <%= ENV['TS_DEPLOY_KEY'] %>
 
 platforms:
-  - name: ubuntu-10.04
-  - name: ubuntu-10.04-i386
+  - name: debian-7.8
   - name: ubuntu-12.04
-  - name: ubuntu-12.04-i386
   - name: ubuntu-14.04
-  - name: ubuntu-14.04-i386
   - name: centos-6.5
-  - name: centos-6.5-i386
 
 suites:
   - name: default
