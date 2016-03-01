@@ -1,7 +1,7 @@
 Threat Stack Puppet Module
 ================
 
-[![Build Status](https://travis-ci.org/threatstack/threatstack-chef.svg?branch=master)][travis]
+[![Build Status](https://travis-ci.org/threatstack/threatstack-puppet.svg?branch=master)][travis]
 [![Puppet Forge](http://img.shields.io/puppetforge/v/threatstack/threatstack.svg)][module]
 
 [travis]: https://travis-ci.org/threatstack/threatstack-puppet
