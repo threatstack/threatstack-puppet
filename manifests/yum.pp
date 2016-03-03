@@ -1,20 +1,27 @@
-# Setup yum repo and install the threatstack agent
+# == Class: threatstack::yum
 #
-# == Authors
+# Setup Threat Stack YUM repo.
 #
-# Pete Cheslock
+# === Examples
+#
+# This class is not meant to be directly realized outside of
+# Class['::threatstack'].
+#
+# === Authors
+#
+# Pete Cheslock <pete.cheslock@threatstack.com>
+# Tom McLaughlin <tom.mclaughlin@threatstack.com>
+#
+# === Copyright
+#
+# Copyright 2016 Threat Stack, Inc.
 #
 class threatstack::yum {
   yumrepo { 'threatstack':
     descr    => 'Threat Stack Package Repository',
     enabled  => 1,
-    baseurl  => $threatstack::repo_url,
+    baseurl  => $::threatstack::repo_url,
     gpgcheck => 1,
-    gpgkey   => $threatstack::gpg_key
-  }
-
-  package { $threatstack::ts_package:
-    ensure  => installed,
-    require => [ Yumrepo['threatstack'] ]
+    gpgkey   => $::threatstack::gpg_key
   }
 }

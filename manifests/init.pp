@@ -1,46 +1,50 @@
 # == Class: threatstack
 #
-# This module installs and configures the
-# Threat Stack host based agent
+# Installs and configures the Threat Stack host based agent.
 #
-# == Authors
+# === Examples
 #
-# Pete Cheslock
+# Standard usage:
+# class { '::threatstack':
+#   deploy_key => 'MyDeployKey',
+#   ruleset    => ['MyRuleset']
+# }
 #
-class threatstack(
-  $deploy_key   = 'none',
-  $ruleset = ['Base Rule Set'],
-  $ts_package   = 'threatstack-agent',
-  $ts_hostname  = $fqdn
-) {
-  if $deploy_key == 'none' {
+# Package mirror usage:
+# class { '::threatstack':
+#   deploy_key => 'MyDeployKey',
+#   ruleset    => ['MyRuleset'],
+#   repo_url   => 'https://my-mirror.example.com/centos-6'
+#   gpg_key    => 'https://my-mirror.example.com/RPM-GPG-KEY-THREATSTACK'
+# }
+#
+# === Authors
+#
+# Pete Cheslock <pete.cheslock@threatstack.com>
+# Tom McLaughlin <tom.mclaughlin@threatstack.com>
+#
+# === Copyright
+#
+# Copyright 2016 Threat Stack, Inc.
+#
+class threatstack (
+  $deploy_key      = undef,
+  $gpg_key         = $::threatstack::params::gpg_key,
+  $package_version = 'installed',
+  $repo_url        = $::threatstack::params::repo_url,
+  $ruleset         = $::threatstack::params::ruleset,
+  $ts_hostname     = $::fqdn
+) inherits ::threatstack::params {
+
+  $ts_package = $::threatstack::params::ts_package
+
+  if $deploy_key == undef {
     fail('deploy_key must be defined.')
   }
 
-  case $::osfamily {
-    'RedHat', 'CentOS', 'Amazon': {
-      $gpg_key    = 'https://app.threatstack.com/RPM-GPG-KEY-THREATSTACK'
-
-      if $::osfamily == 'Amazon' {
-        $repo_url        = 'https://pkg.threatstack.com/Amazon'
-      }
-      else {
-        $repo_url        = 'https://pkg.threatstack.com/CentOS'
-      }
-
-      include threatstack::yum
-      include threatstack::configure
-    }
-    'Debian': {
-      $gpg_key    = 'https://app.threatstack.com/APT-GPG-KEY-THREATSTACK'
-      $repo_url   = 'https://pkg.threatstack.com/Ubuntu'
-
-      include threatstack::apt
-      include threatstack::configure
-    }
-    default: {
-      fail("Module ${module_name} does not support ${::operatingsystem}")
-    }
-  }
+  anchor { '::threatstack::start': } ->
+  class { '::threatstack::package': } ->
+  class { '::threatstack::configure': } ->
+  anchor { '::threatstack::end': }
 
 }

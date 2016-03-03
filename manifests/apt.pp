@@ -1,24 +1,29 @@
-# Setup apt repo and install the threatstack agent
+# == Class: threatstack::apt
 #
-# == Authors
+# Setup Threat Stack APT repo.
 #
-# Pete Cheslock
+# === Examples
+#
+# This class is not meant to be directly realized outside of
+# Class['::threatstack'].
+#
+# === Authors
+#
+# Pete Cheslock <pete.cheslock@threatstack.com>
+# Tom McLaughlin <tom.mclaughlin@threatstack.com>
+#
+# === Copyright
+#
+# Copyright 2016 Threat Stack
 #
 class threatstack::apt {
   $apt_source_file = '/etc/apt/sources.list.d/threatstack.list'
 
-  package { 'curl':
-    ensure => installed
+  Exec {
+    path => ['/bin', '/usr/bin']
   }
 
-  package { $threatstack::ts_package:
-    ensure  => installed,
-    require => [
-      File[$apt_source_file],
-      Exec['Threat Stack GPG Import'],
-      Exec['ts-agent-apt-get-update']
-    ]
-  }
+  ensure_resource( 'package','curl', { 'ensure' => 'installed' } )
 
   file { $apt_source_file:
     owner   => 'root',
@@ -29,13 +34,13 @@ class threatstack::apt {
   }
 
   exec { 'ts-agent-apt-get-update':
-    command     => '/usr/bin/apt-get update',
+    command     => 'apt-get update',
     refreshonly => true
   }
 
-  exec { 'Threat Stack GPG Import':
-    command => "/usr/bin/curl ${threatstack::gpg_key} | /usr/bin/apt-key add -",
-    unless  => '/usr/bin/apt-key list | grep "Threat Stack"',
+  exec { 'ts-gpg-import':
+    command => "curl ${threatstack::gpg_key} | apt-key add -",
+    unless  => 'apt-key list | grep "Threat Stack"',
     notify  => Exec['ts-agent-apt-get-update'],
     require => Package['curl']
   }

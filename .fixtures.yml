@@ -1,0 +1,5 @@
+fixtures:
+  symlinks:
+    threatstack: "#{source_dir}"
+  forge_modules:
+    stdlib: "puppetlabs/stdlib"

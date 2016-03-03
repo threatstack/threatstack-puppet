@@ -1,7 +1,7 @@
 Threat Stack Puppet Module
 ================
 
-[![Build Status](https://travis-ci.org/threatstack/threatstack-chef.svg?branch=master)][travis]
+[![Build Status](https://travis-ci.org/threatstack/threatstack-puppet.svg?branch=master)][travis]
 [![Puppet Forge](http://img.shields.io/puppetforge/v/threatstack/threatstack.svg)][module]
 
 [travis]: https://travis-ci.org/threatstack/threatstack-puppet
@@ -33,18 +33,15 @@ Parameters
 
 Testing
 =======
-
-To test setup a site.pp in the manifests folder with your deploy key (and optional ruleset &/or hostname)
-```
-class { 'threatstack':
-  deploy_key => 'xKkRzesqgkNPGwNNkmx4zHqTYCTUidDdMmNfcZqbxRLWLs3VyE',
-  ruleset => ['Default Ruleset'],
-  ts_hostname => 'My-server-1'
-}
-```
-
-Then run:
+Run the following to perform basic spec testing.
 ```
 bundle install
+bundle exec rake spec
+```
+
+Integration testing requires setting `TS_DEPLOY_KEY` in the environment to a valid key value for tests to succeed.
+```
+export TS_DEPLOY_KEY='<deploy_key>'
 bundle exec kitchen test
 ```
+

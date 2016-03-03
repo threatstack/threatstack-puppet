@@ -1,9 +1,10 @@
 .kitchen/
 .bundle
 .kitchen.local.yml
-manifests/site.pp
+.librarian/
 .tmp/
 modules/
 pkg
 Gemfile.lock
+Puppetfile.lock
 vendor
