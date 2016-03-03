@@ -7,7 +7,11 @@ Threat Stack Puppet Module
 [travis]: https://travis-ci.org/threatstack/threatstack-puppet
 [module]: https://forge.puppetlabs.com/threatstack/threatstack
 
-Puppet manifests to deploy the Threat Stack server agent
+Puppet manifests to deploy the Threat Stack server agent.
+
+Threat Stack is a continuous cloud security monitoring service. It aims to provide an organization greater security, compliance, and operational efficiency.  Threat Stack customers can use this module to deploy the agent and register hosts.
+
+For more see https://www.threatstack.com.
 
 Platforms
 ---------
