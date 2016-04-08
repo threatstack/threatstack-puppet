@@ -14,7 +14,7 @@ describe 'threatstack::yum' do
         :enabled   => 1,
         :baseurl   => 'https://pkg.threatstack.com/CentOS',
         :gpgcheck  => 1,
-        :gpgkey    => 'https://app.threatstack.com/RPM-GPG-KEY-THREATSTACK'
+        :gpgkey    => 'file:///etc/pki/rpm-gpg/RPM-GPG-KEY-THREATSTACK'
       ) }
     end
   end
@@ -29,7 +29,7 @@ describe 'threatstack::yum' do
         :enabled   => 1,
         :baseurl   => 'https://pkg.threatstack.com/CentOS',
         :gpgcheck  => 1,
-        :gpgkey    => 'https://app.threatstack.com/RPM-GPG-KEY-THREATSTACK'
+        :gpgkey    => 'file:///etc/pki/rpm-gpg/RPM-GPG-KEY-THREATSTACK'
       ) }
     end
   end
@@ -44,7 +44,7 @@ describe 'threatstack::yum' do
         :enabled   => 1,
         :baseurl   => 'https://pkg.threatstack.com/Amazon',
         :gpgcheck  => 1,
-        :gpgkey    => 'https://app.threatstack.com/RPM-GPG-KEY-THREATSTACK'
+        :gpgkey    => 'file:///etc/pki/rpm-gpg/RPM-GPG-KEY-THREATSTACK'
       ) }
     end
   end
