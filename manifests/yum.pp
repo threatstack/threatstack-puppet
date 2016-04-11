@@ -17,11 +17,26 @@
 # Copyright 2016 Threat Stack, Inc.
 #
 class threatstack::yum {
+  Exec {
+    path => ['/bin', '/usr/bin']
+  }
+
+  # Our site only supports TLS > 1.0 which curl, used by yum, does not support
+  # in RHEL 6.  We use wget because even better, the --tlsv1 flag to curl does
+  # not work before 6.7.
+  ensure_resource( 'package','curl', { 'ensure' => 'installed' } )
+
+  exec { 'ts-gpg-fetch':
+    command => "wget ${::threatstack::gpg_key} -O ${::threatstack::gpg_key_file}",
+    creates => $::threatstack::gpg_key_file
+  }
+
   yumrepo { 'threatstack':
     descr    => 'Threat Stack Package Repository',
     enabled  => 1,
     baseurl  => $::threatstack::repo_url,
     gpgcheck => 1,
-    gpgkey   => $::threatstack::gpg_key
+    gpgkey   => $::threatstack::gpg_key_file_uri,
+    require  => Exec['ts-gpg-fetch']
   }
 }
