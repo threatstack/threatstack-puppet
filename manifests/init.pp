@@ -31,6 +31,7 @@ class threatstack (
   $deploy_key      = undef,
   $gpg_key         = $::threatstack::params::gpg_key,
   $package_version = 'installed',
+  $configure_agent = true,
   $repo_url        = $::threatstack::params::repo_url,
   $ruleset         = $::threatstack::params::ruleset,
   $ts_hostname     = $::fqdn
@@ -44,7 +45,7 @@ class threatstack (
 
   anchor { '::threatstack::start': } ->
   class { '::threatstack::package': } ->
-  class { '::threatstack::configure': } ->
+  class { '::threatstack::configure': }
   anchor { '::threatstack::end': }
 
 }
