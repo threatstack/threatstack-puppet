@@ -18,7 +18,7 @@
 #
 class threatstack::configure {
 
-  $rulesets     = $threatstack::ruleset # bring value into scope.
+  $rulesets     = $::threatstack::ruleset # bring value into scope.
   $ruleset_args = inline_template("<% @rulesets.each do |ruleset| -%> --ruleset='<%= ruleset %>'<% end -%>")
 
   # doing this here makes init.pp easier to read.
