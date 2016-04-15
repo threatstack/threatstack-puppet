@@ -23,6 +23,11 @@ class threatstack::configure {
 
   # doing this here makes init.pp easier to read.
   if $::threatstack::configure_agent {
+
+    if $::threatstack::deploy_key == undef {
+      fail('$::threatstack::deploy_key must be defined.')
+    }
+
     exec { 'configure-threatstack-agent':
       command     => "/opt/threatstack/bin/cloudsight setup --deploy-key='${::threatstack::deploy_key}' --hostname='${::threatstack::ts_hostname}' ${ruleset_args}",
       subscribe   => Package[$threatstack::ts_package],

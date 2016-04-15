@@ -39,10 +39,6 @@ class threatstack (
 
   $ts_package = $::threatstack::params::ts_package
 
-  if $deploy_key == undef {
-    fail('deploy_key must be defined.')
-  }
-
   anchor { '::threatstack::start': } ->
   class { '::threatstack::package': } ->
   class { '::threatstack::configure': } ->
