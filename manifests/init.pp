@@ -45,7 +45,7 @@ class threatstack (
 
   anchor { '::threatstack::start': } ->
   class { '::threatstack::package': } ->
-  class { '::threatstack::configure': }
+  class { '::threatstack::configure': } ->
   anchor { '::threatstack::end': }
 
 }
