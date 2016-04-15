@@ -41,7 +41,17 @@ class threatstack (
 
   anchor { '::threatstack::start': } ->
   class { '::threatstack::package': } ->
-  class { '::threatstack::configure': } ->
   anchor { '::threatstack::end': }
 
+
+  if $configure_agent {
+    if $deploy_key == undef {
+      fail('$deploy_key must be defined.')
+    }
+
+    class { '::threatstack::configure':
+      require => Class['::threatstack::package'],
+      before => Anchor['::threatstack::end'],
+    }
+  }
 }
