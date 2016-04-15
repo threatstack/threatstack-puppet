@@ -34,7 +34,8 @@ Parameters
 
 * `threatstack::deploy_key` [required] - Set the deploy key for registering the agent
 * `threatstack::ruleset` [optional array] - Set the ruleset or rulesets the node will be added to (Defaults to 'Base Rule Set')
-* `threatstack::configure_agent` [optiona bool] - set to false to just install agent without configuring. Useful for image building.
+* `threatstack::configure_agent` [optiona bool] - Set to false to just install agent without configuring. Useful for image building.
+* `threatstack::agent_extra_args` [optional string] - Extra arguments to pass during agent activation.  Useful for enabling new platform features.
 
 Testing
 =======
