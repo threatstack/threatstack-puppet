@@ -2,6 +2,37 @@
 #
 # Installs and configures the Threat Stack host based agent.
 #
+# === Parameters
+# [*configure_agent*]
+#   Optionally disable agent configuration.  Useful if installing agent into a
+#   base image.
+#   type: bool
+#
+# [*deploy_key*]
+#   Threat Stack agent deploy key.  This value is required.
+#   type: string
+#
+# [*gpg_key*]
+#   URL to repository GPG key.
+#   type: string
+#
+# [*package_version*]
+#   Manage agent package version.
+#   type: string
+#
+# [*repo_url*]
+#   URL of installation repo.  Useful to change if managing own repository.  See
+#   also `gpg_key`.
+#   type: string
+#
+# [*ruleset*]
+#   Ruleset to apply to host.
+#   type: string
+#
+# [*ts_hostname*]
+#   Hostname as reported to Threat Stack.
+#   type: string
+#
 # === Examples
 #
 # Standard usage:
@@ -29,22 +60,29 @@
 #
 class threatstack (
   $deploy_key      = undef,
-  $gpg_key         = $::threatstack::params::gpg_key,
   $package_version = 'installed',
+  $configure_agent = true,
   $repo_url        = $::threatstack::params::repo_url,
+  $gpg_key         = $::threatstack::params::gpg_key,
   $ruleset         = $::threatstack::params::ruleset,
   $ts_hostname     = $::fqdn
 ) inherits ::threatstack::params {
 
   $ts_package = $::threatstack::params::ts_package
 
-  if $deploy_key == undef {
-    fail('deploy_key must be defined.')
-  }
-
   anchor { '::threatstack::start': } ->
   class { '::threatstack::package': } ->
-  class { '::threatstack::configure': } ->
   anchor { '::threatstack::end': }
 
+
+  if $configure_agent {
+    if $deploy_key == undef {
+      fail('$deploy_key must be defined.')
+    }
+
+    class { '::threatstack::configure':
+      require => Class['::threatstack::package'],
+      before => Anchor['::threatstack::end'],
+    }
+  }
 }

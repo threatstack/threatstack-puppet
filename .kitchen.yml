@@ -8,13 +8,13 @@ provisioner:
   manifests_path: manifests
   require_chef_for_busser: true
   custom_facts:
-    ts_deploy_key: <%= ENV['TS_DEPLOY_KEY'] %>
+    ts_deploy_key: <%= ENV['TS_DEPLOY_KEY'] != nil ? ENV['TS_DEPLOY_KEY'] : 'ts_deploy_key' %>
 
 platforms:
   - name: debian-7.8
   - name: ubuntu-12.04
   - name: ubuntu-14.04
-  - name: centos-6.5
+  - name: centos-6.7
 
 suites:
   - name: default
