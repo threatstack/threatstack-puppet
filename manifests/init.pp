@@ -3,6 +3,11 @@
 # Installs and configures the Threat Stack host based agent.
 #
 # === Parameters
+#
+# [*agent_extra_args*]
+#   Extra arguments to pass on the command line during agent activation.
+#   type: string
+#
 # [*configure_agent*]
 #   Optionally disable agent configuration.  Useful if installing agent into a
 #   base image.
@@ -59,13 +64,14 @@
 # Copyright 2016 Threat Stack, Inc.
 #
 class threatstack (
-  $deploy_key      = undef,
-  $package_version = 'installed',
-  $configure_agent = true,
-  $repo_url        = $::threatstack::params::repo_url,
-  $gpg_key         = $::threatstack::params::gpg_key,
-  $ruleset         = $::threatstack::params::ruleset,
-  $ts_hostname     = $::fqdn
+  $deploy_key       = undef,
+  $package_version  = 'installed',
+  $configure_agent  = true,
+  $agent_extra_args = '',
+  $repo_url         = $::threatstack::params::repo_url,
+  $gpg_key          = $::threatstack::params::gpg_key,
+  $ruleset          = $::threatstack::params::ruleset,
+  $ts_hostname      = $::fqdn
 ) inherits ::threatstack::params {
 
   $ts_package = $::threatstack::params::ts_package
