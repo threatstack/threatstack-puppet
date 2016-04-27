@@ -18,6 +18,7 @@
 class threatstack::params {
 
   $ts_package = 'threatstack-agent'
+  $ts_service = 'cloudsight'
   $ruleset    = ['Base Rule Set']
 
   case $::osfamily {
