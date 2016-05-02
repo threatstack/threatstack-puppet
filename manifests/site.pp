@@ -33,6 +33,7 @@ if $::operatingsystem == 'Debian' {
 
 # See .kitchen.yml for setting this fact.
 class { '::threatstack':
-  deploy_key      => $::ts_deploy_key,
-  package_version => $package_version
+  deploy_key        => $::ts_deploy_key,
+  agent_config_args => $::ts_config_args,
+  package_version   => $package_version
 }

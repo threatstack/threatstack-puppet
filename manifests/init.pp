@@ -4,6 +4,10 @@
 #
 # === Parameters
 #
+# [*agent_config_args*]
+#   Arguments to be passed to `cloudsight setup`
+#   type: string
+#
 # [*agent_extra_args*]
 #   Extra arguments to pass on the command line during agent activation.
 #   type: string
@@ -64,14 +68,15 @@
 # Copyright 2016 Threat Stack, Inc.
 #
 class threatstack (
-  $deploy_key       = undef,
-  $package_version  = 'installed',
-  $configure_agent  = true,
-  $agent_extra_args = '',
-  $repo_url         = $::threatstack::params::repo_url,
-  $gpg_key          = $::threatstack::params::gpg_key,
-  $ruleset          = $::threatstack::params::ruleset,
-  $ts_hostname      = $::fqdn
+  $deploy_key        = undef,
+  $package_version   = 'installed',
+  $configure_agent   = true,
+  $agent_extra_args  = '',
+  $agent_config_args = undef,
+  $repo_url          = $::threatstack::params::repo_url,
+  $gpg_key           = $::threatstack::params::gpg_key,
+  $ruleset           = $::threatstack::params::ruleset,
+  $ts_hostname       = $::fqdn
 ) inherits ::threatstack::params {
 
   $ts_package = $::threatstack::params::ts_package
@@ -86,9 +91,12 @@ class threatstack (
       fail('$deploy_key must be defined.')
     }
 
-    class { '::threatstack::configure':
-      require => Class['::threatstack::package'],
-      before => Anchor['::threatstack::end'],
-    }
+    class { '::threatstack::configure': }
+    class { '::threatstack::service': }
+
+    Class['::threatstack::package'] ->
+    Class['::threatstack::configure'] ->
+    Class['::threatstack::service'] ->
+    Anchor['::threatstack::end']
   }
 }
