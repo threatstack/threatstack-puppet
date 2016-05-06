@@ -10,6 +10,9 @@ provisioner:
   custom_facts:
     ts_deploy_key: <%= ENV['TS_DEPLOY_KEY'] != nil ? ENV['TS_DEPLOY_KEY'] : 'ts_deploy_key' %>
     ts_config_args: <%= ENV['TS_CONFIG_ARGS'] %>
+    <% if ENV['TS_PACKAGE_VERSION'] %>
+    ts_package_version: <%= ENV['TS_PACKAGE_VERSION'] %>
+    <% end %>
 
 platforms:
   - name: debian-7.8
