@@ -13,17 +13,6 @@
 #
 include ::stdlib
 
-# Used to test package_version parameter works.
-if $::osfamily == 'RedHat' {
-  $package_version = "1.4.3-1.0.el${::operatingsystemmajrelease}"
-} elsif $operatingsystem == 'Debian' {
-  $package_version = "1.4.3.0debian${::operatingsystemmajrelease}.0"
-} elsif $operatingsystem == 'Ubuntu' {
-  $os_ver = split($::operatingsystemmajrelease, '\.')
-  $os_maj_ver = $os_ver[0]
-  $package_version = "1.4.3.0ubuntu${os_maj_ver}.0"
-}
-
 if $::operatingsystem == 'Debian' {
   package { 'apt-transport-https':
     ensure => installed,
@@ -35,5 +24,5 @@ if $::operatingsystem == 'Debian' {
 class { '::threatstack':
   deploy_key        => $::ts_deploy_key,
   agent_config_args => $::ts_config_args,
-  package_version   => $package_version
+  package_version   => $::ts_package_version
 }
