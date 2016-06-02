@@ -1,9 +1,8 @@
 language: ruby
 bundler_args: "--without system_tests"
-script: bundle install && bundle exec rake validate && bundle exec rake test SPEC_OPTS='--format
-  documentation'
+script: bundle install && bundle exec rake validate && bundle exec rake test SPEC_OPTS='--format documentation'
 cache: bundler
-sudo: false
+sudo: true
 rvm:
 - 2.1.0
 before_install:
