@@ -25,9 +25,12 @@ Classes
 =======
 
 * `threatstack` - Main class
-* `threatstack::apt` - Setup apt repository configuration and package install
-* `threatstack::yum` - Setup yum repository configuration and package install
-* `threatstack::configure` - Register and configure the agent with the Threat Stack service
+* `threatstack::apt` (private) - Setup apt repository configuration and package install
+* `threatstack::yum` (private) - Setup yum repository configuration and package install
+* `threatstack::configure` (private) - Register and configure the agent with the Threat Stack service
+* `threatstack::package` (private) - Install the Threat stack agent
+* `threatstack::params` (private) - Default setup values
+* `threatstack::site` (private) - Used by Puppet test-kitchen
 
 Parameters
 =====
@@ -36,6 +39,40 @@ Parameters
 * `threatstack::ruleset` [optional array] - Set the ruleset or rulesets the node will be added to (Defaults to 'Base Rule Set')
 * `threatstack::configure_agent` [optiona bool] - Set to false to just install agent without configuring. Useful for image building.
 * `threatstack::agent_config_args` [optional string] - Extra arguments to pass during agent activation.  Useful for enabling new platform features.
+
+Example usage
+=====
+Below are some examples for how to use module.
+
+Standard usage
+===
+Supply a your Threat Stack deploy key, and if you choose, an array of rulesets.
+```
+class { '::threatstack':
+  deploy_key => 'MyDeployKey',
+  ruleset    => ['MyRuleset']
+}
+```
+Using a package mirror
+===
+If you manage your own package repository from which you deploy the agent package then supply `repo_url` and `gpg_key`.
+```
+class { '::threatstack':
+  deploy_key => 'MyDeployKey',
+  ruleset    => ['MyRuleset'],
+  repo_url   => 'https://my-mirror.example.com/centos-6'
+  gpg_key    => 'https://my-mirror.example.com/RPM-GPG-KEY-THREATSTACK'
+}
+```
+
+Agent installation into golden image
+===
+If installing the agent into an image that will be deployed for multiple insatnces, configure the class to not configure the agent while creating the image.  If the agent is registered and configured in the golden image then events and alerting will not be correct.
+```
+class { '::threatstack':
+  configure_agent => false,
+}
+```
 
 Testing
 =======
