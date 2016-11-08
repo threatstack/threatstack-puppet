@@ -6,7 +6,11 @@ provisioner:
   name: puppet_apply
   modules_path: modules
   manifests_path: manifests
-  require_chef_for_busser: true
+  <% if ENV['PUPPET3'] != nil %>
+  require_puppet_collections: false
+  <% else %>
+  require_puppet_collections: true
+  <% end %>
   custom_facts:
     ts_deploy_key: <%= ENV['TS_DEPLOY_KEY'] != nil ? ENV['TS_DEPLOY_KEY'] : 'ts_deploy_key' %>
     ts_config_args: <%= ENV['TS_CONFIG_ARGS'] %>
