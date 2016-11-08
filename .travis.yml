@@ -5,15 +5,13 @@ cache: bundler
 sudo: required
 rvm:
 - 2.1.0
-before_install:
-- gem update --system 2.1.11
-- gem --version
 env:
-- PUPPET_VERSION="~> 3.4.0"
-- PUPPET_VERSION="~> 3.5.0"
 - PUPPET_VERSION="~> 3.6.0"
 - PUPPET_VERSION="~> 3.7.0"
 - PUPPET_VERSION="~> 3.8.0"
+- PUPPET_VERSION="~> 4.6.0"
+- PUPPET_VERSION="~> 4.7.0"
+- PUPPET_VERSION="~> 4.8.0"
 notifications:
   slack:
     secure: fIRcyLQ5G7XmPV5n06Q4NPAiQ1E5VwsoL4GuwIZQ79/c85yxUXk7Y2rDVFnzjtJnWBZ4cTxbz1GATn0PmSDV6fEh5pS31nLwZ7LJUWfLz8Kr86XFTkJpo5fnUxik9BYIwx/WyxAhCtHinFxWS9S2MweABhsDX8vIEFcraASpdHs=
