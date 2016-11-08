@@ -6,9 +6,6 @@ cache: bundler
 sudo: false
 rvm:
 - 2.1.0
-before_install:
-- gem update --system 2.1.11
-- gem --version
 env:
 - PUPPET_VERSION="~> 3.6.0"
 - PUPPET_VERSION="~> 3.7.0"
