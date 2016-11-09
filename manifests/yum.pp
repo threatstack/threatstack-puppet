@@ -24,7 +24,7 @@ class threatstack::yum {
   # Our site only supports TLS > 1.0 which curl, used by yum, does not support
   # in RHEL 6.  We use wget because even better, the --tlsv1 flag to curl does
   # not work before 6.7.
-  ensure_resource( 'package', 'wget', { 'ensure' => 'installed' } )
+  ensure_packages('wget')
 
   exec { 'ts-gpg-fetch':
     command => "wget ${::threatstack::gpg_key} -O ${::threatstack::gpg_key_file}",
