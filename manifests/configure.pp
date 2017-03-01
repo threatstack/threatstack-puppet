@@ -21,14 +21,13 @@ class threatstack::configure {
   $rulesets     = $::threatstack::ruleset # bring value into scope.
   $ruleset_args = inline_template("<% @rulesets.each do |ruleset| -%> --ruleset='<%= ruleset %>'<% end -%>")
 
-  $feature_plan_config = {
+  $feature_plan_arg = $::threatstack::feature_plan ? {
     investigate => 'agent_type="i"',
     monitor     => 'agent_type="m"',
     legacy      => 'agent_type="i"',
-    undef       => 'agent_type="i"'
+    default     => 'agent_type="i"'
   }
 
-  $feature_plan_arg = $feature_plan_config[$::threatstack::feature_plan]
   $full_config_args_list = delete_undef_values([$::threatstack::agent_config_args, $feature_plan_arg])
   $full_config_args = join($full_config_args_list, ' ')
 
