@@ -21,6 +21,13 @@
 #   Threat Stack agent deploy key.  This value is required.
 #   type: string
 #
+# [*feature_plan*]
+#   Threat Stack feature plan.  Available values are:
+#     * investigate: Investigate plan
+#     * monitor: Monitor plan
+#     * legacy: Legacy Basic, Advanced, and Pro packaging
+#   type: string
+#
 # [*gpg_key*]
 #   URL to repository GPG key.
 #   type: string
@@ -69,6 +76,7 @@
 #
 class threatstack (
   $deploy_key        = undef,
+  $feature_plan      = undef,
   $package_version   = 'installed',
   $configure_agent   = true,
   $agent_extra_args  = '',
@@ -90,6 +98,13 @@ class threatstack (
     if $deploy_key == undef {
       fail('$deploy_key must be defined.')
     }
+    if $feature_plan == undef {
+      warning('$feature_plan needs to be set to "monitor", "investigate", or a"legacy". See https://www.threatstack.com/plans')
+    }
+    # TODO: Replace above with below.
+    #if member(['investigate', 'monitor', 'legacy'], $feature_plan) == false {
+    #  fail('$feature_plan needs to be set to "monitor", "investigate", or a"legacy". See https://www.threatstack.com/plans')
+    #}
 
     class { '::threatstack::configure': }
     class { '::threatstack::service': }
