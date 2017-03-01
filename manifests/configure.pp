@@ -29,8 +29,8 @@ class threatstack::configure {
   }
 
   $feature_plan_arg = $feature_plan_config[$::threatstack::feature_plan]
-  $config_args = delete_undef_values([$::threatstack::agent_config_args, $feature_plan_arg])
-  $config_args_contents = join($config_args, ' ')
+  $full_config_args_list = delete_undef_values([$::threatstack::agent_config_args, $feature_plan_arg])
+  $full_config_args = join($full_config_args_list, ' ')
 
   exec { 'threatstack-agent-setup':
     command   => "/opt/threatstack/bin/cloudsight setup --deploy-key='${::threatstack::deploy_key}' --hostname='${::threatstack::ts_hostname}' ${ruleset_args} ${::threatstack::agent_extra_args}",
@@ -39,16 +39,18 @@ class threatstack::configure {
     path      => '/usr/bin'
   }
 
+  # this file tracks state and is used to notify
+  # Exec[threatstack-agent-configure] of the need to run.
   file { '/opt/threatstack/cloudsight/config/.config_args':
     ensure  => present,
     owner   => 'root',
     group   => 'root',
     mode    => '0644',
-    content => $config_args_contents
+    content => $full_config_args
   }
 
   exec { 'threatstack-agent-configure':
-    command     => "/opt/threatstack/bin/cloudsight config ${::threatstack::agent_config_args}",
+    command     => "/opt/threatstack/bin/cloudsight config ${full_config_args}",
     subscribe   => File['/opt/threatstack/cloudsight/config/.config_args'],
     refreshonly => true,
     path        => ['/bin', '/usr/bin'],
