@@ -13,6 +13,7 @@ provisioner:
   <% end %>
   custom_facts:
     ts_deploy_key: <%= ENV['TS_DEPLOY_KEY'] != nil ? ENV['TS_DEPLOY_KEY'] : 'ts_deploy_key' %>
+    ts_feature_plan: <%= ENV['TS_FEATURE_PLAN'] != nil ? ENV['TS_FEATURE_PLAN'] : 'monitor' %>
     <% if ENV['TS_CONFIG_ARGS'] != nil %>
     ts_config_args: <%= ENV['TS_CONFIG_ARGS'] %>
     <% end %>

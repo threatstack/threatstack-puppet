@@ -35,8 +35,12 @@ Classes
 Parameters
 =====
 
-* `threatstack::deploy_key` [required] - Set the deploy key for registering the agent
-* `threatstack::ruleset` [optional array] - Set the ruleset or rulesets the node will be added to (Defaults to 'Base Rule Set')
+* `threatstack::deploy_key` [required] - Set the deploy key for registering the agent.
+* `threatstack::feature_plan` [required] - Threat Stack feature plan package. (https://www.threatstack.com/plans)
+  * `investigate` - Investigate plan.
+  * `monitor` - Monitor tier plan.
+  * `legacy` - Legacy Basic, Advanced, and Pro plans.
+* `threatstack::ruleset` [optional array] - Set the ruleset or rulesets the node will be added to (Defaults to 'Base Rule Set').
 * `threatstack::configure_agent` [optiona bool] - Set to false to just install agent without configuring. Useful for image building.
 * `threatstack::agent_config_args` [optional string] - Extra arguments to pass during agent activation.  Useful for enabling new platform features.
 
@@ -49,8 +53,9 @@ Standard usage
 Supply a your Threat Stack deploy key, and if you choose, an array of rulesets.
 ```
 class { '::threatstack':
-  deploy_key => 'MyDeployKey',
-  ruleset    => ['MyRuleset']
+  deploy_key    => 'MyDeployKey',
+  feature_plan  => 'investigate',
+  ruleset       => ['MyRuleset']
 }
 ```
 Using a package mirror
@@ -58,10 +63,11 @@ Using a package mirror
 If you manage your own package repository from which you deploy the agent package then supply `repo_url` and `gpg_key`.
 ```
 class { '::threatstack':
-  deploy_key => 'MyDeployKey',
-  ruleset    => ['MyRuleset'],
-  repo_url   => 'https://my-mirror.example.com/centos-6'
-  gpg_key    => 'https://my-mirror.example.com/RPM-GPG-KEY-THREATSTACK'
+  deploy_key    => 'MyDeployKey',
+  feature_plan  => 'monitor',
+  ruleset       => ['MyRuleset'],
+  repo_url      => 'https://my-mirror.example.com/centos-6'
+  gpg_key       => 'https://my-mirror.example.com/RPM-GPG-KEY-THREATSTACK'
 }
 ```
 

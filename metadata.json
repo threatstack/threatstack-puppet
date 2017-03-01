@@ -8,7 +8,7 @@
   "issues_url": "https://github.com/threatstack/threatstack-puppet/issues",
   "tags": ["threatstack"],
   "dependencies": [
-    { "name": "puppetlabs/stdlib", "version_requirement": ">= 2.5.0" }
+    { "name": "puppetlabs/stdlib", "version_requirement": ">= 4.2.2" }
   ],
   "operatingsystem_support": [
     {
