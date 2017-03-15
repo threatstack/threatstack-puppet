@@ -21,10 +21,15 @@ class threatstack::yum {
     path => ['/bin', '/usr/bin']
   }
 
-  # Our site only supports TLS > 1.0 which curl, used by yum, does not support
-  # in RHEL 6.  We use wget because even better, the --tlsv1 flag to curl does
-  # not work before 6.7.
-  ensure_packages('wget')
+  # Handle setups where wget is defined but with different attributes. This
+  # should be fixed sometime in 4.15.x or 4.16.x of stdlib.  Fix is in master
+  # but not released.
+  if !defined(Package['wget']) {
+    # Our site only supports TLS > 1.0 which curl, used by yum, does not support
+    # in RHEL 6.  We use wget because even better, the --tlsv1 flag to curl does
+    # not work before 6.7.
+    ensure_packages('wget')
+  }
 
   exec { 'ts-gpg-fetch':
     command => "wget ${::threatstack::gpg_key} -O ${::threatstack::gpg_key_file}",
