@@ -23,7 +23,12 @@ class threatstack::apt {
     path => ['/bin', '/usr/bin']
   }
 
-  ensure_packages('curl')
+  # Handle setups where curl is defined but with different attributes. This
+  # should be fixed sometime in 4.15.x or 4.16.x of stdlib.  Fix is in master
+  # but not released.
+  if !defined(Package['curl']) {
+    ensure_packages('curl')
+  }
 
   file { $apt_source_file:
     owner   => 'root',
