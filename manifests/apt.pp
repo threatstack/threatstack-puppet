@@ -23,7 +23,7 @@ class threatstack::apt {
     path => ['/bin', '/usr/bin']
   }
 
-  ensure_resource( 'package','curl', { 'ensure' => 'installed' } )
+  ensure_packages('curl')
 
   file { $apt_source_file:
     owner   => 'root',
