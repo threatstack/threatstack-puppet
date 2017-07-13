@@ -24,8 +24,7 @@ class threatstack::configure {
   $feature_plan_arg = $::threatstack::feature_plan ? {
     investigate => 'agent_type="i"',
     monitor     => 'agent_type="m"',
-    legacy      => 'agent_type="i"',
-    default     => 'agent_type="i"'
+    legacy      => 'agent_type="i"'
   }
 
   $full_config_args_list = delete_undef_values([$::threatstack::agent_config_args, $feature_plan_arg])
