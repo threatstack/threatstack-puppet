@@ -99,12 +99,8 @@ class threatstack (
       fail('$deploy_key must be defined.')
     }
     if $feature_plan == undef {
-      warning('$feature_plan needs to be set to "monitor", "investigate", or a"legacy". See https://www.threatstack.com/plans')
+      fail('$feature_plan needs to be set to "monitor", "investigate", or a"legacy". See https://www.threatstack.com/plans')
     }
-    # TODO: Replace above with below.
-    #if member(['investigate', 'monitor', 'legacy'], $feature_plan) == false {
-    #  fail('$feature_plan needs to be set to "monitor", "investigate", or a"legacy". See https://www.threatstack.com/plans')
-    #}
 
     class { '::threatstack::configure': }
     class { '::threatstack::service': }
