@@ -15,6 +15,7 @@
 #
 # Copyright 2016 Threat Stack, Inc.
 #
+
 class threatstack::params {
 
   $ts_package = 'threatstack-agent'
@@ -22,7 +23,7 @@ class threatstack::params {
   $ruleset    = ['Base Rule Set']
 
   case $::osfamily {
-    'RedHat', 'Amazon': {
+    'RedHat', 'Amazon', 'Fedora': {
       $repo_class       = '::threatstack::yum'
       $gpg_key          = 'https://app.threatstack.com/RPM-GPG-KEY-THREATSTACK'
       $gpg_key_file     = '/etc/pki/rpm-gpg/RPM-GPG-KEY-THREATSTACK'
@@ -31,8 +32,11 @@ class threatstack::params {
       if $::osfamily == 'Amazon' {
         $repo_url = 'https://pkg.threatstack.com/Amazon'
       }
+      elsif $::osfamily == 'Fedora' {
+        $repo_url = 'https://pkg.threatstack.com/El/7'
+      }
       else {
-        $repo_url = 'https://pkg.threatstack.com/CentOS'
+        $repo_url = "https://pkg.threatstack.com/EL/${::operatingsystemmajrelease}"
       }
 
     }
@@ -40,7 +44,6 @@ class threatstack::params {
       $repo_class = '::threatstack::apt'
       $gpg_key  = 'https://app.threatstack.com/APT-GPG-KEY-THREATSTACK'
       $repo_url = 'https://pkg.threatstack.com/Ubuntu'
-
     }
     default: {
       fail("Module ${module_name} does not support ${::operatingsystem}")
