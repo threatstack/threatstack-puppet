@@ -89,9 +89,9 @@ class threatstack (
 
   $ts_package = $::threatstack::params::ts_package
 
-  anchor { '::threatstack::start': } ->
-  class { '::threatstack::package': } ->
-  anchor { '::threatstack::end': }
+  anchor { '::threatstack::start': }
+  -> class { '::threatstack::package': }
+  -> anchor { '::threatstack::end': }
 
 
   if $configure_agent {
@@ -105,9 +105,22 @@ class threatstack (
     class { '::threatstack::configure': }
     class { '::threatstack::service': }
 
-    Class['::threatstack::package'] ->
-    Class['::threatstack::configure'] ->
-    Class['::threatstack::service'] ->
-    Anchor['::threatstack::end']
+    Class['::threatstack::package']
+    -> Class['::threatstack::configure']
+    -> Class['::threatstack::service']
+    -> Anchor['::threatstack::end']
+  }
+  if (!$configure_agent) and ($::operatingsystem == 'Amazon') {
+    if $deploy_key == undef {
+      fail('$deploy_key must be defined.')
+    }
+    if $feature_plan == undef {
+      warning('$feature_plan needs to be set to "monitor", "investigate", or a"legacy". See https://www.threatstack.com/plans')
+    }
+    file { '/etc/cloud/cloud.cfg.d/99_threatstack.cfg':
+      ensure  => file,
+      #content => epp('threatstack/99_threatstack.cfg.epp', {'deploy_key'      => $deploy_key}),
+      content => template('threatstack/99_threatstack.cfg.erb'),
+    }
   }
 }
