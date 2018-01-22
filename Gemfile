@@ -14,7 +14,7 @@ group :development, :unit_tests do
   gem 'metadata-json-lint', '0.0.4', :require => false
   gem 'vagrant-wrapper',             :require => false
   gem 'puppet-blacksmith',           :require => false
-  gem 'rest-client', "1.6.8",        :require => false
+  gem 'rest-client', "1.7.3",        :require => false
 end
 group :system_tests do
   gem 'serverspec',      :require => false
