@@ -9,7 +9,7 @@ describe 'threatstack::apt' do
     let(:facts) { {:osfamily => 'Debian'} }
     let(:pre_condition) { "class { 'threatstack': deploy_key => '#{deploy_key}', feature_plan => '#{feature_plan}' }" }
 
-    it { should contain_package('curl').with_ensure('installed') }
+    it { should contain_package('curl').with_ensure('present') }
     it { should contain_exec('ts-agent-apt-get-update').with(
       :command => 'apt-get update'
     )}
