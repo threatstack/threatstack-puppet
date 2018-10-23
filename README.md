@@ -73,7 +73,7 @@ class { '::threatstack':
 
 Agent installation into golden image
 ===
-If installing the agent into an image that will be deployed for multiple insatnces, configure the class to not configure the agent while creating the image.  If the agent is registered and configured in the golden image then events and alerting will not be correct.
+If installing the agent into an image that will be deployed for multiple instances, configure the class to not configure the agent while creating the image.  If the agent is registered and configured in the golden image then events and alerting will not be correct.
 ```
 class { '::threatstack':
   configure_agent => false,
