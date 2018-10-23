@@ -19,7 +19,7 @@
 class threatstack::configure {
 
   $rulesets     = $::threatstack::ruleset # bring value into scope.
-  $ruleset_args = inline_template("<% @rulesets.each do |ruleset| -%> --ruleset=\"<%= ruleset %>\"<% end -%>")
+  $ruleset_args = inline_template("<% @rulesets.each do |ruleset| -%> --ruleset='<%= ruleset %>'<% end -%>")
 
   $feature_plan_arg = $::threatstack::feature_plan ? {
     investigate => 'agent_type="i"',
