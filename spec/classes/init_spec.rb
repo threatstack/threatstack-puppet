@@ -16,7 +16,17 @@ describe 'threatstack' do
   end
 
   context 'on RedHat' do
-    let(:facts) { {:osfamily => 'RedHat'} }
+    let(:facts) { {:osfamily => 'RedHat', :operatingsystem => 'RedHat' } }
+    let(:params) { { :deploy_key => "#{deploy_key}", :feature_plan => "#{feature_plan}" } }
+
+    it 'should compile' do should create_class('threatstack') end
+    it { should contain_class('threatstack::package') }
+    it { should contain_class('threatstack::configure') }
+
+  end
+
+  context 'on CentOS' do
+    let(:facts) { {:osfamily => 'RedHat', :operatingsystem => 'CentOS'} }
     let(:params) { { :deploy_key => "#{deploy_key}", :feature_plan => "#{feature_plan}" } }
 
     it 'should compile' do should create_class('threatstack') end
@@ -26,7 +36,7 @@ describe 'threatstack' do
   end
 
   context 'on Amazon' do
-    let(:facts) { {:osfamily => 'Amazon'} }
+    let(:facts) { {:osfamily => 'RedHat', :operatingsystem => 'Amazon'} }
     let(:params) { { :deploy_key => "#{deploy_key}", :feature_plan => "#{feature_plan}" } }
 
     it 'should compile' do should create_class('threatstack') end
