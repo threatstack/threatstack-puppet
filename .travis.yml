@@ -12,6 +12,3 @@ rvm:
 env:
 - PUPPET_VERSION="~> 4.8.0"
 - PUPPET_VERSION="~> 5.5.8"
-notifications:
-  slack:
-    secure: fIRcyLQ5G7XmPV5n06Q4NPAiQ1E5VwsoL4GuwIZQ79/c85yxUXk7Y2rDVFnzjtJnWBZ4cTxbz1GATn0PmSDV6fEh5pS31nLwZ7LJUWfLz8Kr86XFTkJpo5fnUxik9BYIwx/WyxAhCtHinFxWS9S2MweABhsDX8vIEFcraASpdHs=
