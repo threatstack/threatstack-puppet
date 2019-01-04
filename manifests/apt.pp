@@ -14,7 +14,7 @@
 #
 # === Copyright
 #
-# Copyright 2016 Threat Stack
+# Copyright 2018 Threat Stack
 #
 class threatstack::apt {
   $apt_source_file = '/etc/apt/sources.list.d/threatstack.list'
