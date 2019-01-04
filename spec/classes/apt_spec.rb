@@ -6,7 +6,7 @@ describe 'threatstack::apt' do
   feature_plan = ENV['TS_FEATURE_PLAN'] ? ENV['TS_FEATURE_PLAN'] : "monitor"
 
   context 'on Debian' do
-    let(:facts) { {:osfamily => 'Debian'} }
+    let(:facts) { i{'os' => { 'distro' => {'codename' => 'trusty'}, 'family' => 'Debian'} } }
     let(:pre_condition) { "class { 'threatstack': deploy_key => '#{deploy_key}', feature_plan => '#{feature_plan}' }" }
 
     it { should contain_package('curl').with_ensure('present') }
