@@ -9,7 +9,6 @@ RSpec.configure do |c|
   c.manifest_dir = File.join(fixture_path, 'manifests')
   c.parser = 'future' if Puppet.version.to_f >= 4.0
   c.environmentpath = File.expand_path(File.join(Dir.pwd, 'spec')) if Puppet.version.to_f >= 4.0
-  c.raise_errors_for_deprecations!
   c.mock_with :rspec
 end
 

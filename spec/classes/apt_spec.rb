@@ -19,7 +19,7 @@ describe 'threatstack::apt' do
   end
 
   context 'on Ubuntu Trusy 14.04' do
-    let(:facts) { {:osfamily => 'Debian', :lsbdistcodename => 'trusty' } }
+    let(:facts) { {'os' => { 'distro' => {'codename' => 'trusty'}, 'family' => 'Debian'} }}
     let(:pre_condition) { "class { 'threatstack': deploy_key => '#{deploy_key}', feature_plan => '#{feature_plan}' }" }
 
     it { should contain_file('/etc/apt/sources.list.d/threatstack.list').with(

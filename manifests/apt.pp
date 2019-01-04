@@ -34,7 +34,7 @@ class threatstack::apt {
     owner   => 'root',
     group   => 'root',
     mode    => '0644',
-    content => "deb ${threatstack::repo_url} ${::lsbdistcodename} main",
+    content => "deb ${threatstack::repo_url} ${$facts['os']['distro']['codename']} main",
     notify  => Exec['ts-agent-apt-get-update']
   }
 
