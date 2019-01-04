@@ -6,7 +6,6 @@ script: bundle install && bundle exec rake validate && bundle exec rake test SPE
 cache: bundler
 sudo: required
 rvm:
-- 2.1.0
 - 2.3.1
 - 2.4.1
 - 2.5.1
