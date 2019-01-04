@@ -6,7 +6,7 @@ describe 'threatstack::yum' do
   feature_plan = ENV['TS_FEATURE_PLAN'] ? ENV['TS_FEATURE_PLAN'] : "monitor"
 
   context 'on RedHat' do
-    let(:facts) { {:osfamily => 'RedHat', :operatingsystemmajrelease => '6', :operatingsystem => 'RedHat'} }
+    let(:facts) {  { 'operatingsystemmajrelease' => '6', 'os' => { 'release' => { 'major' => '6'}, 'family' => 'RedHat'} } }
     let(:pre_condition) { "class { 'threatstack': deploy_key => '#{deploy_key}', feature_plan => '#{feature_plan}' }" }
 
     context 'default' do
@@ -21,7 +21,7 @@ describe 'threatstack::yum' do
   end
 
   context 'on CentOS' do
-    let(:facts) { {:osfamily => 'RedHat', :operatingsystemmajrelease => '7', :operatingsystem => 'CentOS'} }
+    let(:facts) { {'operatingsystemmajrelease' => '7', 'os' => { 'release' => { 'major' => '7'}, 'name' => 'CentOS', 'family' => 'RedHat'} } }
     let(:pre_condition) { "class { 'threatstack': deploy_key => '#{deploy_key}', feature_plan => '#{feature_plan}' }" }
 
     context 'default' do
@@ -36,7 +36,7 @@ describe 'threatstack::yum' do
   end
 
   context 'on Amazon' do
-    let(:facts) { {:osfamily => 'RedHat', :operatingsystem => 'Amazon'} }
+    let(:facts) {  {'os' => { 'name' => 'Amazon', 'family' => 'RedHat'} } }
     let(:pre_condition) { "class { 'threatstack': deploy_key => '#{deploy_key}', feature_plan => '#{feature_plan}' }" }
 
     context 'default' do
