@@ -89,8 +89,8 @@ class threatstack (
 
   $ts_package = $::threatstack::params::ts_package
 
-  anchor { '::threatstack::start': } ->
-  class { '::threatstack::package': } ->
+  anchor { '::threatstack::start': }
+  -> class { '::threatstack::package': }
   anchor { '::threatstack::end': }
 
 
@@ -105,9 +105,9 @@ class threatstack (
     class { '::threatstack::configure': }
     class { '::threatstack::service': }
 
-    Class['::threatstack::package'] ->
-    Class['::threatstack::configure'] ->
-    Class['::threatstack::service'] ->
+    Class['::threatstack::package']
+    -> Class['::threatstack::configure']
+    -> Class['::threatstack::service']
     Anchor['::threatstack::end']
   }
 }
