@@ -22,14 +22,14 @@ class threatstack::params {
   $ts_service = 'cloudsight'
   $ruleset    = ['Base Rule Set']
 
-  case $facts['os']['family'] {
+  case $::facts['os']['family'] {
     'RedHat': {
       $repo_class       = '::threatstack::yum'
       $gpg_key          = 'https://app.threatstack.com/RPM-GPG-KEY-THREATSTACK'
       $gpg_key_file     = '/etc/pki/rpm-gpg/RPM-GPG-KEY-THREATSTACK'
       $gpg_key_file_uri = "file://${gpg_key_file}"
 
-      case $facts['os']['name'] {
+      case $::facts['os']['name'] {
         'Amazon': { $repo_url = 'https://pkg.threatstack.com/Amazon'}
         /(CentOS|RedHat)/: { $repo_url = "https://pkg.threatstack.com/EL/${::operatingsystemmajrelease}" }
         default: { fail("Module ${module_name} does not support ${::operatingsystem}") }
