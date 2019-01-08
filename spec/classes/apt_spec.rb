@@ -5,15 +5,22 @@ describe 'threatstack::apt' do
   deploy_key = ENV['TS_DEPLOY_KEY'] ? ENV['TS_DEPLOY_KEY'] : "xKkRzesqg"
   feature_plan = ENV['TS_FEATURE_PLAN'] ? ENV['TS_FEATURE_PLAN'] : "monitor"
 
-  context 'on Debian' do
-    let(:facts) { {'osfamily' => 'Debian', 'os' => { 'distro' => {'codename' => 'trusty'}, 'family' => 'Debian'} } }
+  context 'on Debian 8' do
+    let(:facts) { {'osfamily' => 'Debian', 'os' => { 'name' => 'Debian', 'distro' => {'codename' => 'jessie'}, 'family' => 'Debian'} } }
+    let(:pre_condition) { "class { 'threatstack': deploy_key => '#{deploy_key}', feature_plan => '#{feature_plan}' }" }
+
+    #add real debian tests here
+  end
+
+  context 'on Debian 9' do
+    let(:facts) { {'osfamily' => 'Debian', 'os' => { 'name' => 'Debian', 'distro' => {'codename' => 'stretch'}, 'family' => 'Debian'} } }
     let(:pre_condition) { "class { 'threatstack': deploy_key => '#{deploy_key}', feature_plan => '#{feature_plan}' }" }
 
     #add real debian tests here
   end
 
   context 'on Ubuntu 18.04' do
-    let(:facts) { {'osfamily' => 'Debian', 'os' => { 'distro' => {'codename' => 'bionic'}, 'family' => 'Debian'} }}
+    let(:facts) { {'osfamily' => 'Debian', 'os' => { 'name' => 'Ubuntu', 'distro' => {'codename' => 'bionic'}, 'family' => 'Debian'} }}
     let(:pre_condition) { "class { 'threatstack': deploy_key => '#{deploy_key}', feature_plan => '#{feature_plan}' }" }
 
     it { should contain_file('/etc/apt/sources.list.d/threatstack.list').with(
@@ -25,7 +32,7 @@ describe 'threatstack::apt' do
   end
 
   context 'on Ubuntu 16.04' do
-    let(:facts) { {'osfamily' => 'Debian', 'os' => { 'distro' => {'codename' => 'xenial'}, 'family' => 'Debian'} }}
+    let(:facts) { {'osfamily' => 'Debian', 'os' => { 'name' => 'Ubuntu', 'distro' => {'codename' => 'xenial'}, 'family' => 'Debian'} }}
     let(:pre_condition) { "class { 'threatstack': deploy_key => '#{deploy_key}', feature_plan => '#{feature_plan}' }" }
 
     it { should contain_file('/etc/apt/sources.list.d/threatstack.list').with(
@@ -37,7 +44,7 @@ describe 'threatstack::apt' do
   end
 
   context 'on Ubuntu 14.04' do
-    let(:facts) { {'osfamily' => 'Debian', 'os' => { 'distro' => {'codename' => 'trusty'}, 'family' => 'Debian'} }}
+    let(:facts) { {'osfamily' => 'Debian', 'os' => { 'name' => 'Ubuntu', 'distro' => {'codename' => 'trusty'}, 'family' => 'Debian'} }}
     let(:pre_condition) { "class { 'threatstack': deploy_key => '#{deploy_key}', feature_plan => '#{feature_plan}' }" }
 
     it { should contain_file('/etc/apt/sources.list.d/threatstack.list').with(
