@@ -42,6 +42,7 @@ class threatstack::params {
       $repo_gpg_id  = 'ACCC2B02EA3A2409557B0AB991BB3B3C6EE04BD4'
       $release      = $::facts['os']['distro']['codename']
       $repos        = 'main'
+      $gpg_key      = 'https://app.threatstack.com/APT-GPG-KEY-THREATSTACK'
     }
     default: {
       fail("Module ${module_name} does not support ${::operatingsystem}")
