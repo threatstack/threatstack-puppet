@@ -16,37 +16,27 @@
 #
 # Copyright 2018 Threat Stack
 #
+
 class threatstack::apt {
   $apt_source_file = '/etc/apt/sources.list.d/threatstack.list'
+  $repo_comment    = $threatstack::params::repo_comment
+  $repo_url        = $threatstack::params::repo_url
+  $repo_gpg_id     = $threatstack::params::repo_gpg_id
+  $release         = $threatstack::params::release
+  $repos           = $threatstack::params::repos
 
-  Exec {
-    path => ['/bin', '/usr/bin']
+  if !defined(Class['apt']) {
+    class { 'apt': }
   }
 
-  # Handle setups where curl is defined but with different attributes. This
-  # should be fixed sometime in 4.15.x or 4.16.x of stdlib.  Fix is in master
-  # but not released.
-  if !defined(Package['curl']) {
-    ensure_packages('curl')
-  }
-
-  file { $apt_source_file:
-    owner   => 'root',
-    group   => 'root',
-    mode    => '0644',
-    content => "deb ${threatstack::repo_url} ${::facts['os']['distro']['codename']} main",
-    notify  => Exec['ts-agent-apt-get-update']
-  }
-
-  exec { 'ts-agent-apt-get-update':
-    command     => 'apt-get update',
-    refreshonly => true
-  }
-
-  exec { 'ts-gpg-import':
-    command => "curl ${threatstack::gpg_key} | apt-key add -",
-    unless  => 'apt-key list | grep "Threat Stack"',
-    notify  => Exec['ts-agent-apt-get-update'],
-    require => Package['curl']
+  apt::source { 'threatstack':
+    location => $repo_url,
+    comment  => $repo_comment,
+    release  => $release,
+    repos    => $repos,
+    key      => {
+      'id'     => $repo_gpg_id,
+      'server' => 'subkeys.pgp.net'
+      }
   }
 }

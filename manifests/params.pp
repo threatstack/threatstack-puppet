@@ -37,8 +37,9 @@ class threatstack::params {
     }
     'Debian': {
       $repo_class = '::threatstack::apt'
-      $gpg_key  = 'https://app.threatstack.com/APT-GPG-KEY-THREATSTACK'
-      $repo_url = 'https://pkg.threatstack.com/Ubuntu'
+      $gpg_key    = 'https://app.threatstack.com/APT-GPG-KEY-THREATSTACK'
+      $repo_url   = 'https://pkg.threatstack.com/Ubuntu'
+      $repos = 'main'
     }
     default: {
       fail("Module ${module_name} does not support ${::operatingsystem}")
