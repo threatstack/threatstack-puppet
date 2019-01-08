@@ -20,7 +20,7 @@ describe 'threatstack::apt' do
   end
 
   context 'on Ubuntu 18.04' do
-    let(:facts) { {'osfamily' => 'Debian', 'os' => { 'name' => 'Ubuntu', 'release' => {'full' => '18'}, distro' => {'codename' => 'bionic'}, 'family' => 'Debian'} }}
+    let(:facts) { {'osfamily' => 'Debian', 'os' => { 'name' => 'Ubuntu', 'release' => {'full' => '18'}, 'distro' => {'codename' => 'bionic'}, 'family' => 'Debian'} }}
     let(:pre_condition) { "class { 'threatstack': deploy_key => '#{deploy_key}', feature_plan => '#{feature_plan}' }" }
 
     it { should contain_file('/etc/apt/sources.list.d/threatstack.list').with(
