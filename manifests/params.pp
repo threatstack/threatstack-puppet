@@ -36,10 +36,12 @@ class threatstack::params {
       }
     }
     'Debian': {
-      $repo_class = '::threatstack::apt'
-      $gpg_key    = 'https://app.threatstack.com/APT-GPG-KEY-THREATSTACK'
-      $repo_url   = 'https://pkg.threatstack.com/Ubuntu'
-      $repos = 'main'
+      $repo_class   = '::threatstack::apt'
+      $repo_comment = 'Threat Stack agent repo'
+      $repo_url     = 'https://pkg.threatstack.com/Ubuntu'
+      $repo_gpg_id  = 'ACCC2B02EA3A2409557B0AB991BB3B3C6EE04BD4'
+      $release      = $::facts['os']['distro']['codename']
+      $repos        = 'main'
     }
     default: {
       fail("Module ${module_name} does not support ${::operatingsystem}")
