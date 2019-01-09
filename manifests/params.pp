@@ -18,9 +18,10 @@
 
 class threatstack::params {
 
-  $ts_package = 'threatstack-agent'
-  $ts_service = 'cloudsight'
-  $ruleset    = ['Base Rule Set']
+  $ts_package     = 'threatstack-agent'
+  $ts_service     = 'cloudsight'
+  $ruleset        = ['Base Rule Set']
+  $cloudsight_bin = '/usr/bin/cloudsight'
 
   case $facts['os']['family'] {
     'RedHat': {
@@ -30,15 +31,15 @@ class threatstack::params {
       $gpg_key_file_uri = "file://${gpg_key_file}"
 
       case $facts['os']['name'] {
-        'Amazon': { $repo_url = 'https://pkg.threatstack.com/Amazon'}
-        /(CentOS|RedHat)/: { $repo_url = "https://pkg.threatstack.com/EL/${::operatingsystemmajrelease}" }
+        'Amazon': { $repo_url = 'https://pkg.threatstack.com/v2/Amazon'}
+        /(CentOS|RedHat)/: { $repo_url = "https://pkg.threatstack.com/v2/EL/${::operatingsystemmajrelease}" }
         default: { fail("Module ${module_name} does not support ${::operatingsystem}") }
       }
     }
     'Debian': {
       $repo_class   = '::threatstack::apt'
       $repo_comment = 'Threat Stack agent repo'
-      $repo_url     = 'https://pkg.threatstack.com/Ubuntu'
+      $repo_url     = 'https://pkg.threatstack.com/v2/Ubuntu'
       $repo_gpg_id  = 'ACCC2B02EA3A2409557B0AB991BB3B3C6EE04BD4'
       $release      = $facts['os']['distro']['codename']
       $repos        = 'main'

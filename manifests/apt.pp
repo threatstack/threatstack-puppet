@@ -36,7 +36,7 @@ class threatstack::apt {
     repos    => $repos,
     key      => {
       'id'     => $repo_gpg_id,
-      'server' => 'subkeys.pgp.net'
+      'server' => 'hkps.pool.sks-keyservers.net'
       }
   }
 }

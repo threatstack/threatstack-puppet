@@ -20,6 +20,7 @@ class threatstack::configure {
 
   $rulesets     = $::threatstack::ruleset # bring value into scope.
   $ruleset_args = inline_template("<% @rulesets.each do |ruleset| -%> --ruleset='<%= ruleset %>'<% end -%>")
+  $cloudsight_bin = $::threatstack::cloudsight_bin
 
   $feature_plan_arg = $::threatstack::feature_plan ? {
     investigate => 'agent_type="i"',
@@ -31,7 +32,7 @@ class threatstack::configure {
   $full_config_args = join($full_config_args_list, ' ')
 
   exec { 'threatstack-agent-setup':
-    command   => "/opt/threatstack/bin/cloudsight setup --deploy-key='${::threatstack::deploy_key}' --hostname='${::threatstack::ts_hostname}' ${ruleset_args} ${::threatstack::agent_extra_args}",
+    command   => "${cloudsight_bin} setup --deploy-key='${::threatstack::deploy_key}' --hostname='${::threatstack::ts_hostname}' ${ruleset_args} ${::threatstack::agent_extra_args}",
     subscribe => Package[$threatstack::ts_package],
     creates   => '/opt/threatstack/cloudsight/config/.audit',
     path      => '/usr/bin'
@@ -48,7 +49,7 @@ class threatstack::configure {
   }
 
   exec { 'threatstack-agent-configure':
-    command     => "/opt/threatstack/bin/cloudsight config ${full_config_args}",
+    command     => "${cloudsight_bin} config ${full_config_args}",
     subscribe   => File['/opt/threatstack/cloudsight/config/.config_args'],
     refreshonly => true,
     path        => ['/bin', '/usr/bin'],
