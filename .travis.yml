@@ -1,7 +1,7 @@
 language: ruby
 before_install:
   - gem install bundler
-  - sudo apt-get install -y lsb-core
+  - sudo apt-get install -y lsb-release
 bundler_args: "--without system_tests"
 script: bundle install && bundle exec rake validate && bundle exec rake test SPEC_OPTS='--format documentation'
 cache: bundler

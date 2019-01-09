@@ -11,10 +11,11 @@
 #
 # Pete Cheslock <pete.cheslock@threatstack.com>
 # Tom McLaughlin <tom.mclaughlin@threatstack.com>
+# Nate St. Germain <nate.stgermain@threatstack.com>
 #
 # === Copyright
 #
-# Copyright 2016 Threat Stack, Inc.
+# Copyright 2018 Threat Stack, Inc.
 #
 class threatstack::configure {
 
