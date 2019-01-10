@@ -36,7 +36,7 @@ class threatstack::configure {
   exec { 'threatstack-agent-setup':
     command   => "${cloudsight_bin} setup --deploy-key='${::threatstack::deploy_key}' --hostname='${::threatstack::ts_hostname}' ${ruleset_args} ${::threatstack::agent_extra_args}",
     subscribe => Package[$threatstack::ts_package],
-    creates   => '/opt/threatstack/cloudsight/config/.audit',
+    creates   => "${confdir}/.audit"
     path      => '/usr/bin'
   }
 
