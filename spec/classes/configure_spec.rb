@@ -11,7 +11,7 @@ describe 'threatstack::configure' do
     let(:pre_condition) { "class { 'threatstack': deploy_key => '#{deploy_key}', feature_plan => '#{feature_plan}', ts_hostname => '#{ts_hostname}', ruleset => ['Default Ruleset', 'Service Ruleset'] }" }
 
     it { should contain_exec('threatstack-agent-setup').with(
-      :command => "/opt/threatstack/bin/cloudsight setup --deploy-key='#{deploy_key}' --hostname='#{ts_hostname}'  --ruleset='Default Ruleset' --ruleset='Service Ruleset' "
+      :command => "/usr/bin/cloudsight setup --deploy-key='#{deploy_key}' --hostname='#{ts_hostname}'  --ruleset='Default Ruleset' --ruleset='Service Ruleset' "
     )}
   end
 
