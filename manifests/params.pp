@@ -23,6 +23,7 @@ class threatstack::params {
   $ts_service     = 'cloudsight'
   $ruleset        = ['Base Rule Set']
   $cloudsight_bin = '/usr/bin/cloudsight'
+  $confdir        = '/opt/threatstack/etc'
 
   case $facts['os']['family'] {
     'RedHat': {

@@ -19,9 +19,10 @@
 #
 class threatstack::configure {
 
-  $rulesets     = $::threatstack::ruleset # bring value into scope.
-  $ruleset_args = inline_template("<% @rulesets.each do |ruleset| -%> --ruleset='<%= ruleset %>'<% end -%>")
+  $rulesets       = $::threatstack::ruleset # bring value into scope.
+  $ruleset_args   = inline_template("<% @rulesets.each do |ruleset| -%> --ruleset = '<% = ruleset %>'<% end -%>")
   $cloudsight_bin = $::threatstack::cloudsight_bin
+  $confdir        = $::threatstack::confdir
 
   $feature_plan_arg = $::threatstack::feature_plan ? {
     investigate => 'agent_type="i"',
@@ -41,7 +42,7 @@ class threatstack::configure {
 
   # this file tracks state and is used to notify
   # Exec[threatstack-agent-configure] of the need to run.
-  file { '/opt/threatstack/cloudsight/config/.config_args':
+  file { "${confdir}/.config_args":
     ensure  => present,
     owner   => 'root',
     group   => 'root',
@@ -51,7 +52,7 @@ class threatstack::configure {
 
   exec { 'threatstack-agent-configure':
     command     => "${cloudsight_bin} config ${full_config_args}",
-    subscribe   => File['/opt/threatstack/cloudsight/config/.config_args'],
+    subscribe   => File["${confdir}/.config_args"],
     refreshonly => true,
     path        => ['/bin', '/usr/bin'],
     notify      => Class['threatstack::service']
