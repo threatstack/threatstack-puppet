@@ -20,7 +20,7 @@
 class threatstack::configure {
 
   $rulesets       = $::threatstack::ruleset # bring value into scope.
-  $ruleset_args   = inline_template("<% @rulesets.each do |ruleset| -%> --ruleset = '<% = ruleset %>'<% end -%>")
+  $ruleset_args   = inline_template("<% @rulesets.each do |ruleset| -%> --ruleset='<%= ruleset %>'<% end -%>")
   $cloudsight_bin = $::threatstack::cloudsight_bin
   $confdir        = $::threatstack::confdir
 
