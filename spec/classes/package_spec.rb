@@ -6,7 +6,7 @@ describe 'threatstack::package' do
   feature_plan = ENV['TS_FEATURE_PLAN'] ? ENV['TS_FEATURE_PLAN'] : "monitor"
 
   context 'on RedHat' do
-    let(:facts) { {:osfamily => 'RedHat', :operatingsystem => 'RedHat'} }
+    let(:facts) {  { 'operatingsystemmajrelease' => '7', 'os' => { 'release' => { 'major' => '7'}, 'family' => 'RedHat'} } }
     let(:pre_condition) { "class { 'threatstack': deploy_key => '#{deploy_key}', feature_plan => '#{feature_plan}' }" }
 
     context 'package' do
@@ -15,7 +15,7 @@ describe 'threatstack::package' do
   end
 
   context 'on Debian' do
-    let(:facts) { {:osfamily => 'Debian'} }
+    let(:facts) { {'osfamily' => 'Debian', 'os' => { 'name' => 'Debian', 'distro' => {'codename' => 'jessie'}, 'family' => 'Debian'} } }
     let(:pre_condition) { "class { 'threatstack': deploy_key => '#{deploy_key}', feature_plan => '#{feature_plan}' }" }
 
     context 'package' do
