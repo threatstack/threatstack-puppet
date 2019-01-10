@@ -27,9 +27,10 @@ describe 'threatstack::apt' do
       :owner => 'root',
       :group => 'root',
       :mode  => '0644',
-      :content => "# This file is managed by Puppet. DO NOT EDIT.
-      # Threat Stack agent repo
-      deb https://pkg.threatstack.com/v2/Ubuntu bionic main"
+      :content => "
+# This file is managed by Puppet. DO NOT EDIT.
+# Threat Stack agent repo
+deb https://pkg.threatstack.com/v2/Ubuntu bionic main"
     )}
   end
 
@@ -41,9 +42,10 @@ describe 'threatstack::apt' do
       :owner => 'root',
       :group => 'root',
       :mode  => '0644',
-      :content => "# This file is managed by Puppet. DO NOT EDIT.
-      # Threat Stack agent repo
-      deb https://pkg.threatstack.com/v2/Ubuntu xenial main"
+      :content => "
+# This file is managed by Puppet. DO NOT EDIT.
+# Threat Stack agent repo
+deb https://pkg.threatstack.com/v2/Ubuntu xenial main"
     )}
   end
 
@@ -55,9 +57,10 @@ describe 'threatstack::apt' do
       :owner => 'root',
       :group => 'root',
       :mode  => '0644',
-      :content => "# This file is managed by Puppet. DO NOT EDIT.
-      # Threat Stack agent repo
-      deb https://pkg.threatstack.com/v2/Ubuntu trusty main"
+      :content => "
+# This file is managed by Puppet. DO NOT EDIT.
+# Threat Stack agent repo
+deb https://pkg.threatstack.com/v2/Ubuntu trusty main"
     )}
   end
 
