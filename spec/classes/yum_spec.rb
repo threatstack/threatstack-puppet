@@ -36,7 +36,7 @@ describe 'threatstack::yum' do
   end
 
   context 'on Amazon' do
-    let(:facts) {  {'os' => {  { 'release' => { 'major' => '1'}, 'name' => 'Amazon', 'family' => 'RedHat'} } }
+    let(:facts) {  {'os' => {  'release' => { 'major' => '1'}, 'name' => 'Amazon', 'family' => 'RedHat'} } }
     let(:pre_condition) { "class { 'threatstack': deploy_key => '#{deploy_key}', feature_plan => '#{feature_plan}' }" }
 
     context 'default' do
