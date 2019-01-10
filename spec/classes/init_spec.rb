@@ -6,7 +6,7 @@ describe 'threatstack' do
   feature_plan = ENV['TS_FEATURE_PLAN'] ? ENV['TS_FEATURE_PLAN'] : "monitor"
 
   context 'on Debian' do
-    let(:facts) { {:osfamily => 'Debian'} }
+    let(:facts) { {'osfamily' => 'Debian', 'os' => { 'name' => 'Debian', 'distro' => {'codename' => 'jessie'}, 'family' => 'Debian'} } }
     let(:params) { { :deploy_key => "#{deploy_key}", :feature_plan => "#{feature_plan}" } }
 
     it 'should compile' do should create_class('threatstack') end
