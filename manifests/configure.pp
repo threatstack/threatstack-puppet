@@ -25,9 +25,9 @@ class threatstack::configure {
   $confdir        = $::threatstack::confdir
 
   $feature_plan_arg = $::threatstack::feature_plan ? {
-    investigate => 'agent_type="i"',
-    monitor     => 'agent_type="m"',
-    legacy      => 'agent_type="i"'
+    investigate => 'agent_type i',
+    monitor     => 'agent_type m',
+    legacy      => 'agent_type i'
   }
 
   $full_config_args_list = delete_undef_values([$::threatstack::agent_config_args, $feature_plan_arg])
@@ -52,7 +52,7 @@ class threatstack::configure {
   }
 
   exec { 'threatstack-agent-configure':
-    command     => "${cloudsight_bin} config ${full_config_args}",
+    command     => "${cloudsight_bin} config -set ${full_config_args}",
     subscribe   => File["${confdir}/.config_args"],
     refreshonly => true,
     path        => ['/bin', '/usr/bin'],
