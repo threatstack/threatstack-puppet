@@ -16,7 +16,7 @@ describe 'threatstack' do
   end
 
   context 'on RedHat' do
-      let(:facts) {  { 'operatingsystem' => 'RedHat', 'operatingsystemmajrelease' => '7', 'os' => { 'release' => { 'full' => '7.5', 'major' => '7', 'minor' => '5'}, 'name' => 'RedHat', 'family' => 'RedHat'} } }
+    let(:facts) {  { 'operatingsystem' => 'RedHat', 'operatingsystemmajrelease' => '7', 'os' => { 'release' => { 'full' => '7.5', 'major' => '7', 'minor' => '5'}, 'name' => 'RedHat', 'family' => 'RedHat'} } }
     let(:params) { { :deploy_key => "#{deploy_key}", :feature_plan => "#{feature_plan}" } }
 
     it 'should compile' do should create_class('threatstack') end
