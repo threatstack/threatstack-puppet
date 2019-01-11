@@ -19,8 +19,6 @@
 #
 
 class threatstack::apt {
-  $apt_source_file = '/etc/apt/sources.list.d/threatstack.list'
-  $repo_comment    = $threatstack::params::repo_comment
   $repo_url        = $threatstack::params::repo_url
   $repo_gpg_id     = $threatstack::params::repo_gpg_id
   $release         = $threatstack::params::release
@@ -32,7 +30,6 @@ class threatstack::apt {
 
   apt::source { 'threatstack':
     location => $repo_url,
-    comment  => $repo_comment,
     release  => $release,
     repos    => $repos,
     key      => {
