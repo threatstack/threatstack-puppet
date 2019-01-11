@@ -37,7 +37,8 @@ class threatstack::configure {
     command   => "${cloudsight_bin} setup --deploy-key='${::threatstack::deploy_key}' --hostname='${::threatstack::ts_hostname}' ${ruleset_args} ${::threatstack::agent_extra_args}",
     subscribe => Package[$threatstack::ts_package],
     creates   => "${confdir}/.audit",
-    path      => '/usr/bin'
+    path      => ['/bin', '/usr/bin'],
+    unless    => 'ps auwwwx| grep [t]sagentd'
   }
 
   # this file tracks state and is used to notify
