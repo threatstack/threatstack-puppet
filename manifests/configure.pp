@@ -24,7 +24,7 @@ class threatstack::configure {
         "--ruleset ${rule}"
       }
   $extra_args = $::threatstack::extra_args.map | $arg | {
-       "--${arg.keys.first} ${arg.values.first}"
+        "--${arg.keys.first} ${arg.values.first}"
       }
 
   $cloudsight_bin = $::threatstack::cloudsight_bin
