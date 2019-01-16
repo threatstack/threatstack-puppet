@@ -19,21 +19,21 @@
 #
 
 class threatstack::apt {
-  $repo_url        = $threatstack::params::repo_url
-  $repo_gpg_id     = $threatstack::params::repo_gpg_id
-  $release         = $threatstack::params::release
-  $repos           = $threatstack::params::repos
+  $location = $threatstack::params::repo_url
+  $key      = $threatstack::params::repo_gpg_id
+  $release  = $threatstack::params::release
+  $repos    = $threatstack::params::repos
 
   if !defined(Class['apt']) {
     class { 'apt': }
   }
 
   apt::source { 'threatstack':
-    location => $repo_url,
+    location => $location,
     release  => $release,
     repos    => $repos,
     key      => {
-      'id'     => $repo_gpg_id,
+      'id'     => $key,
       'server' => 'hkps.pool.sks-keyservers.net'
       }
   }
