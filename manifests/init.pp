@@ -41,9 +41,9 @@
 #   also `gpg_key`.
 #   type: string
 #
-# [*ruleset*]
-#   Ruleset to apply to host.
-#   type: string
+# [*rulesets*]
+#   Ruleset(s) to apply to host.
+#   type: array
 #
 # [*ts_hostname*]
 #   Hostname as reported to Threat Stack.
@@ -83,7 +83,7 @@ class threatstack (
   $agent_config_args = undef,
   $repo_url          = $::threatstack::params::repo_url,
   $gpg_key           = $::threatstack::params::gpg_key,
-  $ruleset           = $::threatstack::params::ruleset,
+  $rulesets          = $::threatstack::params::rulesets,
   $confdir           = $::threatstack::params::confdir,
   $ts_hostname       = $::fqdn
 ) inherits ::threatstack::params {

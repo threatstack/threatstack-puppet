@@ -19,22 +19,21 @@
 #
 class threatstack::configure {
 
-  $rulesets       = $::threatstack::ruleset # bring value into scope.
-  $ruleset_args   = inline_template("<% @rulesets.each do |ruleset| -%> --ruleset='<%= ruleset %>'<% end -%>")
+  $rulesets       = $::threatstack::rulesets
+  $ruleset_args   = $rulesets.map | $rule | {
+        "--ruleset ${rule}"
+      }
+  $extra_args = $::threatstack::extra_args.map | $arg | {
+       "--${arg.keys.first} ${arg.values.first}"
+      }
+
   $cloudsight_bin = $::threatstack::cloudsight_bin
   $confdir        = $::threatstack::confdir
 
-  $feature_plan_arg = $::threatstack::feature_plan ? {
-    investigate => 'agent_type i',
-    monitor     => 'agent_type m',
-    legacy      => 'agent_type i'
-  }
-
-  $full_config_args_list = delete_undef_values([$::threatstack::agent_config_args, $feature_plan_arg])
-  $full_config_args = join($full_config_args_list, ' ')
+  $full_config_args = join($::threatstack::agent_config_args, ' ')
 
   exec { 'threatstack-agent-setup':
-    command   => "${cloudsight_bin} setup --deploy-key='${::threatstack::deploy_key}' --hostname='${::threatstack::ts_hostname}' ${ruleset_args} ${::threatstack::agent_extra_args}",
+    command   => "${cloudsight_bin} setup --deploy-key='${::threatstack::deploy_key}' --hostname='${::threatstack::ts_hostname}' ${join($ruleset_args, ' ')} ${join($extra_args, ' ')}",
     subscribe => Package[$threatstack::ts_package],
     creates   => "${confdir}/.audit",
     path      => ['/bin', '/usr/bin'],
