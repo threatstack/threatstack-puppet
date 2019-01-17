@@ -81,6 +81,7 @@ class threatstack (
   $configure_agent   = true,
   $extra_args        = $::threatstack::params::extra_args,
   $agent_config_args = undef,
+  $repo_class        = $::threatstack::params::repo_class,
   $repo_url          = $::threatstack::params::repo_url,
   $gpg_key           = $::threatstack::params::gpg_key,
   $rulesets          = $::threatstack::params::rulesets,

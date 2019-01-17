@@ -11,7 +11,33 @@ describe 'threatstack' do
     it 'should compile' do should create_class('threatstack') end
     it { should contain_class('threatstack::package') }
     it { should contain_class('threatstack::configure') }
+  end
 
+  context 'on Debian 9' do
+    let(:facts) { {'operatingsystem' => 'Debian', 'osfamily' => 'Debian', 'os' => { 'name' => 'Debian', 'release' => {'full' => '9.1', 'major' => '9', 'minor' => '1'}, 'distro' => {'codename' => 'stretch'}, 'family' => 'Debian'} } }
+    let(:params) { { :deploy_key => "#{deploy_key}" } }
+
+    it 'should compile' do should create_class('threatstack') end
+    it { should contain_class('threatstack::package') }
+    it { should contain_class('threatstack::configure') }
+  end
+
+  context 'on Ubuntu 18.04' do
+    let(:facts) { {'osfamily' => 'Debian', 'os' => { 'name' => 'Ubuntu', 'release' => {'full' => '18.04', 'major' => '18.04'}, 'distro' => {'codename' => 'bionic'}, 'family' => 'Debian'} }}
+    let(:params) { { :deploy_key => "#{deploy_key}" } }
+
+    it 'should compile' do should create_class('threatstack') end
+    it { should contain_class('threatstack::package') }
+    it { should contain_class('threatstack::configure') }
+  end
+
+  context 'on Ubuntu 16.04' do
+    let(:facts) { {'osfamily' => 'Debian', 'os' => { 'name' => 'Ubuntu', 'release' => {'full' => '16.04', 'major' => '16.04'}, 'distro' => {'codename' => 'xenial'}, 'family' => 'Debian'} }}
+    let(:params) { { :deploy_key => "#{deploy_key}" } }
+
+    it 'should compile' do should create_class('threatstack') end
+    it { should contain_class('threatstack::package') }
+    it { should contain_class('threatstack::configure') }
   end
 
   context 'on RedHat' do

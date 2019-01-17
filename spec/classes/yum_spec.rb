@@ -7,6 +7,7 @@ describe 'threatstack::yum' do
 
   context 'on RedHat' do
     let(:facts) {  { 'operatingsystemmajrelease' => '7', 'os' => { 'release' => { 'major' => '7'}, 'name' => 'RedHat', 'family' => 'RedHat'} } }
+    let(:pre_condition) { "class { 'threatstack': deploy_key => '#{deploy_key}', gpg_key => 'https://app.threatstack.com/RPM-GPG-KEY-THREATSTACK' }" }
 
     context 'default' do
       it { should contain_yumrepo('threatstack').with(
@@ -21,6 +22,7 @@ describe 'threatstack::yum' do
 
   context 'on CentOS' do
     let(:facts) { {'operatingsystemmajrelease' => '7', 'os' => { 'release' => { 'major' => '7'}, 'name' => 'CentOS', 'family' => 'RedHat'} } }
+    let(:pre_condition) { "class { 'threatstack': deploy_key => '#{deploy_key}', gpg_key => 'https://app.threatstack.com/RPM-GPG-KEY-THREATSTACK' }" }
 
     context 'default' do
       it { should contain_yumrepo('threatstack').with(
@@ -35,6 +37,7 @@ describe 'threatstack::yum' do
 
   context 'on Amazon' do
     let(:facts) {  {'os' => {  'release' => { 'major' => '1'}, 'name' => 'Amazon', 'family' => 'RedHat'} } }
+    let(:pre_condition) { "class { 'threatstack': deploy_key => '#{deploy_key}', gpg_key => 'https://app.threatstack.com/RPM-GPG-KEY-THREATSTACK' }" }
 
     context 'default' do
       it { should contain_yumrepo('threatstack').with(
