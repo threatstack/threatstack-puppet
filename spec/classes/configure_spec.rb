@@ -8,7 +8,7 @@ describe 'threatstack::configure' do
 
   context 'on Debian 8' do
     let(:facts) { {'operatingsystem' => 'Debian', 'osfamily' => 'Debian', 'os' => { 'name' => 'Debian', 'release' => {'full' => '8.11', 'major' => '8', 'minor' => '11'}, 'distro' => {'codename' => 'jessie'}, 'family' => 'Debian'} } }
-    let(:pre_condition) { "class { 'threatstack': deploy_key => '#{deploy_key}', feature_plan => '#{feature_plan}', ts_hostname => '#{ts_hostname}', ruleset => ['Default Ruleset', 'Service Ruleset'] }" }
+    let(:pre_condition) { "class { 'threatstack': deploy_key => '#{deploy_key}', ts_hostname => '#{ts_hostname}', rulesets => ['Default Ruleset', 'Service Ruleset'] }" }
 
     it { should contain_exec('threatstack-agent-setup').with(
       :command => "/usr/bin/tsagent setup --deploy-key='#{deploy_key}' --hostname='#{ts_hostname}'  --ruleset='Default Ruleset' --ruleset='Service Ruleset'"

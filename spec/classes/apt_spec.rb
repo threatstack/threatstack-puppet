@@ -38,12 +38,4 @@ describe 'threatstack::apt' do
       }
   end
 
-  context 'on Ubuntu 14.04' do
-    let(:facts) { {'osfamily' => 'Debian', 'os' => { 'name' => 'Ubuntu', 'release' => {'full' => '14.04', 'major' => '14.04'}, 'distro' => {'codename' => 'trusty'}, 'family' => 'Debian'} }}
-    let(:params) { { 'location' => REPO_URL, 'release' => 'trust', 'repos' => REPO_TYPE, 'key' => GPG_KEY_ID} }
-    it {
-        is_expected.to contain_apt__source('threatstack').with(ensure: 'present', location: REPO_URL, release: 'trusty', repos: REPO_TYPE)
-      }
-  end
-
 end
