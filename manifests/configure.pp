@@ -27,6 +27,9 @@ class threatstack::configure {
     $extra_args = $::threatstack::extra_args.map | $arg | {
           "--${arg.keys[0]}=${arg.values[0]}"
         }
+    $full_setup_args = "${join($ruleset_args, ' ')} ${join($extra_args, ' ')}"
+    } else {
+      $full_setup_args = "${join($ruleset_args, ' ')}"
     }
 
   $cloudsight_bin = $::threatstack::cloudsight_bin
@@ -39,7 +42,7 @@ class threatstack::configure {
   }
 
   exec { 'threatstack-agent-setup':
-    command   => "${cloudsight_bin} setup --deploy-key='${::threatstack::deploy_key}' --hostname='${::threatstack::ts_hostname}' ${join($ruleset_args, ' ')} ${join($extra_args, ' ')}",
+    command   => "${cloudsight_bin} setup --deploy-key='${::threatstack::deploy_key}' --hostname='${::threatstack::ts_hostname}' ${full_setup_args}",
     subscribe => Package[$threatstack::ts_package],
     creates   => "${confdir}/.audit",
     path      => ['/bin', '/usr/bin'],
