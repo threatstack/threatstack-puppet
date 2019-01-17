@@ -11,7 +11,7 @@ describe 'threatstack::configure' do
     let(:pre_condition) { "class { 'threatstack': deploy_key => '#{deploy_key}', ts_hostname => '#{ts_hostname}', rulesets => ['Default Ruleset', 'Service Ruleset'], agent_config_args => [{'log.level' => 'debug'}] }" }
 
     it { should contain_exec('threatstack-agent-setup').with(
-      :command => "/usr/bin/tsagent setup --deploy-key='#{deploy_key}' --hostname='#{ts_hostname}' --ruleset='Default Ruleset' --ruleset='Service Ruleset'"
+      :command => "/usr/bin/tsagent setup --deploy-key='#{deploy_key}' --hostname='#{ts_hostname}' --ruleset 'Default Ruleset' --ruleset 'Service Ruleset'"
     )}
   end
 
