@@ -18,11 +18,12 @@
 # Copyright 2019 Threat Stack
 #
 
-class threatstack::apt inherits ::threatstack::params {
-  $location = $threatstack::params::repo_url
-  $key      = $threatstack::params::repo_gpg_id
-  $release  = $threatstack::params::release
-  $repos    = $threatstack::params::repos
+class threatstack::apt (
+  $location = $threatstack::params::repo_url,
+  $key      = $threatstack::params::repo_gpg_id,
+  $release  = $threatstack::params::release,
+  $repos    = $threatstack::params::repos,
+  ) inherits ::threatstack::params {
 
   if !defined(Class['apt']) {
     class { 'apt': }
