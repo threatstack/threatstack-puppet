@@ -21,11 +21,11 @@ class threatstack::configure {
 
   $rulesets       = $::threatstack::rulesets
   $ruleset_args   = $rulesets.map | $rule | {
-        "--ruleset ${rule}"
+        "--ruleset='${rule}'"
       }
   if $::threatstack::extra_args {
     $extra_args = $::threatstack::extra_args.map | $arg | {
-          "--${arg.keys[0]} ${arg.values[0]}"
+          "--${arg.keys[0]}=${arg.values[0]}"
         }
     }
 
