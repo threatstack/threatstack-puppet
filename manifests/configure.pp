@@ -15,7 +15,7 @@
 #
 # === Copyright
 #
-# Copyright 2018 Threat Stack, Inc.
+# Copyright 2019 Threat Stack, Inc.
 #
 class threatstack::configure {
 
