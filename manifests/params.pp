@@ -22,6 +22,7 @@ class threatstack::params {
   $ts_service      = 'threatstack'
   $package_version = 'installed'
   $rulesets        = ['Base Rule Set']
+  $extra_args      = undef
   $cloudsight_bin  = '/usr/bin/tsagent'
   $confdir         = '/opt/threatstack/etc'
 

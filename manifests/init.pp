@@ -11,6 +11,7 @@
 # [*extra_args*]
 #   Extra arguments to pass on the command line during agent activation.
 #   type: array of hashes
+#   default: undef
 #
 # [*configure_agent*]
 #   Optionally disable agent configuration.  Useful if installing agent into a
@@ -78,7 +79,7 @@ class threatstack (
   $deploy_key        = undef,
   $package_version   = $::threatstack::params::package_version,
   $configure_agent   = true,
-  $extra_args        = [],
+  $extra_args        = $::threatstack::params::extra_args,
   $agent_config_args = undef,
   $repo_url          = $::threatstack::params::repo_url,
   $gpg_key           = $::threatstack::params::gpg_key,
