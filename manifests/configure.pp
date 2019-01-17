@@ -39,15 +39,7 @@ class threatstack::configure {
   $full_config_args = $::threatstack::agent_config_args.map | $config | {
       "${config.keys[0]} ${config.values[0]}"
     }
-  }
-
-  exec { 'threatstack-agent-setup':
-    command   => "${cloudsight_bin} setup --deploy-key='${::threatstack::deploy_key}' --hostname='${::threatstack::ts_hostname}' ${full_setup_args}",
-    subscribe => Package[$threatstack::ts_package],
-    creates   => "${confdir}/.audit",
-    path      => ['/bin', '/usr/bin'],
-    unless    => 'ps auwwwx| grep [t]sagentd'
-  }
+  $config_args_content = join($full_config_args, "\n")
 
   # this file tracks state and is used to notify
   # Exec[threatstack-agent-configure] of the need to run.
@@ -56,7 +48,7 @@ class threatstack::configure {
     owner   => 'root',
     group   => 'root',
     mode    => '0644',
-    content => join($full_config_args, "\n")
+    content => $config_args_content
   }
 
   exec { 'threatstack-agent-configure':
@@ -66,5 +58,15 @@ class threatstack::configure {
     path        => ['/bin', '/usr/bin'],
     notify      => Class['threatstack::service']
   }
+  } else {
+      $config_args_content = ''
+  }
 
+  exec { 'threatstack-agent-setup':
+    command   => "${cloudsight_bin} setup --deploy-key='${::threatstack::deploy_key}' --hostname='${::threatstack::ts_hostname}' ${full_setup_args}",
+    subscribe => Package[$threatstack::ts_package],
+    creates   => "${confdir}/.audit",
+    path      => ['/bin', '/usr/bin'],
+    unless    => 'ps auwwwx| grep [t]sagentd'
+  }
 }
