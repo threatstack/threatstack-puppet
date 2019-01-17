@@ -16,9 +16,9 @@
 #
 # Copyright 2019 Threat Stack, Inc.
 #
-class threatstack::package {
+class threatstack::package inherits ::threatstack::params {
 
-  class { $::threatstack::repo_class: }
+  class { $::threatstack::params::repo_class: }
 
   # NOTE: We do not signal the cloudsight service to restart because the
   # package takes care of this.  The workflow differs between fresh

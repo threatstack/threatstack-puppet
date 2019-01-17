@@ -26,7 +26,7 @@ describe 'threatstack' do
 
   context 'on CentOS' do
     let(:facts) { {'operatingsystem' => 'CentOS', 'operatingsystemmajrelease' => '7', 'os' => { 'release' => { 'full' => '7.4.1708', 'major' => '7', 'minor' => '4'}, 'name' => 'CentOS', 'family' => 'RedHat'} } }
-    let(:params) { { :deploy_key => "#{deploy_key}", :feature_plan => "#{feature_plan}" } }
+    let(:params) { { :deploy_key => "#{deploy_key}" } }
 
     it 'should compile' do should create_class('threatstack') end
     it { should contain_class('threatstack::package') }
