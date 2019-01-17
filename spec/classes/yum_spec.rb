@@ -3,11 +3,11 @@ require 'spec_helper'
 describe 'threatstack::yum' do
 
   deploy_key = ENV['TS_DEPLOY_KEY'] ? ENV['TS_DEPLOY_KEY'] : "xKkRzesqg"
-  feature_plan = ENV['TS_FEATURE_PLAN'] ? ENV['TS_FEATURE_PLAN'] : "monitor"
+  gpgkey = 'file:///etc/pki/rpm-gpg/RPM-GPG-KEY-THREATSTACK'
 
   context 'on RedHat' do
     let(:facts) {  { 'operatingsystemmajrelease' => '7', 'os' => { 'release' => { 'major' => '7'}, 'name' => 'RedHat', 'family' => 'RedHat'} } }
-    let(:pre_condition) { "class { 'threatstack': deploy_key => '#{deploy_key}', feature_plan => '#{feature_plan}' }" }
+    let(:params) { { 'threatstack::gpg_key_file_uri' => gpgkey } }
 
     context 'default' do
       it { should contain_yumrepo('threatstack').with(
@@ -22,7 +22,7 @@ describe 'threatstack::yum' do
 
   context 'on CentOS' do
     let(:facts) { {'operatingsystemmajrelease' => '7', 'os' => { 'release' => { 'major' => '7'}, 'name' => 'CentOS', 'family' => 'RedHat'} } }
-    let(:pre_condition) { "class { 'threatstack': deploy_key => '#{deploy_key}', feature_plan => '#{feature_plan}' }" }
+    let(:params) { { 'threatstack::gpg_key_file_uri' => gpgkey } }
 
     context 'default' do
       it { should contain_yumrepo('threatstack').with(
@@ -37,7 +37,7 @@ describe 'threatstack::yum' do
 
   context 'on Amazon' do
     let(:facts) {  {'os' => {  'release' => { 'major' => '1'}, 'name' => 'Amazon', 'family' => 'RedHat'} } }
-    let(:pre_condition) { "class { 'threatstack': deploy_key => '#{deploy_key}', feature_plan => '#{feature_plan}' }" }
+    let(:params) { { 'threatstack::gpg_key_file_uri' => gpgkey } }
 
     context 'default' do
       it { should contain_yumrepo('threatstack').with(

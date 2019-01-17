@@ -17,7 +17,7 @@
 #
 # Copyright 2019 Threat Stack, Inc.
 #
-class threatstack::yum {
+class threatstack::yum inherits ::threatstack::params {
   Exec {
     path => ['/bin', '/usr/bin']
   }

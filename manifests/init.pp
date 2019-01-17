@@ -5,12 +5,12 @@
 # === Parameters
 #
 # [*agent_config_args*]
-#   Arguments to be passed to `cloudsight setup`
-#   type: string
+#   Arguments to be passed to `tsagent setup`
+#   type: array
 #
-# [*agent_extra_args*]
+# [*extra_args*]
 #   Extra arguments to pass on the command line during agent activation.
-#   type: string
+#   type: array of hashes
 #
 # [*configure_agent*]
 #   Optionally disable agent configuration.  Useful if installing agent into a
@@ -76,10 +76,9 @@
 #
 class threatstack (
   $deploy_key        = undef,
-  $feature_plan      = undef,
   $package_version   = 'installed',
   $configure_agent   = true,
-  $agent_extra_args  = '',
+  $extra_args        = [],
   $agent_config_args = undef,
   $repo_url          = $::threatstack::params::repo_url,
   $gpg_key           = $::threatstack::params::gpg_key,
@@ -99,9 +98,9 @@ class threatstack (
     if $deploy_key == undef {
       fail('$deploy_key must be defined.')
     }
-    if $feature_plan == undef {
-      fail('$feature_plan needs to be set to "monitor", "investigate", or a"legacy". See https://www.threatstack.com/plans')
-    }
+    # if $feature_plan == undef {
+    #  fail('$feature_plan needs to be set to "monitor", "investigate", or a "legacy". See https://www.threatstack.com/plans')
+    # }
 
     class { '::threatstack::configure': }
     class { '::threatstack::service': }

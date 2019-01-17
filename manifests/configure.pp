@@ -23,14 +23,20 @@ class threatstack::configure {
   $ruleset_args   = $rulesets.map | $rule | {
         "--ruleset ${rule}"
       }
-  $extra_args = $::threatstack::extra_args.map | $arg | {
-        "--${arg.keys.first} ${arg.values.first}"
-      }
+  if $::threatstack::extra_args {
+    $extra_args = $::threatstack::extra_args.map | $arg | {
+          "--${arg.keys[0]} ${arg.values[0]}"
+        }
+    }
 
   $cloudsight_bin = $::threatstack::cloudsight_bin
   $confdir        = $::threatstack::confdir
 
-  $full_config_args = join($::threatstack::agent_config_args, ' ')
+  if $::threatstack::agent_config_args {
+  $full_config_args = $::threatstack::agent_config_args.map | $config | {
+      "${config.keys[0]} ${config.values[0]}"
+    }
+  }
 
   exec { 'threatstack-agent-setup':
     command   => "${cloudsight_bin} setup --deploy-key='${::threatstack::deploy_key}' --hostname='${::threatstack::ts_hostname}' ${join($ruleset_args, ' ')} ${join($extra_args, ' ')}",
@@ -47,11 +53,11 @@ class threatstack::configure {
     owner   => 'root',
     group   => 'root',
     mode    => '0644',
-    content => $full_config_args
+    content => join($full_config_args, "\n")
   }
 
   exec { 'threatstack-agent-configure':
-    command     => "${cloudsight_bin} config -set ${full_config_args}",
+    command     => "${cloudsight_bin} config -set ${join($full_config_args, ' ')}",
     subscribe   => File["${confdir}/.config_args"],
     refreshonly => true,
     path        => ['/bin', '/usr/bin'],
