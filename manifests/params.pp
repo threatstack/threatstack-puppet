@@ -18,11 +18,12 @@
 #
 
 class threatstack::params {
-  $ts_package     = 'threatstack-agent'
-  $ts_service     = 'threatstack'
-  $rulesets       = ['Base Rule Set']
-  $cloudsight_bin = '/usr/bin/tsagent'
-  $confdir        = '/opt/threatstack/etc'
+  $ts_package      = 'threatstack-agent'
+  $ts_service      = 'threatstack'
+  $package_version = 'installed'
+  $rulesets        = ['Base Rule Set']
+  $cloudsight_bin  = '/usr/bin/tsagent'
+  $confdir         = '/opt/threatstack/etc'
 
   case $facts['os']['family'] {
     'RedHat': {

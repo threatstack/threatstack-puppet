@@ -76,7 +76,7 @@
 #
 class threatstack (
   $deploy_key        = undef,
-  $package_version   = 'installed',
+  $package_version   = $::threatstack::params::package_version,
   $configure_agent   = true,
   $extra_args        = [],
   $agent_config_args = undef,
