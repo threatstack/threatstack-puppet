@@ -5,12 +5,13 @@
 # === Parameters
 #
 # [*agent_config_args*]
-#   Arguments to be passed to `cloudsight setup`
-#   type: string
+#   Arguments to be passed to `tsagent setup`
+#   type: array
 #
-# [*agent_extra_args*]
+# [*extra_args*]
 #   Extra arguments to pass on the command line during agent activation.
-#   type: string
+#   type: array of hashes
+#   default: undef
 #
 # [*configure_agent*]
 #   Optionally disable agent configuration.  Useful if installing agent into a
@@ -41,9 +42,9 @@
 #   also `gpg_key`.
 #   type: string
 #
-# [*ruleset*]
-#   Ruleset to apply to host.
-#   type: string
+# [*rulesets*]
+#   Ruleset(s) to apply to host.
+#   type: array
 #
 # [*ts_hostname*]
 #   Hostname as reported to Threat Stack.
@@ -76,21 +77,22 @@
 #
 class threatstack (
   $deploy_key        = undef,
-  $feature_plan      = undef,
-  $package_version   = 'installed',
+  $package_version   = $::threatstack::params::package_version,
   $configure_agent   = true,
-  $agent_extra_args  = '',
+  $extra_args        = $::threatstack::params::extra_args,
   $agent_config_args = undef,
+  $repo_class        = $::threatstack::params::repo_class,
   $repo_url          = $::threatstack::params::repo_url,
   $gpg_key           = $::threatstack::params::gpg_key,
-  $ruleset           = $::threatstack::params::ruleset,
+  $rulesets          = $::threatstack::params::rulesets,
+  $confdir           = $::threatstack::params::confdir,
   $ts_hostname       = $::fqdn
 ) inherits ::threatstack::params {
 
   $ts_package = $::threatstack::params::ts_package
 
-  anchor { '::threatstack::start': } ->
-  class { '::threatstack::package': } ->
+  anchor { '::threatstack::start': }
+  -> class { '::threatstack::package': }
   anchor { '::threatstack::end': }
 
 
@@ -98,16 +100,16 @@ class threatstack (
     if $deploy_key == undef {
       fail('$deploy_key must be defined.')
     }
-    if $feature_plan == undef {
-      fail('$feature_plan needs to be set to "monitor", "investigate", or a"legacy". See https://www.threatstack.com/plans')
-    }
+    # if $feature_plan == undef {
+    #  fail('$feature_plan needs to be set to "monitor", "investigate", or a "legacy". See https://www.threatstack.com/plans')
+    # }
 
     class { '::threatstack::configure': }
     class { '::threatstack::service': }
 
-    Class['::threatstack::package'] ->
-    Class['::threatstack::configure'] ->
-    Class['::threatstack::service'] ->
+    Class['::threatstack::package']
+    -> Class['::threatstack::configure']
+    -> Class['::threatstack::service']
     Anchor['::threatstack::end']
   }
 }

@@ -1,6 +1,6 @@
 {
   "name": "threatstack-threatstack",
-  "version": "1.8.1",
+  "version": "2.0.0",
   "author": "Threat Stack",
   "license": "Apache-2.0",
   "summary": "Installs the Threat Stack agent",
@@ -8,23 +8,28 @@
   "issues_url": "https://github.com/threatstack/threatstack-puppet/issues",
   "tags": ["threatstack"],
   "dependencies": [
-    { "name": "puppetlabs/stdlib", "version_requirement": ">= 4.2.2" }
+    { "name": "puppetlabs/stdlib", "version_requirement": ">= 4.2.2" },
+    {"name": "puppetlabs/apt", "version_requirement": ">= 6.2.1"}
   ],
   "operatingsystem_support": [
     {
     "operatingsystem":"RedHat",
-    "operatingsystemrelease":[ "6.0", "6.5", "7.0", "7.5" ]
+    "operatingsystemrelease":[ "7.0", "7.5" ]
     },
     {
     "operatingsystem":"CentOS",
-    "operatingsystemrelease":[ "6.0", "6.5", "7.0", "7.5" ]
+    "operatingsystemrelease":[ "7.0", "7.5" ]
     },
     {
     "operatingsystem":"Amazon"
     },
     {
     "operatingsystem": "Ubuntu",
-    "operatingsystemrelease": [ "16.04", "14.04" ]
+    "operatingsystemrelease": [ "18.04", "16.04" ]
+    },
+    {
+    "operatingsystem": "Debian",
+    "operatingsystemrelease": [ "9.3", "8.7" ]
     }
    ]
 }

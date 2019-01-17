@@ -11,12 +11,13 @@
 #
 # Pete Cheslock <pete.cheslock@threatstack.com>
 # Tom McLaughlin <tom.mclaughlin@threatstack.com>
+# Nate St. Germain <nate.stgermain@threatstack.com>
 #
 # === Copyright
 #
-# Copyright 2016 Threat Stack, Inc.
+# Copyright 2019 Threat Stack, Inc.
 #
-class threatstack::yum {
+class threatstack::yum inherits ::threatstack::params {
   Exec {
     path => ['/bin', '/usr/bin']
   }

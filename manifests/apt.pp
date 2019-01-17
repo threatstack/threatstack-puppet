@@ -11,42 +11,31 @@
 #
 # Pete Cheslock <pete.cheslock@threatstack.com>
 # Tom McLaughlin <tom.mclaughlin@threatstack.com>
+# Nate St. Germain <nate.stgermain@threatstack.com>
 #
 # === Copyright
 #
-# Copyright 2016 Threat Stack
+# Copyright 2019 Threat Stack
 #
-class threatstack::apt {
-  $apt_source_file = '/etc/apt/sources.list.d/threatstack.list'
 
-  Exec {
-    path => ['/bin', '/usr/bin']
+class threatstack::apt (
+  $location = $threatstack::params::repo_url,
+  $key      = $threatstack::params::repo_gpg_id,
+  $release  = $threatstack::params::release,
+  $repos    = $threatstack::params::repos,
+  ) inherits ::threatstack::params {
+
+  if !defined(Class['apt']) {
+    class { 'apt': }
   }
 
-  # Handle setups where curl is defined but with different attributes. This
-  # should be fixed sometime in 4.15.x or 4.16.x of stdlib.  Fix is in master
-  # but not released.
-  if !defined(Package['curl']) {
-    ensure_packages('curl')
-  }
-
-  file { $apt_source_file:
-    owner   => 'root',
-    group   => 'root',
-    mode    => '0644',
-    content => "deb ${threatstack::repo_url} ${::lsbdistcodename} main",
-    notify  => Exec['ts-agent-apt-get-update']
-  }
-
-  exec { 'ts-agent-apt-get-update':
-    command     => 'apt-get update',
-    refreshonly => true
-  }
-
-  exec { 'ts-gpg-import':
-    command => "curl ${threatstack::gpg_key} | apt-key add -",
-    unless  => 'apt-key list | grep "Threat Stack"',
-    notify  => Exec['ts-agent-apt-get-update'],
-    require => Package['curl']
+  apt::source { 'threatstack':
+    location => $location,
+    release  => $release,
+    repos    => $repos,
+    key      => {
+      'id'     => $key,
+      'server' => 'hkps.pool.sks-keyservers.net'
+      }
   }
 }

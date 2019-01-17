@@ -1,15 +1,16 @@
 language: ruby
+before_install:
+  - curl https://apt.puppetlabs.com/DEB-GPG-KEY-puppet | sudo apt-key add -
+  - curl -O https://apt.puppetlabs.com/puppet5-release-trusty.deb
+  - sudo dpkg -i puppet5-release-trusty.deb
+  - sudo apt-get update -q
+  - sudo apt-get install -y lsb-release puppet-agent
+  - /opt/puppetlabs/puppet/bin/gem install bundler
 bundler_args: "--without system_tests"
+before_script:
+  - export PATH=$PATH:/opt/puppetlabs/puppet/bin
 script: bundle install && bundle exec rake validate && bundle exec rake test SPEC_OPTS='--format documentation'
 cache: bundler
 sudo: required
-rvm:
-- 2.1.0
 env:
-- PUPPET_VERSION="~> 3.8.0"
-- PUPPET_VERSION="~> 4.6.0"
-- PUPPET_VERSION="~> 4.7.0"
-- PUPPET_VERSION="~> 4.8.0"
-notifications:
-  slack:
-    secure: fIRcyLQ5G7XmPV5n06Q4NPAiQ1E5VwsoL4GuwIZQ79/c85yxUXk7Y2rDVFnzjtJnWBZ4cTxbz1GATn0PmSDV6fEh5pS31nLwZ7LJUWfLz8Kr86XFTkJpo5fnUxik9BYIwx/WyxAhCtHinFxWS9S2MweABhsDX8vIEFcraASpdHs=
+- PUPPET_VERSION="~> 5.5.8"

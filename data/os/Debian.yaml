@@ -1,0 +1,5 @@
+---
+threatstack::params:
+    repo_class: '::threatstack::apt'
+    gpg_key: 'https://app.threatstack.com/APT-GPG-KEY-THREATSTACK'
+
