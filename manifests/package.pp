@@ -20,7 +20,7 @@ class threatstack::package {
 
   class { $::threatstack::repo_class: }
 
-  # NOTE: We do not signal the cloudsight service to restart because the
+  # NOTE: We do not signal the tsagent service to restart because the
   # package takes care of this.  The workflow differs between fresh
   # installation and upgrades.
   package { $::threatstack::ts_package:
