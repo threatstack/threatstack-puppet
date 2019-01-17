@@ -10,11 +10,11 @@ describe 'threatstack::apt' do
 
     let(:params) { { 'location' => REPO_URL, 'release' => 'jessie', 'repos' => REPO_TYPE, 'key' => GPG_KEY_ID} }
     it {
-        is_expected.to contain_apt__source('list-threatstack').with(ensure: 'present', location: REPO_URL, release: 'jessie', repos: REPO_TYPE)
+        is_expected.to contain_apt__source('threatstack').with(ensure: 'present', location: REPO_URL, release: 'jessie', repos: REPO_TYPE)
       }
 
     it {
-        is_expected.to contain_apt__key("Add key: #{GPG_KEY_ID} from Apt::Source threatstack").that_comes_before('Apt::Setting[list-threatstack]').with(ensure: 'present',
+        is_expected.to contain_apt__key("Add key: #{GPG_KEY_ID} from Apt::Source threatstack").that_comes_before('Apt::Source[threatstack]').with(ensure: 'present',
         id: GPG_KEY_ID)
       }
   end
@@ -27,7 +27,7 @@ describe 'threatstack::apt' do
       }
 
     it {
-        is_expected.to contain_apt__key("Add key: #{GPG_KEY_ID} from Apt::Source threatstack").that_comes_before('Apt::Setting[list-threatstack]').with(ensure: 'present',
+        is_expected.to contain_apt__key("Add key: #{GPG_KEY_ID} from Apt::Source threatstack").that_comes_before('Apt::Source[threatstack]').with(ensure: 'present',
         id: GPG_KEY_ID)
       }
   end
@@ -36,11 +36,11 @@ describe 'threatstack::apt' do
     let(:facts) { {'osfamily' => 'Debian', 'os' => { 'name' => 'Ubuntu', 'release' => {'full' => '18.04', 'major' => '18.04'}, 'distro' => {'codename' => 'bionic'}, 'family' => 'Debian'} }}
     let(:params) { { 'location' => REPO_URL, 'release' => 'bionic', 'repos' => REPO_TYPE, 'key' => GPG_KEY_ID} }
     it {
-        is_expected.to contain_apt__source('list-threatstack').with(ensure: 'present', location: REPO_URL, release: 'bionic', repos: REPO_TYPE)
+        is_expected.to contain_apt__source('threatstack').with(ensure: 'present', location: REPO_URL, release: 'bionic', repos: REPO_TYPE)
       }
 
     it {
-        is_expected.to contain_apt__key("Add key: #{GPG_KEY_ID} from Apt::Source threatstack").that_comes_before('Apt::Setting[list-threatstack]').with(ensure: 'present',
+        is_expected.to contain_apt__key("Add key: #{GPG_KEY_ID} from Apt::Source threatstack").that_comes_before('Apt::Source[threatstack]').with(ensure: 'present',
         id: GPG_KEY_ID)
       }
   end
@@ -49,11 +49,11 @@ describe 'threatstack::apt' do
     let(:facts) { {'osfamily' => 'Debian', 'os' => { 'name' => 'Ubuntu', 'release' => {'full' => '16.04', 'major' => '16.04'}, 'distro' => {'codename' => 'xenial'}, 'family' => 'Debian'} }}
     let(:params) { { 'location' => REPO_URL, 'release' => 'xenial', 'repos' => REPO_TYPE, 'key' => GPG_KEY_ID} }
     it {
-        is_expected.to contain_apt__source('list-threatstack').with(ensure: 'present', location: REPO_URL, release: 'xenial', repos: REPO_TYPE)
+        is_expected.to contain_apt__source('threatstack').with(ensure: 'present', location: REPO_URL, release: 'xenial', repos: REPO_TYPE)
       }
 
     it {
-        is_expected.to contain_apt__key("Add key: #{GPG_KEY_ID} from Apt::Source threatstack").that_comes_before('Apt::Setting[list-threatstack]').with(ensure: 'present',
+        is_expected.to contain_apt__key("Add key: #{GPG_KEY_ID} from Apt::Source threatstack").that_comes_before('Apt::Source[threatstack]').with(ensure: 'present',
         id: GPG_KEY_ID)
       }
   end
@@ -62,11 +62,11 @@ describe 'threatstack::apt' do
     let(:facts) { {'osfamily' => 'Debian', 'os' => { 'name' => 'Ubuntu', 'release' => {'full' => '14.04', 'major' => '14.04'}, 'distro' => {'codename' => 'trusty'}, 'family' => 'Debian'} }}
     let(:params) { { 'location' => REPO_URL, 'release' => 'trust', 'repos' => REPO_TYPE, 'key' => GPG_KEY_ID} }
     it {
-        is_expected.to contain_apt__source('list-threatstack').with(ensure: 'present', location: REPO_URL, release: 'trusty', repos: REPO_TYPE)
+        is_expected.to contain_apt__source('threatstack').with(ensure: 'present', location: REPO_URL, release: 'trusty', repos: REPO_TYPE)
       }
 
     it {
-        is_expected.to contain_apt__key("Add key: #{GPG_KEY_ID} from Apt::Source threatstack").that_comes_before('Apt::Setting[list-threatstack]').with(ensure: 'present',
+        is_expected.to contain_apt__key("Add key: #{GPG_KEY_ID} from Apt::Source threatstack").that_comes_before('Apt::Source[threatstack]').with(ensure: 'present',
         id: GPG_KEY_ID)
       }
   end
