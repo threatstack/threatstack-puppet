@@ -20,12 +20,22 @@ class threatstack::package {
 
   class { $::threatstack::repo_class: }
 
+  if $::threatstack::disable_auditd {
+    service { 'auditd':
+      ensure => 'stopped',
+      enable => false
+    }
+  $required = [ Class[$::threatstack::repo_class], Service['auditd'] ]
+  } else {
+    $required = Class[$::threatstack::repo_class]
+  }
+
   # NOTE: We do not signal the tsagent service to restart because the
   # package takes care of this.  The workflow differs between fresh
   # installation and upgrades.
   package { $::threatstack::ts_package:
     ensure  => $::threatstack::package_version,
-    require => Class[$::threatstack::repo_class]
+    require => $required
   }
 
 }

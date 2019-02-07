@@ -25,6 +25,7 @@ class threatstack::params {
   $extra_args      = undef
   $cloudsight_bin  = '/usr/bin/tsagent'
   $confdir         = '/opt/threatstack/etc'
+  $disable_auditd  = false
 
   case $facts['os']['family'] {
     'RedHat': {
@@ -34,7 +35,10 @@ class threatstack::params {
       $gpg_key_file_uri = "file://${gpg_key_file}"
 
       case $facts['os']['name'] {
-        'Amazon': { $repo_url = 'https://pkg.threatstack.com/v2/Amazon'}
+        'Amazon': {
+              $repo_url       = 'https://pkg.threatstack.com/v2/Amazon'
+              $disable_auditd = true
+            }
         /(CentOS|RedHat)/: { $repo_url = "https://pkg.threatstack.com/v2/EL/${::operatingsystemmajrelease}" }
         default: { fail("Module ${module_name} does not support ${::operatingsystem}") }
       }
