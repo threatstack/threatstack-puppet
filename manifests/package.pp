@@ -20,6 +20,14 @@ class threatstack::package {
 
   class { $::threatstack::repo_class: }
 
+# Disable auditd on amazon linux 2, before installing the agent
+if $::operatingsystem == 'RedHat' && $::operatingsystemmajrelease == '2' {
+  package { 'auditd':
+    ensure => 'stopped',
+    enable => false,
+  }
+}
+
   # NOTE: We do not signal the tsagent service to restart because the
   # package takes care of this.  The workflow differs between fresh
   # installation and upgrades.

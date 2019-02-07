@@ -20,15 +20,6 @@ if $::operatingsystem == 'Debian' {
   }
 }
 
-# Disable auditd on amazon linux 2, before installing the agent
-if $::operatingsystem == 'RedHat' && $::operatingsystemmajrelease == '2' {
-  package { 'auditd':
-    ensure => 'stopped',
-    enable => false,
-    before => Class['::threatstack']
-  }
-}
-
 # See .kitchen.yml for setting this fact.
 class { '::threatstack':
   deploy_key        => $::ts_deploy_key,
