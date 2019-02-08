@@ -35,7 +35,7 @@ class threatstack::params {
 
       case $facts['os']['name'] {
         'Amazon': {
-              $repo_url       = "https://pkg.threatstack.com/v2/Amazon/${facts['os']['release']['major']}"
+              $repo_url       = "https://pkg.threatstack.com/v2/Amazon/${::operatingsystemmajrelease}"
               $disable_auditd = true
             }
         /(CentOS|RedHat)/: {
