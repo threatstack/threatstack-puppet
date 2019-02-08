@@ -43,7 +43,7 @@ describe 'threatstack::yum' do
       it { should contain_yumrepo('threatstack').with(
         :descr     => 'Threat Stack Package Repository',
         :enabled   => 1,
-        :baseurl   => 'https://pkg.threatstack.com/v2/Amazon',
+        :baseurl   => 'https://pkg.threatstack.com/v2/Amazon/2',
         :gpgcheck  => 1,
         :gpgkey    => 'file:///etc/pki/rpm-gpg/RPM-GPG-KEY-THREATSTACK'
       ) }
