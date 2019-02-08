@@ -21,11 +21,17 @@ class threatstack::package {
   class { $::threatstack::repo_class: }
 
   if $::threatstack::disable_auditd {
-    service { 'auditd':
-      ensure => 'stopped',
-      enable => false
+    exec { 'stop_auditd':
+      command => '/sbin/service auditd stop',
+      onlyif  => '/sbin/service auditd status'
     }
-  $required = [ Class[$::threatstack::repo_class], Service['auditd'] ]
+
+    exec { 'disable_auditd':
+      command => '/bin/systemctl disable auditd',
+      require => Exec['stop_auditd']
+    }
+
+  $required = [ Class[$::threatstack::repo_class], Exec['stop_auditd'] ]
   } else {
     $required = Class[$::threatstack::repo_class]
   }
@@ -37,5 +43,4 @@ class threatstack::package {
     ensure  => $::threatstack::package_version,
     require => $required
   }
-
 }
