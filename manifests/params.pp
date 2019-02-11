@@ -40,7 +40,6 @@ class threatstack::params {
             }
         /(CentOS|RedHat)/: {
               $repo_url         = "https://pkg.threatstack.com/v2/EL/${::operatingsystemmajrelease}"
-              $disable_auditd   = false
             }
         default: { fail("Module ${module_name} does not support ${::operatingsystem}") }
       }
