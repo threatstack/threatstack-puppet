@@ -32,11 +32,11 @@ class threatstack::params {
       $gpg_key          = 'https://app.threatstack.com/RPM-GPG-KEY-THREATSTACK'
       $gpg_key_file     = '/etc/pki/rpm-gpg/RPM-GPG-KEY-THREATSTACK'
       $gpg_key_file_uri = "file://${gpg_key_file}"
+      $disable_auditd   = true
 
       case $facts['os']['name'] {
         'Amazon': {
               $repo_url       = "https://pkg.threatstack.com/v2/Amazon/${::operatingsystemmajrelease}"
-              $disable_auditd = true
             }
         /(CentOS|RedHat)/: {
               $repo_url         = "https://pkg.threatstack.com/v2/EL/${::operatingsystemmajrelease}"
