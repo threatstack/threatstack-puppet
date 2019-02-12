@@ -2,6 +2,13 @@
 
 We'll track changes here starting with details about the 2.0 release and reference to earlier releases.
 
+## 2.0.1
+### Changed
+- added optional parameter `disable_auditd` to handle issues users reported installing on RHEL-like OSes
+
+### Fixed
+- fixed amazon linux 2 yum repo assignment
+
 ## 2.0
 ### This release tracks the release of the Threat Stack Agent 2.0
 
