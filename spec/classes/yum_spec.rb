@@ -36,14 +36,14 @@ describe 'threatstack::yum' do
   end
 
   context 'on Amazon' do
-    let(:facts) {  {'os' => {  'release' => { 'major' => '2'}, 'name' => 'Amazon', 'family' => 'RedHat'} } }
+    let(:facts) {  {'operatingsystemmajrelease' => '2', 'os' => {  'release' => { 'major' => '2'}, 'name' => 'Amazon', 'family' => 'RedHat'} } }
     let(:pre_condition) { "class { 'threatstack': deploy_key => '#{deploy_key}', gpg_key => 'https://app.threatstack.com/RPM-GPG-KEY-THREATSTACK' }" }
 
     context 'default' do
       it { should contain_yumrepo('threatstack').with(
         :descr     => 'Threat Stack Package Repository',
         :enabled   => 1,
-        :baseurl   => 'https://pkg.threatstack.com/v2/Amazon',
+        :baseurl   => 'https://pkg.threatstack.com/v2/Amazon/2',
         :gpgcheck  => 1,
         :gpgkey    => 'file:///etc/pki/rpm-gpg/RPM-GPG-KEY-THREATSTACK'
       ) }

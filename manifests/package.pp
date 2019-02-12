@@ -20,12 +20,27 @@ class threatstack::package {
 
   class { $::threatstack::repo_class: }
 
+  if $::threatstack::disable_auditd {
+    exec { 'stop_auditd':
+      command => '/sbin/service auditd stop',
+      onlyif  => '/sbin/service auditd status'
+    }
+
+    exec { 'disable_auditd':
+      command => '/bin/systemctl disable auditd',
+      require => Exec['stop_auditd']
+    }
+
+  $required = [ Class[$::threatstack::repo_class], Exec['stop_auditd'] ]
+  } else {
+    $required = Class[$::threatstack::repo_class]
+  }
+
   # NOTE: We do not signal the tsagent service to restart because the
   # package takes care of this.  The workflow differs between fresh
   # installation and upgrades.
   package { $::threatstack::ts_package:
     ensure  => $::threatstack::package_version,
-    require => Class[$::threatstack::repo_class]
+    require => $required
   }
-
 }
