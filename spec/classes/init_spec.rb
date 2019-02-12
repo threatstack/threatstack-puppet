@@ -61,7 +61,7 @@ describe 'threatstack' do
   end
 
   context 'on Amazon' do
-    let(:facts) {  {'os' => { 'name' => 'Amazon', 'family' => 'RedHat'} } }
+    let(:facts) { { 'operatingsystemmajrelease' => '2', 'os' => { 'name' => 'Amazon', 'family' => 'RedHat'} } }
     let(:params) { { :deploy_key => "#{deploy_key}" } }
 
     it 'should compile' do should create_class('threatstack') end

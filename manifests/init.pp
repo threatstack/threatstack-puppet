@@ -8,6 +8,10 @@
 #   Arguments to be passed to `tsagent setup`
 #   type: array
 #
+# [*disable_auditd*]
+#   Required to work around issues with auditd on some distros
+#   type: bool
+#
 # [*extra_args*]
 #   Extra arguments to pass on the command line during agent activation.
 #   type: array of hashes
@@ -86,7 +90,8 @@ class threatstack (
   $gpg_key           = $::threatstack::params::gpg_key,
   $rulesets          = $::threatstack::params::rulesets,
   $confdir           = $::threatstack::params::confdir,
-  $ts_hostname       = $::fqdn
+  $ts_hostname       = $::fqdn,
+  $disable_auditd    = $::threatstack::params::disable_auditd
 ) inherits ::threatstack::params {
 
   $ts_package = $::threatstack::params::ts_package

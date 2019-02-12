@@ -22,7 +22,7 @@ describe 'threatstack::package' do
   end
 
   context 'on Amazon Linux' do
-    let(:facts) {  {'os' => {  'release' => { 'major' => '2'}, 'name' => 'Amazon', 'family' => 'RedHat'} } }
+    let(:facts) {  {'operatingsystemmajrelease' => '2', 'os' => {  'release' => { 'major' => '2'}, 'name' => 'Amazon', 'family' => 'RedHat'} } }
     let(:pre_condition) { "class { 'threatstack': deploy_key => '#{deploy_key}', gpg_key => 'https://app.threatstack.com/RPM-GPG-KEY-THREATSTACK', repo_class => '::threatstack::yum' }" }
 
     context 'package' do
