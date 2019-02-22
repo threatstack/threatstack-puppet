@@ -53,13 +53,14 @@ class threatstack::params {
       }
     }
     'Debian': {
-      $repo_class     = '::threatstack::apt'
-      $repo_url       = 'https://pkg.threatstack.com/v2/Ubuntu'
-      $repo_gpg_id    = 'ACCC2B02EA3A2409557B0AB991BB3B3C6EE04BD4'
-      $release        = $facts['os']['distro']['codename']
-      $repos          = 'main'
-      $gpg_key        = 'https://app.threatstack.com/APT-GPG-KEY-THREATSTACK'
-      $disable_auditd = false
+      $repo_class         = '::threatstack::apt'
+      $repo_url           = 'https://pkg.threatstack.com/v2/Ubuntu'
+      $repo_gpg_id        = 'ACCC2B02EA3A2409557B0AB991BB3B3C6EE04BD4'
+      $release            = $facts['os']['distro']['codename']
+      $repos              = 'main'
+      $gpg_key            = 'https://app.threatstack.com/APT-GPG-KEY-THREATSTACK'
+      $disable_auditd     = false
+      $disable_auditd_cmd = '/bin/systemctl disable auditd'
     }
     default: {
       fail("Module ${module_name} does not support ${::operatingsystem}")
