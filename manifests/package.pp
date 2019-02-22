@@ -27,7 +27,7 @@ class threatstack::package {
     }
 
     exec { 'disable_auditd':
-      command => '/bin/systemctl disable auditd',
+      command => $::threatstack::disable_auditd_cmd,
       require => Exec['stop_auditd']
     }
 

@@ -12,6 +12,10 @@
 #   Required to work around issues with auditd on some distros
 #   type: bool
 #
+# [*disable_auditd_cmd*]
+#   Systemd vs. SysV init, related to above
+#   type: string
+#
 # [*extra_args*]
 #   Extra arguments to pass on the command line during agent activation.
 #   type: array of hashes
@@ -80,18 +84,19 @@
 # Copyright 2016 Threat Stack, Inc.
 #
 class threatstack (
-  $deploy_key        = undef,
-  $package_version   = $::threatstack::params::package_version,
-  $configure_agent   = true,
-  $extra_args        = $::threatstack::params::extra_args,
-  $agent_config_args = undef,
-  $repo_class        = $::threatstack::params::repo_class,
-  $repo_url          = $::threatstack::params::repo_url,
-  $gpg_key           = $::threatstack::params::gpg_key,
-  $rulesets          = $::threatstack::params::rulesets,
-  $confdir           = $::threatstack::params::confdir,
-  $ts_hostname       = $::fqdn,
-  $disable_auditd    = $::threatstack::params::disable_auditd
+  $deploy_key         = undef,
+  $package_version    = $::threatstack::params::package_version,
+  $configure_agent    = true,
+  $extra_args         = $::threatstack::params::extra_args,
+  $agent_config_args  = undef,
+  $repo_class         = $::threatstack::params::repo_class,
+  $repo_url           = $::threatstack::params::repo_url,
+  $gpg_key            = $::threatstack::params::gpg_key,
+  $rulesets           = $::threatstack::params::rulesets,
+  $confdir            = $::threatstack::params::confdir,
+  $ts_hostname        = $::fqdn,
+  $disable_auditd     = $::threatstack::params::disable_auditd,
+  $disable_auditd_cmd = $::threatstack::params::disable_auditd_cmd
 ) inherits ::threatstack::params {
 
   $ts_package = $::threatstack::params::ts_package

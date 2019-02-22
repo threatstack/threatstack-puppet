@@ -2,6 +2,10 @@
 
 We'll track changes here starting with details about the 2.0 release and reference to earlier releases.
 
+## 2.0.2
+### Fixed
+- fixed amazon linux 1 support and tests
+
 ## 2.0.1
 ### Changed
 - added optional parameter `disable_auditd` to handle issues users reported installing on RHEL-like OSes
