@@ -36,10 +36,18 @@ class threatstack::params {
 
       case $facts['os']['name'] {
         'Amazon': {
-              $repo_url       = "https://pkg.threatstack.com/v2/Amazon/${::operatingsystemmajrelease}"
+               if $facts['os']['release']['major'] =~ /^201\d$/ {
+                 $releasever         = '1'
+                 $disable_auditd_cmd = '/sbin/chkconfig auditd off'
+               } else {
+                 $releasever         = $facts['os']['release']['major']
+                 $disable_auditd_cmd = '/bin/systemctl disable auditd'
+               }
+              $repo_url = "https://pkg.threatstack.com/v2/Amazon/${releasever}"
             }
         /(CentOS|RedHat)/: {
-              $repo_url         = "https://pkg.threatstack.com/v2/EL/${::operatingsystemmajrelease}"
+              $repo_url           = "https://pkg.threatstack.com/v2/EL/${::operatingsystemmajrelease}"
+              $disable_auditd_cmd = '/bin/systemctl disable auditd'
             }
         default: { fail("Module ${module_name} does not support ${::operatingsystem}") }
       }
