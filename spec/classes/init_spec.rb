@@ -60,8 +60,8 @@ describe 'threatstack' do
 
   end
 
-  context 'on Amazon' do
-    let(:facts) { { 'operatingsystemmajrelease' => '2', 'os' => { 'name' => 'Amazon', 'family' => 'RedHat'} } }
+  context 'on Amazon Linux 2' do
+    let(:facts) { { 'operatingsystemmajrelease' => '2', 'os' => { 'name' => 'Amazon', 'family' => 'RedHat', 'release' => { 'major' => '2'}} } }
     let(:params) { { :deploy_key => "#{deploy_key}" } }
 
     it 'should compile' do should create_class('threatstack') end
@@ -70,6 +70,16 @@ describe 'threatstack' do
 
   end
 
+
+  context 'on Amazon Linux 1' do
+    let(:facts) { { 'operatingsystemmajrelease' => '2018', 'os' => { 'name' => 'Amazon', 'family' => 'RedHat', 'release' => { 'major' => '2018'}} } }
+    let(:params) { { :deploy_key => "#{deploy_key}" } }
+
+    it 'should compile' do should create_class('threatstack') end
+    it { should contain_class('threatstack::package') }
+    it { should contain_class('threatstack::configure') }
+
+  end
 
 
 end
