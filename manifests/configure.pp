@@ -28,9 +28,9 @@ class threatstack::configure {
           "--${arg.keys[0]}=${arg.values[0]}"
         }
     $full_setup_args = "${join($ruleset_args, ' ')} ${join($extra_args, ' ')}"
-    } else {
-      $full_setup_args = "${join($ruleset_args, ' ')}"
-    }
+  } else {
+    $full_setup_args = "${join($ruleset_args, ' ')}"
+  }
 
   $cloudsight_bin = $::threatstack::cloudsight_bin
   $confdir        = $::threatstack::confdir
