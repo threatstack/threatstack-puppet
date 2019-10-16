@@ -18,8 +18,16 @@
 #
 
 class threatstack::params {
-  $ts_package      = 'threatstack-agent'
-  $ts_service      = 'threatstack'
+  $ts_package = $facts['os']['family'] ? {
+    'Windows' => 'Threat Stack Agent'
+    default   =>  'threatstack-agent'
+  }
+
+  $ts_service = $facts['os']['family'] ? {
+    'Windows' => 'Threat Stack Agent',
+    default   => 'threatstack'
+  }
+
   $package_version = 'installed'
   $rulesets        = ['Base Rule Set']
   $extra_args      = undef
@@ -28,12 +36,9 @@ class threatstack::params {
 
   case $facts['os']['family'] {
     'Windows': {
-        $ts_service       = 'Threat Stack Agent'
-        $ts_package       = 'Threat Stack Agent'
         $windows_base_url = 'https://pkg.threatstack.com/v2/Windows'
         $windows_pkg_name = 'Threat+Stack+Cloud+Security+Agent.latest.msi'
         $download_url     = "${windows_base_url}/${windows_pkg_name}"
-        $rulesets         = ['Windows Rule Set']
         $progdir          = 'C:\\Program Files\\Threat Stack'
         $windows_opts     = ["TSDEPLOYKEY=${::threatstack::deploy_key}"]
 
