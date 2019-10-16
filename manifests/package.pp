@@ -42,9 +42,8 @@ class threatstack::package {
   case $facts['os']['family'] {
   'Windows': {
     package { $::threatstack::ts_package:
-      ensure          => $::threatstack::package_version,
+      ensure          => installed,
       source          => $::threatstack::windows_download_url,
-      upgradeable     => true,
       install_options => $::threatstack::windows_install_options
     }
   }
