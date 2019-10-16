@@ -1,7 +1,12 @@
+.DS_Store
 .kitchen/
 .bundle
 .kitchen.local.yml
 .librarian/
+*.orig
+*.log
+*.rpm
+*.deb
 .ruby-version
 .tmp/
 modules/
