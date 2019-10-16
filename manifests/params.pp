@@ -27,6 +27,14 @@ class threatstack::params {
   $confdir         = '/opt/threatstack/etc'
 
   case $facts['os']['family'] {
+    'Windows': {
+        $windows_base_url = 'https://pkg.threatstack.com/v2/Windows'
+        $ts_package       = 'Threat+Stack+Cloud+Security+Agent.latest.msi'
+        $download_url     = "${windows_base_url}/${windows_pkg_name}"
+        $rulesets         = ['Windows Rule Set']
+        $progdir          = 'C:\\Program Files\\Threat Stack'
+        $tmpdir           = '%TEMP%\\ThreatStack'
+      }
     'RedHat': {
       $repo_class       = '::threatstack::yum'
       $gpg_key          = 'https://app.threatstack.com/RPM-GPG-KEY-THREATSTACK'
@@ -66,6 +74,4 @@ class threatstack::params {
       fail("Module ${module_name} does not support ${::operatingsystem}")
     }
   }
-
-
 }
