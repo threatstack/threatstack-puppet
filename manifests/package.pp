@@ -44,6 +44,7 @@ class threatstack::package {
     package { $::threatstack::ts_package:
       ensure          => $::threatstack::package_version,
       source          => $::threatstack::windows_download_url,
+      upgradeable     => true,
       install_options => $::threatstack::windows_install_options
     }
   }
