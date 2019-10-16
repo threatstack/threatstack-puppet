@@ -28,12 +28,15 @@ class threatstack::params {
 
   case $facts['os']['family'] {
     'Windows': {
+        $ts_service       = 'Threat Stack Agent'
+        $ts_package       = 'Threat Stack Agent'
         $windows_base_url = 'https://pkg.threatstack.com/v2/Windows'
-        $ts_package       = 'Threat+Stack+Cloud+Security+Agent.latest.msi'
+        $windows_pkg_name = 'Threat+Stack+Cloud+Security+Agent.latest.msi'
         $download_url     = "${windows_base_url}/${windows_pkg_name}"
         $rulesets         = ['Windows Rule Set']
         $progdir          = 'C:\\Program Files\\Threat Stack'
-        $tmpdir           = '%TEMP%\\ThreatStack'
+        $windows_opts     = ["TSDEPLOYKEY=${::threatstack::deploy_key}"]
+
       }
     'RedHat': {
       $repo_class       = '::threatstack::yum'

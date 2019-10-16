@@ -3,6 +3,7 @@
 .bundle
 .kitchen.local.yml
 .librarian/
+*.swp
 *.orig
 *.log
 *.rpm

@@ -39,8 +39,18 @@ class threatstack::package {
   # NOTE: We do not signal the tsagent service to restart because the
   # package takes care of this.  The workflow differs between fresh
   # installation and upgrades.
-  package { $::threatstack::ts_package:
-    ensure  => $::threatstack::package_version,
-    require => $required
+  case $facts['os']['family'] {
+  'Windows': {
+    package { $::threatstack::ts_package:
+      ensure          => $::threatstack::package_version,
+      source          => $::threatstack::windows_download_url
+      install_options => $::threatstack::windows_install_options
+    }
+  }
+  default:
+    package { $::threatstack::ts_package:
+      ensure  => $::threatstack::package_version,
+      require => $required
+    }
   }
 }

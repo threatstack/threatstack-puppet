@@ -54,8 +54,24 @@
 #   Ruleset(s) to apply to host.
 #   type: array
 #
+# [*tmpdir*]
+#   Used to download Windows agent MSI
+#   type: string
+#
 # [*ts_hostname*]
 #   Hostname as reported to Threat Stack.
+#   type: string
+#
+# [*windows_download_url*]
+#   Windows MSI download url
+#   type: string
+#
+# [*windows_install_options*]
+#   Windows MSI install options
+#   type: array
+#
+# [*windows_ts_package*]
+#   Windows MSI package name
 #   type: string
 #
 # === Examples
@@ -78,25 +94,31 @@
 #
 # Pete Cheslock <pete.cheslock@threatstack.com>
 # Tom McLaughlin <tom.mclaughlin@threatstack.com>
+# Nate St. Germain <nate.stgermain@threatstack.com>
 #
 # === Copyright
 #
-# Copyright 2016 Threat Stack, Inc.
+# Copyright 2019 Threat Stack, Inc.
 #
 class threatstack (
-  $deploy_key         = undef,
-  $package_version    = $::threatstack::params::package_version,
-  $configure_agent    = true,
-  $extra_args         = $::threatstack::params::extra_args,
-  $agent_config_args  = undef,
-  $repo_class         = $::threatstack::params::repo_class,
-  $repo_url           = $::threatstack::params::repo_url,
-  $gpg_key            = $::threatstack::params::gpg_key,
-  $rulesets           = $::threatstack::params::rulesets,
-  $confdir            = $::threatstack::params::confdir,
-  $ts_hostname        = $::fqdn,
-  $disable_auditd     = $::threatstack::params::disable_auditd,
-  $disable_auditd_cmd = $::threatstack::params::disable_auditd_cmd
+  $deploy_key              = undef,
+  $package_version         = $::threatstack::params::package_version,
+  $configure_agent         = true,
+  $extra_args              = $::threatstack::params::extra_args,
+  $agent_config_args       = undef,
+  $repo_class              = $::threatstack::params::repo_class,
+  $repo_url                = $::threatstack::params::repo_url,
+  $gpg_key                 = $::threatstack::params::gpg_key,
+  $rulesets                = $::threatstack::params::rulesets,
+  $confdir                 = $::threatstack::params::confdir,
+  $ts_hostname             = $::fqdn,
+  $disable_auditd          = $::threatstack::params::disable_auditd,
+  $disable_auditd_cmd      = $::threatstack::params::disable_auditd_cmd,
+  $tmpdir                  = $::threatstack::params::tmpdir,
+  $windows_download_url    = $::threatstack::params::download_url,
+  $windows_ts_package      = $::threatstack::params::ts_package,
+  $windows_install_options = $::threatstack::params::windows_opts
+
 ) inherits ::threatstack::params {
 
   $ts_package = $::threatstack::params::ts_package
