@@ -47,10 +47,11 @@ class threatstack::package {
       install_options => $::threatstack::windows_install_options
     }
   }
-  default:
+  default: {
     package { $::threatstack::ts_package:
       ensure  => $::threatstack::package_version,
       require => $required
     }
   }
+ }
 }
