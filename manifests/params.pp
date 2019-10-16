@@ -36,13 +36,15 @@ class threatstack::params {
 
   case $facts['os']['family'] {
     'Windows': {
-        $windows_base_url = 'https://pkg.threatstack.com/v2/Windows'
-        $windows_pkg_name = 'Threat+Stack+Cloud+Security+Agent.latest.msi'
-        $download_url     = "${windows_base_url}/${windows_pkg_name}"
-        $progdir          = 'C:\\Program Files\\Threat Stack'
-        $windows_opts     = ["TSDEPLOYKEY=${::threatstack::deploy_key}"]
-
-      }
+      $repo_class       = '::threatstack::msi'
+      $repo_url         = undef
+      $gpg_key          = undef
+      $disable_auditd   = false
+      $windows_base_url = 'https://pkg.threatstack.com/v2/Windows'
+      $windows_pkg_name = 'Threat+Stack+Cloud+Security+Agent.latest.msi'
+      $download_url     = "${windows_base_url}/${windows_pkg_name}"
+      $progdir          = 'C:V\\Program Files\\Threat Stack'
+    }
     'RedHat': {
       $repo_class       = '::threatstack::yum'
       $gpg_key          = 'https://app.threatstack.com/RPM-GPG-KEY-THREATSTACK'

@@ -43,7 +43,7 @@ class threatstack::package {
   'Windows': {
     package { $::threatstack::ts_package:
       ensure          => $::threatstack::package_version,
-      source          => $::threatstack::windows_download_url
+      source          => $::threatstack::windows_download_url,
       install_options => $::threatstack::windows_install_options
     }
   }

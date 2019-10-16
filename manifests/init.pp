@@ -114,10 +114,9 @@ class threatstack (
   $ts_hostname             = $::fqdn,
   $disable_auditd          = $::threatstack::params::disable_auditd,
   $disable_auditd_cmd      = $::threatstack::params::disable_auditd_cmd,
-  $tmpdir                  = $::threatstack::params::tmpdir,
   $windows_download_url    = $::threatstack::params::download_url,
   $windows_ts_package      = $::threatstack::params::ts_package,
-  $windows_install_options = $::threatstack::params::windows_opts
+  $windows_install_options = ["TSDEPLOYKEY=${deploy_key}"]
 
 ) inherits ::threatstack::params {
 
