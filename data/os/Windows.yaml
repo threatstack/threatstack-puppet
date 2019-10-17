@@ -1,0 +1,5 @@
+---
+threatstack::params:
+    repo_class: '::threatstack::msi'
+    gpg_key: undef
+    disable_auditd: false
