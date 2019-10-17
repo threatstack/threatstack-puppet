@@ -21,7 +21,7 @@
 #   type: string
 #
 # [*enable_sysmon*]
-#   Windows: optionally enable sysmon
+#   Windows: optionally enable sysmon (not used yet)
 #   type: bool
 #
 # [*extra_args*]

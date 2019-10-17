@@ -2,6 +2,10 @@
 
 We'll track changes here starting with details about the 2.0 release and reference to earlier releases.
 
+## 2.0.3
+### Added
+- added basic support for downloading, configuring, installing, running windows agent
+
 ## 2.0.2
 ### Fixed
 - fixed amazon linux 1 support and tests
