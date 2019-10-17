@@ -43,7 +43,7 @@ class threatstack::package {
   'Windows': {
     remote_file { 'agent msi download':
       ensure => present,
-      path   => $::threatstack::windows_tmp_path
+      path   => $::threatstack::windows_tmp_path,
       source => $::threatstack::windows_download_url
     }
 
