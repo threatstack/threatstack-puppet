@@ -48,8 +48,12 @@ class threatstack::params {
     default   => '/opt/threatstack/etc'
   }
 
+  $rulesets = $facts['os']['family'] ? {
+    'Windows' => ['Windows Rule Set'],
+    default   => ['Base Rule Set']
+  }
+
   $package_version = 'installed'
-  $rulesets        = ['Base Rule Set']
   $extra_args      = undef
   $windows_install_options = ["TSDEPLOYKEY=${deploy_key}", "TSEVENTLOGLIST=Security,Microsoft-Windows-Sysmon/Operational"]
 
