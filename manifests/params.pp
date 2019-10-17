@@ -55,7 +55,7 @@ class threatstack::params {
 
   $package_version = 'installed'
   $extra_args      = undef
-  $windows_install_options = ["TSDEPLOYKEY=${::threatstack::deploy_key}", "TSEVENTLOGLIST=Security,Microsoft-Windows-Sysmon/Operational"]
+  $windows_install_options = ["TSEVENTLOGLIST=Security,Microsoft-Windows-Sysmon/Operational"]
 
   case $facts['os']['family'] {
     'Windows': {
