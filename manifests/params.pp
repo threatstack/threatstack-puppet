@@ -34,7 +34,7 @@ class threatstack::params {
   }
 
   $confdir = $facts['os']['family'] ? {
-    'Windows' => 'C:\\ProgramData\\Threat Stack\\config',
+    'Windows' => 'C:\\ProgramData\\Threat Stack\\config\\',
     default   => '/opt/threatstack/etc'
   }
 
