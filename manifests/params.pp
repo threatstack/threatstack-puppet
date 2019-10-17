@@ -28,11 +28,19 @@ class threatstack::params {
     default   => 'threatstack'
   }
 
+  $cloudsight_bin  = $facts['os']['family'] ? {
+    'Windows' => 'C:\\Program Files\\Threat Stack\\tsagent.exe',
+    default   => '/usr/bin/tsagent'
+  }
+
+  $confdir = $facts['os']['family'] ? {
+    'Windows' => 'C:\\ProgramData\\Threat Stack\\config',
+    default   => '/opt/threatstack/etc'
+  }
+
   $package_version = 'installed'
   $rulesets        = ['Base Rule Set']
   $extra_args      = undef
-  $cloudsight_bin  = '/usr/bin/tsagent'
-  $confdir         = '/opt/threatstack/etc'
 
   case $facts['os']['family'] {
     'Windows': {
