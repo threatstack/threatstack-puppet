@@ -29,18 +29,29 @@ class threatstack::params {
   }
 
   $cloudsight_bin  = $facts['os']['family'] ? {
-    'Windows' => 'C:\\Program Files\\Threat Stack\\tsagent.exe',
+    'Windows' => "C:\\Program Files\\Threat Stack\\tsagent.exe",
     default   => '/usr/bin/tsagent'
   }
 
+  $binpath = $facts['os']['family'] ? {
+    'Windows' => ["C:\\Program Files\\Threat Stack\\"],
+    default   => ['/bin', '/usr/bin']
+  }
+
+  $setup_unless = $facts['os']['family'] ? {
+    'Windows' => 'tasklist.exe /fi "Imagename eq tsagent*"',
+    default   =>'ps auwwwx| grep [t]sagentd'
+  }
+
   $confdir = $facts['os']['family'] ? {
-    'Windows' => 'C:\\ProgramData\\Threat Stack\\config\\',
+    'Windows' => "C:\\ProgramData\\Threat Stack\\config\\",
     default   => '/opt/threatstack/etc'
   }
 
   $package_version = 'installed'
   $rulesets        = ['Base Rule Set']
   $extra_args      = undef
+  $windows_install_options = ["TSDEPLOYKEY=${deploy_key}", "TSEVENTLOGLIST=Security,Microsoft-Windows-Sysmon/Operational"]
 
   case $facts['os']['family'] {
     'Windows': {

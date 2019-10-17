@@ -8,6 +8,10 @@
 #   Arguments to be passed to `tsagent setup`
 #   type: array
 #
+# [*binpath*]
+#   Used to set bin path for exec in the config class
+#   type: Array
+#
 # [*disable_auditd*]
 #   Required to work around issues with auditd on some distros
 #   type: bool
@@ -53,6 +57,10 @@
 # [*rulesets*]
 #   Ruleset(s) to apply to host.
 #   type: array
+#
+# [*setup_unless*]
+#   Used in the setup exec in the configure class
+#   type: String
 #
 # [*tmpdir*]
 #   Used to download Windows agent MSI
@@ -114,10 +122,12 @@ class threatstack (
   $ts_hostname             = $::fqdn,
   $disable_auditd          = $::threatstack::params::disable_auditd,
   $disable_auditd_cmd      = $::threatstack::params::disable_auditd_cmd,
+  $binpath                 = $::threatstack::params::binpath,
+  $setup_unless            = $::threatstack::params::setup_unless,
   $windows_download_url    = $::threatstack::params::download_url,
   $windows_tmp_path        = $::threatstack::params::tmp_path,
   $windows_ts_package      = $::threatstack::params::ts_package,
-  $windows_install_options = ["TSDEPLOYKEY=${deploy_key}"]
+  $windows_install_options = $::threatstack::params::windows_install_options
 
 ) inherits ::threatstack::params {
 
