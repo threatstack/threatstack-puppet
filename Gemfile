@@ -14,7 +14,7 @@ group :development, :unit_tests do
   gem 'metadata-json-lint', '2.2.0',  :require => false
   gem 'vagrant-wrapper',              :require => false
   gem 'puppet-blacksmith',            :require => false
-  gem 'rest-client', ">=1.7.3",       :require => false
+  gem 'rest-client', ">=1.8",         :require => false
   gem 'semantic_puppet',              :require => false
   gem 'rspec-puppet-facts', '~> 1.7', :require => false
 end
