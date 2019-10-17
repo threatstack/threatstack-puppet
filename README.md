@@ -21,6 +21,7 @@ Platforms
 * Debian
 * RedHat
 * Ubuntu
+* Windows
 
 Classes
 =======
@@ -28,8 +29,10 @@ Classes
 * `threatstack` - Main class
 * `threatstack::apt` (private) - Setup apt repository configuration and package install
 * `threatstack::yum` (private) - Setup yum repository configuration and package install
+* `threatstack::msi` (private) - Dummy repo class for Windows installs
 * `threatstack::configure` (private) - Register and configure the agent with the Threat Stack service
-* `threatstack::package` (private) - Install the Threat stack agent
+* `threatstack::package` (private) - Install the Threat Stack agent
+* `threatstack::service` (private) - Manage the Threat Stack service
 * `threatstack::params` (private) - Default setup values
 * `threatstack::site` (private) - Used by Puppet test-kitchen
 

@@ -8,6 +8,10 @@
 #   Arguments to be passed to `tsagent setup`
 #   type: array
 #
+# [*binpath*]
+#   Used to set bin path for exec in the config class
+#   type: Array
+#
 # [*disable_auditd*]
 #   Required to work around issues with auditd on some distros
 #   type: bool
@@ -15,6 +19,10 @@
 # [*disable_auditd_cmd*]
 #   Systemd vs. SysV init, related to above
 #   type: string
+#
+# [*enable_sysmon*]
+#   Windows: optionally enable sysmon (not used yet)
+#   type: bool
 #
 # [*extra_args*]
 #   Extra arguments to pass on the command line during agent activation.
@@ -54,8 +62,28 @@
 #   Ruleset(s) to apply to host.
 #   type: array
 #
+# [*setup_unless*]
+#   Used in the setup exec in the configure class
+#   type: String
+#
+# [*tmpdir*]
+#   Used to download Windows agent MSI
+#   type: string
+#
 # [*ts_hostname*]
 #   Hostname as reported to Threat Stack.
+#   type: string
+#
+# [*windows_download_url*]
+#   Windows MSI download url
+#   type: string
+#
+# [*windows_install_options*]
+#   Windows MSI install options
+#   type: array
+#
+# [*windows_ts_package*]
+#   Windows MSI package name
 #   type: string
 #
 # === Examples
@@ -78,25 +106,32 @@
 #
 # Pete Cheslock <pete.cheslock@threatstack.com>
 # Tom McLaughlin <tom.mclaughlin@threatstack.com>
+# Nate St. Germain <nate.stgermain@threatstack.com>
 #
 # === Copyright
 #
-# Copyright 2016 Threat Stack, Inc.
+# Copyright 2019 Threat Stack, Inc.
 #
 class threatstack (
-  $deploy_key         = undef,
-  $package_version    = $::threatstack::params::package_version,
-  $configure_agent    = true,
-  $extra_args         = $::threatstack::params::extra_args,
-  $agent_config_args  = undef,
-  $repo_class         = $::threatstack::params::repo_class,
-  $repo_url           = $::threatstack::params::repo_url,
-  $gpg_key            = $::threatstack::params::gpg_key,
-  $rulesets           = $::threatstack::params::rulesets,
-  $confdir            = $::threatstack::params::confdir,
-  $ts_hostname        = $::fqdn,
-  $disable_auditd     = $::threatstack::params::disable_auditd,
-  $disable_auditd_cmd = $::threatstack::params::disable_auditd_cmd
+  $deploy_key              = undef,
+  $package_version         = $::threatstack::params::package_version,
+  $configure_agent         = true,
+  $extra_args              = $::threatstack::params::extra_args,
+  $agent_config_args       = undef,
+  $repo_class              = $::threatstack::params::repo_class,
+  $repo_url                = $::threatstack::params::repo_url,
+  $gpg_key                 = $::threatstack::params::gpg_key,
+  $rulesets                = $::threatstack::params::rulesets,
+  $confdir                 = $::threatstack::params::confdir,
+  $ts_hostname             = $::fqdn,
+  $disable_auditd          = $::threatstack::params::disable_auditd,
+  $disable_auditd_cmd      = $::threatstack::params::disable_auditd_cmd,
+  $binpath                 = $::threatstack::params::binpath,
+  $setup_unless            = $::threatstack::params::setup_unless,
+  $windows_download_url    = $::threatstack::params::download_url,
+  $windows_tmp_path        = $::threatstack::params::tmp_path,
+  $windows_install_options = concat(["TSDEPLOYKEY=${deploy_key}"],$::threatstack::params::windows_install_options)
+
 ) inherits ::threatstack::params {
 
   $ts_package = $::threatstack::params::ts_package

@@ -39,8 +39,26 @@ class threatstack::package {
   # NOTE: We do not signal the tsagent service to restart because the
   # package takes care of this.  The workflow differs between fresh
   # installation and upgrades.
-  package { $::threatstack::ts_package:
-    ensure  => $::threatstack::package_version,
-    require => $required
+  case $facts['os']['family'] {
+  'Windows': {
+    remote_file { 'agent msi download':
+      ensure => present,
+      path   => $::threatstack::windows_tmp_path,
+      source => $::threatstack::windows_download_url
+    }
+
+    package { $::threatstack::ts_package:
+      ensure          => installed,
+      source          => $::threatstack::windows_tmp_path,
+      install_options => $::threatstack::windows_install_options,
+      require => Remote_file['agent msi download']
+    }
   }
+  default: {
+    package { $::threatstack::ts_package:
+      ensure  => $::threatstack::package_version,
+      require => $required
+    }
+  }
+ }
 }
