@@ -41,10 +41,17 @@ class threatstack::package {
   # installation and upgrades.
   case $facts['os']['family'] {
   'Windows': {
+    remote_file { 'agent msi download':
+      ensure => present,
+      path   => $::threatstack::windows_tmp_path
+      source => $::threatstack::windows_download_url
+    }
+
     package { $::threatstack::ts_package:
       ensure          => installed,
-      source          => $::threatstack::windows_download_url,
+      source          => $::threatstack::windows_tmp_path
       install_options => $::threatstack::windows_install_options
+      require => Remote_file['agent msi download']
     }
   }
   default: {

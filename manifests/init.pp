@@ -115,6 +115,7 @@ class threatstack (
   $disable_auditd          = $::threatstack::params::disable_auditd,
   $disable_auditd_cmd      = $::threatstack::params::disable_auditd_cmd,
   $windows_download_url    = $::threatstack::params::download_url,
+  $windows_tmp_path        = $::threatstack::params::tmp_path,
   $windows_ts_package      = $::threatstack::params::ts_package,
   $windows_install_options = ["TSDEPLOYKEY=${deploy_key}"]
 

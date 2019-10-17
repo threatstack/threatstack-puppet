@@ -9,7 +9,8 @@
   "tags": ["threatstack"],
   "dependencies": [
     { "name": "puppetlabs/stdlib", "version_requirement": ">= 4.2.2" },
-    {"name": "puppetlabs/apt", "version_requirement": ">= 6.2.1"}
+    {"name": "puppetlabs/apt", "version_requirement": ">= 6.2.1"},
+    {"name": "lwf/remote_file", "version_requirement": ">= 1.1.3"}
   ],
   "operatingsystem_support": [
     {

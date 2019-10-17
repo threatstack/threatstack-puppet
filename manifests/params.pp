@@ -41,10 +41,10 @@ class threatstack::params {
       $gpg_key            = undef
       $disable_auditd     = false
       $disable_auditd_cmd = undef
-      $windows_base_url   = 'https://pkg.threatstack.com/v2/Windows'
+      $windows_base_url   = "https://pkg.threatstack.com/v2/Windows"
       $windows_pkg_name   = 'Threat+Stack+Cloud+Security+Agent.latest.msi'
       $download_url       = "${windows_base_url}/${windows_pkg_name}"
-      $progdir            = 'C:V\\Program Files\\Threat Stack'
+      $tmp_path           = "C:\\Windows\\Temp\\${windows_pkg_name}"
     }
     'RedHat': {
       $repo_class       = '::threatstack::yum'
