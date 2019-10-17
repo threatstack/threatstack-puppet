@@ -10,6 +10,8 @@
 *.deb
 .ruby-version
 .tmp/
+config.sh
+test.pp
 modules/
 pkg
 Gemfile.lock
