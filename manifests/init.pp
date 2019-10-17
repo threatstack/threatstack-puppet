@@ -126,7 +126,6 @@ class threatstack (
   $setup_unless            = $::threatstack::params::setup_unless,
   $windows_download_url    = $::threatstack::params::download_url,
   $windows_tmp_path        = $::threatstack::params::tmp_path,
-  $windows_ts_package      = $::threatstack::params::ts_package,
   $windows_install_options = concat(["TSDEPLOYKEY=${deploy_key}"],$::threatstack::params::windows_install_options)
 
 ) inherits ::threatstack::params {
