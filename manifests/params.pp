@@ -19,7 +19,7 @@
 
 class threatstack::params {
   $ts_package = $facts['os']['family'] ? {
-    'Windows' => 'Threat+Stack+Cloud+Security+Agent.latest.msi',
+    'Windows' => 'Threat Stack Cloud Security Platform',
     default   =>  'threatstack-agent'
   }
 

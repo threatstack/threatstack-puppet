@@ -20,6 +20,10 @@
 #   Systemd vs. SysV init, related to above
 #   type: string
 #
+# [*enable_sysmon*]
+#   Windows: optionally enable sysmon
+#   type: bool
+#
 # [*extra_args*]
 #   Extra arguments to pass on the command line during agent activation.
 #   type: array of hashes
