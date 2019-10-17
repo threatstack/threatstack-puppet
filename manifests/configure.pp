@@ -21,7 +21,7 @@ class threatstack::configure {
 
   case $facts['os']['family'] {
     'Windows': {
-      notify("We are working on support for configuring the agent on ${::operatingsystem}")
+      notice("We are working on support for configuring the agent on ${::operatingsystem}")
     }
     default: {
       $rulesets       = $::threatstack::rulesets
