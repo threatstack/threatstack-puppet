@@ -18,15 +18,57 @@
 #
 
 class threatstack::params {
-  $ts_package      = 'threatstack-agent'
-  $ts_service      = 'threatstack'
+  $ts_package = $facts['os']['family'] ? {
+    'Windows' => 'Threat Stack Cloud Security Platform',
+    default   =>  'threatstack-agent'
+  }
+
+  $ts_service = $facts['os']['family'] ? {
+    'Windows' => 'Threat Stack Agent',
+    default   => 'threatstack'
+  }
+
+  $cloudsight_bin  = $facts['os']['family'] ? {
+    'Windows' => "C:\\Program Files\\Threat Stack\\tsagent.exe",
+    default   => '/usr/bin/tsagent'
+  }
+
+  $binpath = $facts['os']['family'] ? {
+    'Windows' => ["C:\\Program Files\\Threat Stack\\"],
+    default   => ['/bin', '/usr/bin']
+  }
+
+  $setup_unless = $facts['os']['family'] ? {
+    'Windows' => 'tasklist.exe /fi "Imagename eq tsagent*"',
+    default   =>'ps auwwwx| grep [t]sagentd'
+  }
+
+  $confdir = $facts['os']['family'] ? {
+    'Windows' => "C:\\ProgramData\\Threat Stack\\config\\",
+    default   => '/opt/threatstack/etc'
+  }
+
+  $rulesets = $facts['os']['family'] ? {
+    'Windows' => ['Windows Rule Set'],
+    default   => ['Base Rule Set']
+  }
+
   $package_version = 'installed'
-  $rulesets        = ['Base Rule Set']
   $extra_args      = undef
-  $cloudsight_bin  = '/usr/bin/tsagent'
-  $confdir         = '/opt/threatstack/etc'
+  $windows_install_options = ["TSEVENTLOGLIST=Security,Microsoft-Windows-Sysmon/Operational"]
 
   case $facts['os']['family'] {
+    'Windows': {
+      $repo_class         = '::threatstack::msi'
+      $repo_url           = undef
+      $gpg_key            = undef
+      $disable_auditd     = false
+      $disable_auditd_cmd = undef
+      $windows_base_url   = "https://pkg.threatstack.com/v2/Windows"
+      $windows_pkg_name   = 'Threat+Stack+Cloud+Security+Agent.latest.msi'
+      $download_url       = "${windows_base_url}/${windows_pkg_name}"
+      $tmp_path           = "C:\\Windows\\Temp\\${windows_pkg_name}"
+    }
     'RedHat': {
       $repo_class       = '::threatstack::yum'
       $gpg_key          = 'https://app.threatstack.com/RPM-GPG-KEY-THREATSTACK'
@@ -66,6 +108,4 @@ class threatstack::params {
       fail("Module ${module_name} does not support ${::operatingsystem}")
     }
   }
-
-
 }

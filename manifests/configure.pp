@@ -18,7 +18,6 @@
 # Copyright 2019 Threat Stack, Inc.
 #
 class threatstack::configure {
-
   $rulesets       = $::threatstack::rulesets
   $ruleset_args   = $rulesets.map | $rule | {
         "--ruleset='${rule}'"
@@ -61,12 +60,18 @@ class threatstack::configure {
   } else {
       $config_args_content = ''
   }
-
-  exec { 'threatstack-agent-setup':
-    command   => "${cloudsight_bin} setup --deploy-key='${::threatstack::deploy_key}' --hostname='${::threatstack::ts_hostname}' ${full_setup_args}",
-    subscribe => Package[$threatstack::ts_package],
-    creates   => "${confdir}/.audit",
-    path      => ['/bin', '/usr/bin'],
-    unless    => 'ps auwwwx| grep [t]sagentd'
+  case $facts['os']['family'] {
+    'Windows': {
+      notice("Windows agent setup should be done at install time.")
+    }
+    default: {
+      exec { 'threatstack-agent-setup':
+        command   => "${cloudsight_bin} setup --deploy-key='${::threatstack::deploy_key}' --hostname='${::threatstack::ts_hostname}' ${full_setup_args}",
+        subscribe => Package[$threatstack::ts_package],
+        creates   => "${confdir}/.audit",
+        path      => $::threatstack::binpath,
+        unless    => $::threatstack::setup_unless
+      }
+    }
   }
 }

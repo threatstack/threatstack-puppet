@@ -1,9 +1,17 @@
+.DS_Store
 .kitchen/
 .bundle
 .kitchen.local.yml
 .librarian/
+*.swp
+*.orig
+*.log
+*.rpm
+*.deb
 .ruby-version
 .tmp/
+config.sh
+test.pp
 modules/
 pkg
 Gemfile.lock
