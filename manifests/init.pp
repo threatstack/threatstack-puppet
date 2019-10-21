@@ -21,7 +21,7 @@
 #   type: string
 #
 # [*enable_sysmon*]
-#   Windows: optionally enable sysmon (not used yet)
+#   Windows: optionally enable sysmon
 #   type: bool
 #
 # [*extra_args*]
@@ -128,6 +128,7 @@ class threatstack (
   $disable_auditd_cmd      = $::threatstack::params::disable_auditd_cmd,
   $binpath                 = $::threatstack::params::binpath,
   $setup_unless            = $::threatstack::params::setup_unless,
+  $enable_sysmon           = $::threatstack::params::enable_sysmon,
   $windows_download_url    = $::threatstack::params::download_url,
   $windows_tmp_path        = $::threatstack::params::tmp_path,
   $windows_install_options = concat(["TSDEPLOYKEY=${deploy_key}"],$::threatstack::params::windows_install_options)

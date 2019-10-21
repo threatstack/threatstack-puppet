@@ -48,6 +48,11 @@ class threatstack::params {
     default   => '/opt/threatstack/etc'
   }
 
+  $enable_sysmon = $facts['os']['family'] ? {
+    'Windows' => true
+    default   => false
+  }
+
   $rulesets = $facts['os']['family'] ? {
     'Windows' => ['Windows Rule Set'],
     default   => ['Base Rule Set']
