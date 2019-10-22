@@ -21,10 +21,10 @@ class threatstack::sysmon {
   }
 
   file { 'C:\Windows\Temp\sysmonconfig-export.xml':
-    ensure   => present,
-    source   => 'https://raw.githubusercontent.com/SwiftOnSecurity/sysmon-config/master/sysmonconfig-export.xml',
-    checksum => 'b03fab566310ff214c9285131a0d148f',
-    require  => Exec['test conf present']
+    ensure         => present,
+    source         => 'https://raw.githubusercontent.com/SwiftOnSecurity/sysmon-config/master/sysmonconfig-export.xml',
+    checksum_value => 'b03fab566310ff214c9285131a0d148f',
+    require        => Exec['test conf present']
   }
 
   exec { 'test conf present':
