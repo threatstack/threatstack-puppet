@@ -41,4 +41,10 @@ class threatstack::sysmon {
       File['C:\Windows\Temp\sysmonconfig-export.xml']
     ]
   }
+
+  service { 'Sysmon64':
+    ensure => 'running',
+    enable => 'true',
+    require => [Exec['Install sysmon'],File['C:\Windows\Temp\sysmonconfig-export.xml']]
+  }
 }
