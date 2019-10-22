@@ -28,7 +28,7 @@ class threatstack::sysmon {
   }
 
   exec { 'test conf present':
-    command => '/usr/bin/true',
+    command => 'C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe Test-Path C:\Windows\Temp\sysmonconfig-export.xml',
     unless  => 'C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe Test-Path C:\Windows\Temp\sysmonconfig-export.xml'
   }
 
