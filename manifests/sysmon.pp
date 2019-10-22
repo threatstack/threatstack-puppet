@@ -36,7 +36,7 @@ class threatstack::sysmon {
     command     => "C:\\Windows\\Temp\\Sysmon64.exe –accepteula –i sysmonconfig-export.xml",
     subscribe   => File['C:\Windows\Temp\sysmonconfig-export.xml'],
     refreshonly => true,
-    unless      => 'tasklist.exe /fi "Imagename eq sysmon*"',
+    unless      => 'C:\Windows\System32\tasklist.exe /fi "Imagename eq sysmon*"',
     require     => [
       Archive["C:\\Windows\\Temp\\sysmon.zip"],
       File['C:\Windows\Temp\sysmonconfig-export.xml']
