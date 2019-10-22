@@ -22,7 +22,8 @@ class threatstack::sysmon {
 
   file { 'C:\Windows\Temp\sysmonconfig-export.xml':
     ensure => present,
-    source => 'https://raw.githubusercontent.com/SwiftOnSecurity/sysmon-config/master/sysmonconfig-export.xml'
+    source => 'https://raw.githubusercontent.com/SwiftOnSecurity/sysmon-config/master/sysmonconfig-export.xml',
+    replace => 'no'
   }
 
   exec { 'Install sysmon':
