@@ -29,7 +29,7 @@ class threatstack::sysmon {
 
   exec { 'test conf present':
     command => 'true',
-    unless  => 'dir C:\Windows\Temp\sysmonconfig-export.xml'
+    unless  => '/usr/bin/dir C:\Windows\Temp\sysmonconfig-export.xml'
   }
 
   exec { 'Install sysmon':
