@@ -16,7 +16,7 @@ For more see https://www.threatstack.com.
 Platforms
 ---------
 
-* Amazon Linux 2
+* Amazon Linux
 * CentOS
 * Debian
 * RedHat
