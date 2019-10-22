@@ -55,7 +55,7 @@ class threatstack::package {
       ensure          => installed,
       source          => $::threatstack::windows_tmp_path,
       install_options => $::threatstack::windows_install_options,
-      require         => Remote_file['agent msi download']
+      require         => [Exec['Install sysmon'], Remote_file['agent msi download']]
     }
   }
   default: {
