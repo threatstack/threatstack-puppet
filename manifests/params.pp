@@ -49,7 +49,7 @@ class threatstack::params {
   }
 
   $enable_sysmon = $facts['os']['family'] ? {
-    'Windows' => true
+    'Windows' => true,
     default   => false
   }
 
