@@ -12,11 +12,11 @@
 #
 class threatstack::sysmon {
 
-  archive { "C:\\Windows\\Temp\\sysmon.zip":
+  archive { 'C:\Windows\Temp\sysmon.zip':
     ensure       => present,
     extract      => true,
     cleanup      => true,
-    extract_path => "C:\\Windows\\Temp\\",
+    extract_path => 'C:\Windows\Temp\',
     source       => 'https://download.sysinternals.com/files/Sysmon.zip'
   }
 
@@ -33,12 +33,12 @@ class threatstack::sysmon {
   }
 
   exec { 'Install sysmon':
-    command     => "C:\\Windows\\Temp\\Sysmon64.exe –accepteula –i sysmonconfig-export.xml",
+    command     => 'C:\Windows\Temp\Sysmon64.exe –accepteula –i sysmonconfig-export.xml',
     subscribe   => File['C:\Windows\Temp\sysmonconfig-export.xml'],
     refreshonly => true,
     unless      => 'C:\Windows\System32\tasklist.exe /fi "Imagename eq sysmon*"',
     require     => [
-      Archive["C:\\Windows\\Temp\\sysmon.zip"],
+      Archive['C:\Windows\Temp\sysmon.zip'],
       File['C:\Windows\Temp\sysmonconfig-export.xml']
     ]
   }
