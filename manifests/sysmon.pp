@@ -33,7 +33,7 @@ class threatstack::sysmon {
   }
 
   exec { 'Install sysmon':
-    command     => 'C:\Windows\Temp\Sysmon64.exe –accepteula –i sysmonconfig-export.xml',
+    command     => 'C:\Windows\Temp\Sysmon64.exe –accepteula –i C:\Windows\Temp\sysmonconfig-export.xml',
     subscribe   => File['C:\Windows\Temp\sysmonconfig-export.xml'],
     refreshonly => true,
     unless      => 'C:\Windows\System32\tasklist.exe /fi "Imagename eq sysmon*"',
