@@ -16,7 +16,7 @@ class threatstack::sysmon {
     ensure       => present,
     extract      => true,
     cleanup      => true,
-    extract_path => 'C:\Windows\Temp\',
+    extract_path => 'C:\Windows\Temp',
     source       => 'https://download.sysinternals.com/files/Sysmon.zip'
   }
 
