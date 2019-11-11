@@ -16,8 +16,8 @@
 #   Required to work around issues with auditd on some distros
 #   type: bool
 #
-# [*disable_auditd_cmd*]
-#   Systemd vs. SysV init, related to above
+# [*disable_auditd_provider*]
+#   Puppet service provider used to disable auditd
 #   type: string
 #
 # [*enable_sysmon*]
@@ -125,7 +125,7 @@ class threatstack (
   $confdir                 = $::threatstack::params::confdir,
   $ts_hostname             = $::fqdn,
   $disable_auditd          = $::threatstack::params::disable_auditd,
-  $disable_auditd_cmd      = $::threatstack::params::disable_auditd_cmd,
+  $disable_auditd_provider = $::threatstack::params::disable_auditd_provider,
   $binpath                 = $::threatstack::params::binpath,
   $setup_unless            = $::threatstack::params::setup_unless,
   $windows_download_url    = $::threatstack::params::download_url,

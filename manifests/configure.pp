@@ -62,7 +62,7 @@ class threatstack::configure {
   }
   case $facts['os']['family'] {
     'Windows': {
-      notice("Windows agent setup should be done at install time.")
+      notice('Windows agent setup should be done at install time.')
     }
     default: {
       exec { 'threatstack-agent-setup':

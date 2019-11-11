@@ -44,7 +44,7 @@ Parameters
 * `threatstack::configure_agent` [optiona bool] - Set to false to just install agent without configuring. Useful for image building.
 * `threatstack::agent_config_args` [optional array of hashes] - Extra arguments to pass during agent activation. Useful for enabling new platform features.
 * `threatstack::disable_auditd` [optional bool] - Disable `auditd` service to avoid installation issues. (Default is 'true' on RHEL-like OSes.)
-* `threatstack::disable_auditd_cmd` [optional string] - related to `threatstack::disable_auditd`, the OS version dependent command to disable auditd (Default: set in `threatstack::params` based on operating system)
+* `threatstack::disable_auditd_provider` [optional string] - related to `threatstack::disable_auditd`, the Puppet service provider to disable auditd (Default: set in `threatstack::params` based on operating system)
 * `threatstack::extra_args` [optional array of hashes] - optional array of hashes to define setup options for the threatstack agent (Default: `undef`)
 * `threatstack::confdir` [optional string] - path to config directory for the threatstack service (Default: '/opt/threatstack/etc')
 * `threatstack::ts_hostname` [optional string] - hostname of your node (Default: `$::fqdn`)
@@ -63,7 +63,7 @@ Supply your Threat Stack deploy key, and if you choose, an array of rulesets.
 ```
 class { '::threatstack':
   deploy_key    => 'MyDeployKey',
-  ruleset       => ['MyRuleset']
+  rulesets      => ['MyRuleset']
 }
 ```
 Using a package mirror
@@ -72,7 +72,7 @@ If you manage your own package repository from which you deploy the agent packag
 ```
 class { '::threatstack':
   deploy_key    => 'MyDeployKey',
-  ruleset       => ['MyRuleset'],
+  rulesets      => ['MyRuleset'],
   repo_url      => 'https://my-mirror.example.com/centos-6'
   gpg_key       => 'https://my-mirror.example.com/RPM-GPG-KEY-THREATSTACK'
 }
