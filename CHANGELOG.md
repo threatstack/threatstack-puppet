@@ -2,7 +2,10 @@
 
 We'll track changes here starting with details about the 2.0 release and reference to earlier releases.
 
-<<<<<<< HEAD
+## 2.0.7
+### Changed
+- use a service resource to manage auditd vs. an exec
+
 ## 2.0.6
 ### Added
 - added basic support for downloading, configuring, installing, running windows agent

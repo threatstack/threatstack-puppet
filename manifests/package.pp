@@ -21,18 +21,16 @@ class threatstack::package {
   class { $::threatstack::repo_class: }
 
   if $::threatstack::disable_auditd {
-    exec { 'stop_auditd':
-      command => '/sbin/service auditd stop',
-      onlyif  => '/sbin/service auditd status'
+    if defined(Service['auditd']) {
+      fail('auditd is already defined or managed. please ensure the service is disabled and stopped before running Threatstack Agent.')
+    } else {
+      service { 'auditd':
+        ensure => stopped,
+        enable => false
+      }
     }
-
-    exec { 'disable_auditd':
-      command => $::threatstack::disable_auditd_cmd,
-      require => Exec['stop_auditd']
-    }
-
-  $required = [ Class[$::threatstack::repo_class], Exec['stop_auditd'] ]
-  } else {
+      $required = [ Class[$::threatstack::repo_class], Service['auditd'] ]
+    } else {
     $required = Class[$::threatstack::repo_class]
   }
 
