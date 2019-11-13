@@ -3,7 +3,7 @@ source 'https://rubygems.org'
 source ENV['GEM_SOURCE'] || 'https://rubygems.org'
 
 group :development, :unit_tests , :test do
-  gem 'rake', "12.3.3",               :require => false
+  gem 'rake', "13.0.1",               :require => false
   gem 'rspec-puppet', "2.7.2",        :require => false
   gem 'puppetlabs_spec_helper',       :require => false
   gem 'puppet-lint', "2.3.6",         :require => false
