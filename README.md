@@ -16,7 +16,7 @@ For more see https://www.threatstack.com.
 Platforms
 ---------
 
-* Amazon Linux 2
+* Amazon Linux 1 & 2
 * CentOS
 * Debian
 * RedHat
@@ -28,13 +28,15 @@ Classes
 
 * `threatstack` - Main class
 * `threatstack::apt` (private) - Setup apt repository configuration and package install
-* `threatstack::yum` (private) - Setup yum repository configuration and package install
-* `threatstack::msi` (private) - Dummy repo class for Windows installs
 * `threatstack::configure` (private) - Register and configure the agent with the Threat Stack service
+* `threatstack::msi` (private) - Dummy repo class for Windows installs
 * `threatstack::package` (private) - Install the Threat Stack agent
-* `threatstack::service` (private) - Manage the Threat Stack service
 * `threatstack::params` (private) - Default setup values
+* `threatstack::service` (private) - Manage the Threat Stack service
 * `threatstack::site` (private) - Used by Puppet test-kitchen
+* `threatstack::sysmon` (private) - Installs sysmon service and default config on Windows
+* `threatstack::yum` (private) - Setup yum repository configuration and package install
+
 
 Parameters
 =====
@@ -45,6 +47,7 @@ Parameters
 * `threatstack::agent_config_args` [optional array of hashes] - Extra arguments to pass during agent activation. Useful for enabling new platform features.
 * `threatstack::disable_auditd` [optional bool] - Disable `auditd` service to avoid installation issues. (Default is 'true' on RHEL-like OSes.)
 * `threatstack::disable_auditd_cmd` [optional string] - related to `threatstack::disable_auditd`, the OS version dependent command to disable auditd (Default: set in `threatstack::params` based on operating system)
+* `threatstack::enable_sysmon` [optional bool] - used via `threatstack::sysmon` to enable sysmon service on Windows hosts
 * `threatstack::extra_args` [optional array of hashes] - optional array of hashes to define setup options for the threatstack agent (Default: `undef`)
 * `threatstack::confdir` [optional string] - path to config directory for the threatstack service (Default: '/opt/threatstack/etc')
 * `threatstack::ts_hostname` [optional string] - hostname of your node (Default: `$::fqdn`)
@@ -52,6 +55,9 @@ Parameters
 * `threatstack::package_version` [optional string] - version of the `threatstack-agent` package to install (Default: `installed`)
 * `threatstack::repo_class` [optional string] - name of puppet class that configures the threatstack package repo (Default: either `threatstack::apt` or `threatstack::yum`, set in `threatstack::params` based on operating system)
 * `threatstack::repo_url` [optional string] - url used by threatstack package repo (Default: defined in `threatstack::params` for Debian and RedHat operating system families.)
+* `threatstack::windows_download_url` [optional string] - url used to download Threatstack Agent MSI on Windows 
+* `threatstack::windows_install_options` [optional array] - Windows MSI install options
+* `threatstack::windows_ts_package` [optional string] - Windows MSI package name
 
 Example usage
 =====

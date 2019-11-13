@@ -10,6 +10,7 @@
 *.deb
 .ruby-version
 .tmp/
+.vagrant
 config.sh
 test.pp
 modules/
