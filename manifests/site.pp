@@ -9,7 +9,7 @@
 #
 # === Copyright
 #
-# Copyright 2016 Threat Stack, Inc.
+# Copyright 2019 Threat Stack, Inc.
 #
 include ::stdlib
 

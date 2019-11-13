@@ -91,13 +91,13 @@
 # Standard usage:
 # class { '::threatstack':
 #   deploy_key => 'MyDeployKey',
-#   ruleset    => ['MyRuleset']
+#   rulesets   => ['MyRuleset']
 # }
 #
 # Package mirror usage:
 # class { '::threatstack':
 #   deploy_key => 'MyDeployKey',
-#   ruleset    => ['MyRuleset'],
+#   rulesets   => ['MyRuleset'],
 #   repo_url   => 'https://my-mirror.example.com/centos-6'
 #   gpg_key    => 'https://my-mirror.example.com/RPM-GPG-KEY-THREATSTACK'
 # }
