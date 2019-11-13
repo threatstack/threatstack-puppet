@@ -1,4 +1,6 @@
 language: ruby
+rvm:
+  - 2.5
 before_install:
   - curl https://apt.puppetlabs.com/DEB-GPG-KEY-puppet | sudo apt-key add -
   - curl -O https://apt.puppetlabs.com/puppet5-release-trusty.deb
@@ -6,6 +8,7 @@ before_install:
   - sudo apt-get update -q
   - sudo apt-get install -y lsb-release puppet-agent
   - /opt/puppetlabs/puppet/bin/gem install bundler rake
+  - gem install bundler rake
 bundler_args: "--without system_tests"
 before_script:
   - export PATH=$PATH:/opt/puppetlabs/puppet/bin
