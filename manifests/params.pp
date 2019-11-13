@@ -18,44 +18,14 @@
 #
 
 class threatstack::params {
-  $ts_package = $facts['os']['family'] ? {
-    'Windows' => 'Threat Stack Cloud Security Platform',
-    default   =>  'threatstack-agent'
-  }
 
-  $ts_service = $facts['os']['family'] ? {
-    'Windows' => 'Threat Stack Agent',
-    default   => 'threatstack'
-  }
 
-  $cloudsight_bin  = $facts['os']['family'] ? {
-    'Windows' => "C:\\Program Files\\Threat Stack\\tsagent.exe",
-    default   => '/usr/bin/tsagent'
-  }
 
-  $binpath = $facts['os']['family'] ? {
-    'Windows' => ["C:\\Program Files\\Threat Stack\\"],
-    default   => ['/bin', '/usr/bin']
-  }
 
-  $setup_unless = $facts['os']['family'] ? {
-    'Windows' => 'tasklist.exe /fi "Imagename eq tsagent*"',
-    default   =>'ps auwwwx| grep [t]sagentd'
-  }
-
-  $confdir = $facts['os']['family'] ? {
-    'Windows' => "C:\\ProgramData\\Threat Stack\\config\\",
-    default   => '/opt/threatstack/etc'
-  }
-
-  $rulesets = $facts['os']['family'] ? {
-    'Windows' => ['Windows Rule Set'],
-    default   => ['Base Rule Set']
-  }
 
   $package_version = 'installed'
   $extra_args      = undef
-  $windows_install_options = ["TSEVENTLOGLIST=Security,Microsoft-Windows-Sysmon/Operational"]
+  $windows_install_options = ['TSEVENTLOGLIST=Security,Microsoft-Windows-Sysmon/Operational']
 
   case $facts['os']['family'] {
     'Windows': {
@@ -64,10 +34,18 @@ class threatstack::params {
       $gpg_key            = undef
       $disable_auditd     = false
       $disable_auditd_cmd = undef
-      $windows_base_url   = "https://pkg.threatstack.com/v2/Windows"
+      $windows_base_url   = 'https://pkg.threatstack.com/v2/Windows'
       $windows_pkg_name   = 'Threat+Stack+Cloud+Security+Agent.latest.msi'
-      $download_url       = "${windows_base_url}/${windows_pkg_name}"
       $tmp_path           = "C:\\Windows\\Temp\\${windows_pkg_name}"
+      $download_url       = "${windows_base_url}/${windows_pkg_name}"
+      $rulesets           = ['Windows Rule Set']
+      $enable_sysmon      = true
+      $confdir            = "C:\\ProgramData\\Threat Stack\\config\\"
+      $setup_unless       = 'tasklist.exe /fi "Imagename eq tsagent*"'
+      $binpath            = ["C:\\Program Files\\Threat Stack\\"]
+      $cloudsight_bin     = "C:\\Program Files\\Threat Stack\\tsagent.exe"
+      $ts_service         = 'Threat Stack Agent'
+      $ts_package         = 'Threat Stack Cloud Security Platform'
     }
     'RedHat': {
       $repo_class       = '::threatstack::yum'
@@ -75,6 +53,16 @@ class threatstack::params {
       $gpg_key_file     = '/etc/pki/rpm-gpg/RPM-GPG-KEY-THREATSTACK'
       $gpg_key_file_uri = "file://${gpg_key_file}"
       $disable_auditd   = true
+      $tmp_path         = undef
+      $download_url     = undef
+      $rulesets         = ['Base Rule Set']
+      $enable_sysmon    = false
+      $confdir          = '/opt/threatstack/etc'
+      $setup_unless     = 'ps auwwwx| grep [t]sagentd'
+      $binpath          = ['/bin', '/usr/bin']
+      $cloudsight_bin   = '/usr/bin/tsagent'
+      $ts_service       = 'threatstack'
+      $ts_package       = 'threatstack-agent'
 
       case $facts['os']['name'] {
         'Amazon': {
@@ -103,6 +91,16 @@ class threatstack::params {
       $gpg_key            = 'https://app.threatstack.com/APT-GPG-KEY-THREATSTACK'
       $disable_auditd     = false
       $disable_auditd_cmd = '/bin/systemctl disable auditd'
+      $tmp_path           = undef
+      $download_url       = undef
+      $rulesets           = ['Base Rule Set']
+      $enable_sysmon      = false
+      $confdir            = '/opt/threatstack/etc'
+      $setup_unless       = 'ps auwwwx| grep [t]sagentd'
+      $binpath            = ['/bin', '/usr/bin']
+      $cloudsight_bin     = '/usr/bin/tsagent'
+      $ts_service         = 'threatstack'
+      $ts_package         = 'threatstack-agent'
     }
     default: {
       fail("Module ${module_name} does not support ${::operatingsystem}")

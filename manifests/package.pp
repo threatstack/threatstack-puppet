@@ -40,25 +40,29 @@ class threatstack::package {
   # package takes care of this.  The workflow differs between fresh
   # installation and upgrades.
   case $facts['os']['family'] {
-  'Windows': {
-    remote_file { 'agent msi download':
-      ensure => present,
-      path   => $::threatstack::windows_tmp_path,
-      source => $::threatstack::windows_download_url
-    }
+    'Windows': {
+      remote_file { 'agent msi download':
+        ensure => present,
+        path   => $::threatstack::windows_tmp_path,
+        source => $::threatstack::windows_download_url
+      }
 
-    package { $::threatstack::ts_package:
-      ensure          => installed,
-      source          => $::threatstack::windows_tmp_path,
-      install_options => $::threatstack::windows_install_options,
-      require => Remote_file['agent msi download']
+      if $::threatstack::enable_sysmon {
+          include threatstack::sysmon
+      }
+
+      package { $::threatstack::ts_package:
+        ensure          => installed,
+        source          => $::threatstack::windows_tmp_path,
+        install_options => $::threatstack::windows_install_options,
+        require         => [Exec['Install sysmon'], Remote_file['agent msi download']]
+      }
+    }
+    default: {
+      package { $::threatstack::ts_package:
+        ensure  => $::threatstack::package_version,
+        require => $required
+      }
     }
   }
-  default: {
-    package { $::threatstack::ts_package:
-      ensure  => $::threatstack::package_version,
-      require => $required
-    }
-  }
- }
 }

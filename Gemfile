@@ -2,8 +2,8 @@ source 'https://rubygems.org'
 
 source ENV['GEM_SOURCE'] || 'https://rubygems.org'
 
-group :development, :unit_tests do
-  gem 'rake',                         :require => false
+group :development, :unit_tests , :test do
+  gem 'rake', "13.0.1",               :require => false
   gem 'rspec-puppet', "2.7.2",        :require => false
   gem 'puppetlabs_spec_helper',       :require => false
   gem 'puppet-lint', "2.3.6",         :require => false
@@ -14,7 +14,7 @@ group :development, :unit_tests do
   gem 'metadata-json-lint', '2.2.0',  :require => false
   gem 'vagrant-wrapper',              :require => false
   gem 'puppet-blacksmith',            :require => false
-  gem 'rest-client', ">=1.7.3",       :require => false
+  gem 'rest-client', ">=1.8",         :require => false
   gem 'semantic_puppet',              :require => false
   gem 'rspec-puppet-facts', '~> 1.7', :require => false
 end
