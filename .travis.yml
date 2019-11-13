@@ -5,7 +5,7 @@ before_install:
   - sudo dpkg -i puppet5-release-trusty.deb
   - sudo apt-get update -q
   - sudo apt-get install -y lsb-release puppet-agent
-  - /opt/puppetlabs/puppet/bin/gem install bundler
+  - /opt/puppetlabs/puppet/bin/gem install bundler rake
 bundler_args: "--without system_tests"
 before_script:
   - export PATH=$PATH:/opt/puppetlabs/puppet/bin
