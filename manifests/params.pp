@@ -60,7 +60,7 @@ class threatstack::params {
 
   $package_version = 'installed'
   $extra_args      = undef
-  $windows_install_options = ["TSEVENTLOGLIST=Security,Microsoft-Windows-Sysmon/Operational"]
+  $windows_install_options = ['TSEVENTLOGLIST=Security,Microsoft-Windows-Sysmon/Operational']
 
   case $facts['os']['family'] {
     'Windows': {
@@ -69,7 +69,7 @@ class threatstack::params {
       $gpg_key            = undef
       $disable_auditd     = false
       $disable_auditd_cmd = undef
-      $windows_base_url   = "https://pkg.threatstack.com/v2/Windows"
+      $windows_base_url   = 'https://pkg.threatstack.com/v2/Windows'
       $windows_pkg_name   = 'Threat+Stack+Cloud+Security+Agent.latest.msi'
       $download_url       = "${windows_base_url}/${windows_pkg_name}"
       $tmp_path           = "C:\\Windows\\Temp\\${windows_pkg_name}"
