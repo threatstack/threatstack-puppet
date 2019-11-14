@@ -16,10 +16,6 @@
 #   Required to work around issues with auditd on some distros
 #   type: bool
 #
-# [*disable_auditd_cmd*]
-#   Systemd vs. SysV init, related to above
-#   type: string
-#
 # [*enable_sysmon*]
 #   Windows: optionally enable sysmon
 #   type: bool
@@ -125,7 +121,6 @@ class threatstack (
   $confdir                 = $::threatstack::params::confdir,
   $ts_hostname             = $::fqdn,
   $disable_auditd          = $::threatstack::params::disable_auditd,
-  $disable_auditd_cmd      = $::threatstack::params::disable_auditd_cmd,
   $binpath                 = $::threatstack::params::binpath,
   $setup_unless            = $::threatstack::params::setup_unless,
   $enable_sysmon           = $::threatstack::params::enable_sysmon,
