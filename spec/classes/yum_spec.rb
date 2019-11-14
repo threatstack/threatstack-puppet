@@ -6,7 +6,7 @@ describe 'threatstack::yum' do
   gpgkey = 'file:///etc/pki/rpm-gpg/RPM-GPG-KEY-THREATSTACK'
 
   context 'on RedHat' do
-    let(:facts) {  { 'osfamily' => 'RedHat', operatingsystemmajrelease' => '7', 'os' => { 'release' => { 'major' => '7'}, 'name' => 'RedHat', 'family' => 'RedHat'} } }
+    let(:facts) {  { 'osfamily' => 'RedHat', 'operatingsystemmajrelease' => '7', 'os' => { 'release' => { 'major' => '7'}, 'name' => 'RedHat', 'family' => 'RedHat'} } }
     let(:pre_condition) { "class { 'threatstack': deploy_key => '#{deploy_key}', gpg_key => 'https://app.threatstack.com/RPM-GPG-KEY-THREATSTACK' }" }
 
     context 'default' do
