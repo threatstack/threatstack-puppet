@@ -18,6 +18,7 @@ group :development, :unit_tests , :test do
   gem 'semantic_puppet',              :require => false
   gem 'rspec-puppet-facts', '~> 1.7', :require => false
 end
+
 group :system_tests do
   gem 'serverspec',      :require => false
   gem 'test-kitchen',    :require => false

@@ -6,7 +6,7 @@ describe 'threatstack::yum' do
   gpgkey = 'file:///etc/pki/rpm-gpg/RPM-GPG-KEY-THREATSTACK'
 
   context 'on RedHat' do
-    let(:facts) {  { 'osfamily' => 'RedHat', 'operatingsystemmajrelease' => '7', 'os' => { 'release' => { 'major' => '7'}, 'name' => 'RedHat', 'family' => 'RedHat'} } }
+    let(:facts) {  { :operatingsystem => 'RedHat', 'operatingsystemrelease' => '7.6.1810', :osfamily => 'RedHat', 'operatingsystemmajrelease' => '7', 'os' => { 'release' => { 'major' => '7'}, 'name' => 'RedHat', 'family' => 'RedHat'} } }
     let(:pre_condition) { "class { 'threatstack': deploy_key => '#{deploy_key}', gpg_key => 'https://app.threatstack.com/RPM-GPG-KEY-THREATSTACK' }" }
 
     context 'default' do
@@ -21,7 +21,7 @@ describe 'threatstack::yum' do
   end
 
   context 'on CentOS' do
-    let(:facts) { {'osfamily' => 'RedHat', 'operatingsystemmajrelease' => '7', 'os' => { 'release' => { 'major' => '7'}, 'name' => 'CentOS', 'family' => 'RedHat'} } }
+    let(:facts) { {:operatingsystem => 'CentOS', 'operatingsystemrelease' => '7.6.1810', :osfamily => 'RedHat', 'operatingsystemmajrelease' => '7', 'os' => { 'release' => { 'major' => '7'}, 'name' => 'CentOS', 'family' => 'RedHat'} } }
     let(:pre_condition) { "class { 'threatstack': deploy_key => '#{deploy_key}', gpg_key => 'https://app.threatstack.com/RPM-GPG-KEY-THREATSTACK' }" }
 
     context 'default' do
@@ -36,7 +36,7 @@ describe 'threatstack::yum' do
   end
 
   context 'on Amazon Linux 2' do
-    let(:facts) {  {'osfamily' => 'RedHat', 'operatingsystemmajrelease' => '2', 'os' => {  'release' => { 'major' => '2'}, 'name' => 'Amazon', 'family' => 'RedHat'} } }
+    let(:facts) {  { :operatingsystem => 'Amazon', :osfamily => 'RedHat', 'operatingsystemmajrelease' => '2', 'os' => {  'release' => { 'major' => '2'}, 'name' => 'Amazon', 'family' => 'RedHat'} } }
     let(:pre_condition) { "class { 'threatstack': deploy_key => '#{deploy_key}', gpg_key => 'https://app.threatstack.com/RPM-GPG-KEY-THREATSTACK' }" }
 
     context 'default' do
@@ -51,7 +51,7 @@ describe 'threatstack::yum' do
   end
 
   context 'on Amazon Linux 1' do
-    let(:facts) {  {'osfamily' => 'RedHat', 'operatingsystemmajrelease' => '2018', 'os' => {  'release' => { 'major' => '2018'}, 'name' => 'Amazon', 'family' => 'RedHat'} } }
+    let(:facts) {  { :operatingsystem => 'Amazon', :osfamily => 'RedHat', 'operatingsystemmajrelease' => '2018', 'os' => {  'release' => { 'major' => '2018'}, 'name' => 'Amazon', 'family' => 'RedHat'} } }
     let(:pre_condition) { "class { 'threatstack': deploy_key => '#{deploy_key}', gpg_key => 'https://app.threatstack.com/RPM-GPG-KEY-THREATSTACK' }" }
 
     context 'default' do

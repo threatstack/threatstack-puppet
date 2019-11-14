@@ -8,3 +8,4 @@ fixtures:
     auditd: "kemra102/auditd"
     archive: "puppet/archive"
     remote_file: "lwf/remote_file"
+    concat: "puppetlabs/concat"
