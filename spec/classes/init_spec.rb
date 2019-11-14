@@ -41,7 +41,7 @@ describe 'threatstack' do
   end
 
   context 'on RedHat' do
-    let(:facts) {  { 'operatingsystem' => 'RedHat', 'operatingsystemmajrelease' => '7', 'os' => { 'release' => { 'full' => '7.5', 'major' => '7', 'minor' => '5'}, 'name' => 'RedHat', 'family' => 'RedHat'} } }
+    let(:facts) {  { 'osfamily' => 'RedHat', 'operatingsystem' => 'RedHat', 'operatingsystemmajrelease' => '7', 'os' => { 'release' => { 'full' => '7.5', 'major' => '7', 'minor' => '5'}, 'name' => 'RedHat', 'family' => 'RedHat'} } }
     let(:params) { { :deploy_key => "#{deploy_key}" } }
 
     it 'should compile' do should create_class('threatstack') end
@@ -51,7 +51,7 @@ describe 'threatstack' do
   end
 
   context 'on CentOS' do
-    let(:facts) { {'operatingsystem' => 'CentOS', 'operatingsystemmajrelease' => '7', 'os' => { 'release' => { 'full' => '7.4.1708', 'major' => '7', 'minor' => '4'}, 'name' => 'CentOS', 'family' => 'RedHat'} } }
+    let(:facts) { {'osfamily' => 'RedHat', 'operatingsystem' => 'CentOS', 'operatingsystemmajrelease' => '7', 'os' => { 'release' => { 'full' => '7.4.1708', 'major' => '7', 'minor' => '4'}, 'name' => 'CentOS', 'family' => 'RedHat'} } }
     let(:params) { { :deploy_key => "#{deploy_key}" } }
 
     it 'should compile' do should create_class('threatstack') end
@@ -61,7 +61,7 @@ describe 'threatstack' do
   end
 
   context 'on Amazon Linux 2' do
-    let(:facts) { { 'operatingsystemmajrelease' => '2', 'os' => { 'name' => 'Amazon', 'family' => 'RedHat', 'release' => { 'major' => '2'}} } }
+    let(:facts) { {'osfamily' => 'RedHat',  'operatingsystemmajrelease' => '2', 'os' => { 'name' => 'Amazon', 'family' => 'RedHat', 'release' => { 'major' => '2'}} } }
     let(:params) { { :deploy_key => "#{deploy_key}" } }
 
     it 'should compile' do should create_class('threatstack') end
@@ -72,7 +72,7 @@ describe 'threatstack' do
 
 
   context 'on Amazon Linux 1' do
-    let(:facts) { { 'operatingsystemmajrelease' => '2018', 'os' => { 'name' => 'Amazon', 'family' => 'RedHat', 'release' => { 'major' => '2018'}} } }
+    let(:facts) { {'osfamily' => 'RedHat',  'operatingsystemmajrelease' => '2018', 'os' => { 'name' => 'Amazon', 'family' => 'RedHat', 'release' => { 'major' => '2018'}} } }
     let(:params) { { :deploy_key => "#{deploy_key}" } }
 
     it 'should compile' do should create_class('threatstack') end

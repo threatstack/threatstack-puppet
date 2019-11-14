@@ -42,7 +42,7 @@ describe 'threatstack::configure' do
   end
 
   context 'on Redhat' do
-    let(:facts) {  { 'operatingsystemmajrelease' => '7', 'os' => { 'release' => { 'major' => '7'}, 'name' => 'RedHat', 'family' => 'RedHat'} } }
+    let(:facts) {  {'osfamily' => 'RedHat', 'operatingsystemmajrelease' => '7', 'os' => { 'release' => { 'major' => '7'}, 'name' => 'RedHat', 'family' => 'RedHat'} } }
     let(:pre_condition) { "class { 'threatstack': deploy_key => '#{deploy_key}', ts_hostname => '#{ts_hostname}', rulesets => ['Default Ruleset', 'Service Ruleset'], agent_config_args => [{'log.level' => 'debug'}]}" }
 
     it { should contain_exec('threatstack-agent-setup').with(
@@ -51,7 +51,7 @@ describe 'threatstack::configure' do
   end
 
   context 'on CentOS 7' do
-    let(:facts) { {'operatingsystemmajrelease' => '7', 'os' => { 'release' => { 'major' => '7'}, 'name' => 'CentOS', 'family' => 'RedHat'} } }
+    let(:facts) { {'osfamily' => 'RedHat','operatingsystemmajrelease' => '7', 'os' => { 'release' => { 'major' => '7'}, 'name' => 'CentOS', 'family' => 'RedHat'} } }
     let(:pre_condition) { "class { 'threatstack': deploy_key => '#{deploy_key}', ts_hostname => '#{ts_hostname}', rulesets => ['Default Ruleset', 'Service Ruleset'], agent_config_args => [{'log.level' => 'debug'}]}" }
 
     it { should contain_exec('threatstack-agent-setup').with(
@@ -60,7 +60,7 @@ describe 'threatstack::configure' do
   end
 
   context 'on Amazon Linux 2' do
-    let(:facts) {  {'operatingsystemmajrelease' => '2', 'os' => {  'release' => { 'major' => '2'}, 'name' => 'Amazon', 'family' => 'RedHat'} } }
+    let(:facts) {  {'osfamily' => 'RedHat','operatingsystemmajrelease' => '2', 'os' => {  'release' => { 'major' => '2'}, 'name' => 'Amazon', 'family' => 'RedHat'} } }
     let(:pre_condition) { "class { 'threatstack': deploy_key => '#{deploy_key}', ts_hostname => '#{ts_hostname}', rulesets => ['Default Ruleset', 'Service Ruleset'], agent_config_args => [{'log.level' => 'debug'}]}" }
 
     it { should contain_exec('threatstack-agent-setup').with(
@@ -69,7 +69,7 @@ describe 'threatstack::configure' do
   end
 
   context 'on Amazon Linux 1' do
-    let(:facts) {  {'operatingsystemmajrelease' => '2018', 'os' => {  'release' => { 'major' => '2018'}, 'name' => 'Amazon', 'family' => 'RedHat'} } }
+    let(:facts) {  {'osfamily' => 'RedHat','operatingsystemmajrelease' => '2018', 'os' => {  'release' => { 'major' => '2018'}, 'name' => 'Amazon', 'family' => 'RedHat'} } }
     let(:pre_condition) { "class { 'threatstack': deploy_key => '#{deploy_key}', ts_hostname => '#{ts_hostname}', rulesets => ['Default Ruleset', 'Service Ruleset'], agent_config_args => [{'log.level' => 'debug'}]}" }
 
     it { should contain_exec('threatstack-agent-setup').with(

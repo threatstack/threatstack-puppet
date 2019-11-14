@@ -4,7 +4,7 @@ describe 'threatstack::package' do
   deploy_key = ENV['TS_DEPLOY_KEY'] ? ENV['TS_DEPLOY_KEY'] : "xKkRzesqg"
 
   context 'on RedHat' do
-    let(:facts) {  { 'operatingsystem' => 'RedHat', 'operatingsystemmajrelease' => '7', 'os' => { 'release' => { 'full' => '7.5', 'major' => '7', 'minor' => '5'}, 'name' => 'RedHat', 'family' => 'RedHat'} } }
+    let(:facts) {  { 'osfamily' => 'RedHat', 'operatingsystem' => 'RedHat', 'operatingsystemmajrelease' => '7', 'os' => { 'release' => { 'full' => '7.5', 'major' => '7', 'minor' => '5'}, 'name' => 'RedHat', 'family' => 'RedHat'} } }
     let(:pre_condition) { "class { 'threatstack': deploy_key => '#{deploy_key}', gpg_key => 'https://app.threatstack.com/RPM-GPG-KEY-THREATSTACK', repo_class => '::threatstack::yum' }" }
 
     context 'package' do
@@ -13,7 +13,7 @@ describe 'threatstack::package' do
   end
 
   context 'on CentOS 7' do
-    let(:facts) { {'operatingsystemmajrelease' => '7', 'os' => { 'release' => { 'major' => '7'}, 'name' => 'CentOS', 'family' => 'RedHat'} } }
+    let(:facts) { {'osfamily' => 'RedHat', 'operatingsystemmajrelease' => '7', 'os' => { 'release' => { 'major' => '7'}, 'name' => 'CentOS', 'family' => 'RedHat'} } }
     let(:pre_condition) { "class { 'threatstack': deploy_key => '#{deploy_key}', gpg_key => 'https://app.threatstack.com/RPM-GPG-KEY-THREATSTACK', repo_class => '::threatstack::yum' }" }
 
     context 'package' do
@@ -22,7 +22,7 @@ describe 'threatstack::package' do
   end
 
   context 'on Amazon Linux 2' do
-    let(:facts) {  {'operatingsystemmajrelease' => '2', 'os' => {  'release' => { 'major' => '2'}, 'name' => 'Amazon', 'family' => 'RedHat'} } }
+    let(:facts) {  {'osfamily' => 'RedHat', 'operatingsystemmajrelease' => '2', 'os' => {  'release' => { 'major' => '2'}, 'name' => 'Amazon', 'family' => 'RedHat'} } }
     let(:pre_condition) { "class { 'threatstack': deploy_key => '#{deploy_key}', gpg_key => 'https://app.threatstack.com/RPM-GPG-KEY-THREATSTACK', repo_class => '::threatstack::yum' }" }
 
     context 'package' do
@@ -31,7 +31,7 @@ describe 'threatstack::package' do
   end
 
   context 'on Amazon Linux 1' do
-    let(:facts) {  {'operatingsystemmajrelease' => '1', 'os' => {  'release' => { 'major' => '1'}, 'name' => 'Amazon', 'family' => 'RedHat'} } }
+    let(:facts) {  {'osfamily' => 'RedHat', 'operatingsystemmajrelease' => '1', 'os' => {  'release' => { 'major' => '1'}, 'name' => 'Amazon', 'family' => 'RedHat'} } }
     let(:pre_condition) { "class { 'threatstack': deploy_key => '#{deploy_key}', gpg_key => 'https://app.threatstack.com/RPM-GPG-KEY-THREATSTACK', repo_class => '::threatstack::yum' }" }
 
     context 'package' do
