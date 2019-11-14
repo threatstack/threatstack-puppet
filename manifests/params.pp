@@ -33,7 +33,6 @@ class threatstack::params {
       $repo_url           = undef
       $gpg_key            = undef
       $disable_auditd     = false
-      $disable_auditd_cmd = undef
       $windows_base_url   = 'https://pkg.threatstack.com/v2/Windows'
       $windows_pkg_name   = 'Threat+Stack+Cloud+Security+Agent.latest.msi'
       $tmp_path           = "C:\\Windows\\Temp\\${windows_pkg_name}"
@@ -68,16 +67,13 @@ class threatstack::params {
         'Amazon': {
           if $facts['os']['release']['major'] =~ /^201\d$/ {
             $releasever         = '1'
-            $disable_auditd_cmd = '/sbin/chkconfig auditd off'
           } else {
             $releasever         = $facts['os']['release']['major']
-            $disable_auditd_cmd = '/bin/systemctl disable auditd'
           }
             $repo_url = "https://pkg.threatstack.com/v2/Amazon/${releasever}"
         }
         /(CentOS|RedHat)/: {
               $repo_url           = "https://pkg.threatstack.com/v2/EL/${::operatingsystemmajrelease}"
-              $disable_auditd_cmd = '/bin/systemctl disable auditd'
         }
         default: { fail("Module ${module_name} does not support ${::operatingsystem}") }
       }
@@ -90,7 +86,6 @@ class threatstack::params {
       $repos              = 'main'
       $gpg_key            = 'https://app.threatstack.com/APT-GPG-KEY-THREATSTACK'
       $disable_auditd     = false
-      $disable_auditd_cmd = '/bin/systemctl disable auditd'
       $tmp_path           = undef
       $download_url       = undef
       $rulesets           = ['Base Rule Set']
