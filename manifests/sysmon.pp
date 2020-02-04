@@ -33,12 +33,12 @@ class threatstack::sysmon {
 
   exec { 'Install sysmon':
     command     => 'C:\Windows\Temp\Sysmon64.exe -accepteula -i C:\Windows\Temp\sysmonconfig-export.xml',
-    subscribe   => File['C:\Windows\Temp\sysmonconfig-export.xml'],
+    subscribe   => Remote_File['C:\Windows\Temp\sysmonconfig-export.xml'],
     refreshonly => true,
     unless      => 'C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe Get-Process "sysmon64"',
     require     => [
       Archive['C:\Windows\Temp\sysmon.zip'],
-      File['C:\Windows\Temp\sysmonconfig-export.xml']
+      Remote_File['C:\Windows\Temp\sysmonconfig-export.xml']
     ]
   }
 }
