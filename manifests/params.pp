@@ -23,8 +23,9 @@ class threatstack::params {
 
 
 
-  $package_version = 'installed'
-  $extra_args      = undef
+  $package_version  = 'installed'
+  $extra_args       = undef
+  $service_provider = undef
   $windows_install_options = ['TSEVENTLOGLIST=Security,Microsoft-Windows-Sysmon/Operational']
 
   case $facts['os']['family'] {
@@ -67,6 +68,7 @@ class threatstack::params {
         'Amazon': {
           if $facts['os']['release']['major'] =~ /^201\d$/ {
             $releasever         = '1'
+            $service_provider   = 'upstart'
           } else {
             $releasever         = $facts['os']['release']['major']
           }

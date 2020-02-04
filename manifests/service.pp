@@ -16,10 +16,11 @@ class threatstack::service {
   # NOTE: We do not signal the tsagent service to restart via the package
   # resource because the workflow differs between fresh installation and
   # upgrades.  The package scripts will handle this.
-  service { $::threatstack::ts_service:
+  service { 'threatstack':
     ensure     => running,
     enable     => true,
-    hasrestart => true
+    hasrestart => true,
+    provider   => $::threatstack::service_provider
   }
 
 }
