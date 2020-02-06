@@ -21,9 +21,9 @@ class threatstack::sysmon {
   }
 
   remote_file { 'C:\Windows\Temp\sysmonconfig-export.xml':
-    ensure         => present,
-    source         => 'https://raw.githubusercontent.com/SwiftOnSecurity/sysmon-config/master/sysmonconfig-export.xml',
-    require        => Exec['test conf present']
+    ensure  => present,
+    source  => 'https://raw.githubusercontent.com/SwiftOnSecurity/sysmon-config/master/sysmonconfig-export.xml',
+    require => Exec['test conf present']
   }
 
   exec { 'test conf present':
