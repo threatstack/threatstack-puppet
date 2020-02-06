@@ -23,8 +23,8 @@ class threatstack::params {
 
 
 
-  $package_version  = 'installed'
-  $extra_args       = undef
+  $package_version = 'installed'
+  $extra_args      = undef
   $windows_install_options = ['TSEVENTLOGLIST=Security,Microsoft-Windows-Sysmon/Operational']
 
   case $facts['os']['family'] {
