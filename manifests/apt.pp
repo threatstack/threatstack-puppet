@@ -35,7 +35,6 @@ class threatstack::apt (
     repos    => $repos,
     key      => {
       'id'     => $key,
-      'server' => 'hkps.pool.sks-keyservers.net'
-      }
+    }
   }
 }
