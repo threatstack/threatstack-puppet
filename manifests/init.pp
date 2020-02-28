@@ -70,6 +70,10 @@
 #   Hostname as reported to Threat Stack.
 #   type: string
 #
+# [*service_provider*]
+#   The Puppet Service provider used to manage the service. Defaults to undef on most distros
+#   type: string
+#
 # [*windows_download_url*]
 #   Windows MSI download url
 #   type: string
@@ -124,6 +128,7 @@ class threatstack (
   $binpath                 = $::threatstack::params::binpath,
   $setup_unless            = $::threatstack::params::setup_unless,
   $enable_sysmon           = $::threatstack::params::enable_sysmon,
+  $service_provider        = $::threatstack::params::service_provider,
   $windows_download_url    = $::threatstack::params::download_url,
   $windows_tmp_path        = $::threatstack::params::tmp_path,
   $windows_install_options = concat(["TSDEPLOYKEY=${deploy_key}"],$::threatstack::params::windows_install_options)

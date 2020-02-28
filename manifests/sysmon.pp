@@ -20,11 +20,10 @@ class threatstack::sysmon {
     source       => 'https://download.sysinternals.com/files/Sysmon.zip'
   }
 
-  file { 'C:\Windows\Temp\sysmonconfig-export.xml':
-    ensure         => present,
-    source         => 'https://raw.githubusercontent.com/SwiftOnSecurity/sysmon-config/master/sysmonconfig-export.xml',
-    checksum_value => 'b03fab566310ff214c9285131a0d148f',
-    require        => Exec['test conf present']
+  remote_file { 'C:\Windows\Temp\sysmonconfig-export.xml':
+    ensure  => present,
+    source  => 'https://raw.githubusercontent.com/SwiftOnSecurity/sysmon-config/master/sysmonconfig-export.xml',
+    require => Exec['test conf present']
   }
 
   exec { 'test conf present':
@@ -34,12 +33,12 @@ class threatstack::sysmon {
 
   exec { 'Install sysmon':
     command     => 'C:\Windows\Temp\Sysmon64.exe -accepteula -i C:\Windows\Temp\sysmonconfig-export.xml',
-    subscribe   => File['C:\Windows\Temp\sysmonconfig-export.xml'],
+    subscribe   => Remote_File['C:\Windows\Temp\sysmonconfig-export.xml'],
     refreshonly => true,
     unless      => 'C:\Windows\System32\WindowsPowerShell\v1.0\powershell.exe Get-Process "sysmon64"',
     require     => [
       Archive['C:\Windows\Temp\sysmon.zip'],
-      File['C:\Windows\Temp\sysmonconfig-export.xml']
+      Remote_File['C:\Windows\Temp\sysmonconfig-export.xml']
     ]
   }
 }
