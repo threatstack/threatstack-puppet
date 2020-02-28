@@ -19,7 +19,8 @@ class threatstack::service {
   service { $::threatstack::ts_service:
     ensure     => running,
     enable     => true,
-    hasrestart => true
+    hasrestart => true,
+    provider   => $::threatstack::service_provider
   }
 
 }

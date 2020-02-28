@@ -43,6 +43,7 @@ class threatstack::params {
       $setup_unless       = 'tasklist.exe /fi "Imagename eq tsagent*"'
       $binpath            = ["C:\\Program Files\\Threat Stack\\"]
       $cloudsight_bin     = "C:\\Program Files\\Threat Stack\\tsagent.exe"
+      $service_provider   = undef
       $ts_service         = 'Threat Stack Agent'
       $ts_package         = 'Threat Stack Cloud Security Platform'
     }
@@ -67,13 +68,16 @@ class threatstack::params {
         'Amazon': {
           if $facts['os']['release']['major'] =~ /^201\d$/ {
             $releasever         = '1'
+            $service_provider   = 'upstart'
           } else {
             $releasever         = $facts['os']['release']['major']
+            $service_provider   = undef
           }
             $repo_url = "https://pkg.threatstack.com/v2/Amazon/${releasever}"
         }
         /(CentOS|RedHat)/: {
               $repo_url           = "https://pkg.threatstack.com/v2/EL/${::operatingsystemmajrelease}"
+              $service_provider   = undef
         }
         default: { fail("Module ${module_name} does not support ${::operatingsystem}") }
       }
@@ -94,6 +98,7 @@ class threatstack::params {
       $setup_unless       = 'ps auwwwx| grep [t]sagentd'
       $binpath            = ['/bin', '/usr/bin']
       $cloudsight_bin     = '/usr/bin/tsagent'
+      $service_provider   = undef
       $ts_service         = 'threatstack'
       $ts_package         = 'threatstack-agent'
     }
