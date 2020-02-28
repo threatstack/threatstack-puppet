@@ -15,7 +15,7 @@
 #
 # === Copyright
 #
-# Copyright 2019 Threat Stack
+# Copyright 2020 Threat Stack
 #
 
 class threatstack::apt (

@@ -15,7 +15,7 @@
 #
 # === Copyright
 #
-# Copyright 2019 Threat Stack, Inc.
+# Copyright 2020 Threat Stack, Inc.
 #
 class threatstack::configure {
   $rulesets       = $::threatstack::rulesets

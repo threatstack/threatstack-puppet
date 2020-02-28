@@ -2,6 +2,15 @@
 
 We'll track changes here starting with details about the 2.0 release and reference to earlier releases.
 
+## 2.0.8
+### Fixed
+- merged PR fixing amazon linux 1/upstart service compatibility
+- also uses `remote_file` vs. `file` resource in windows manifest
+  - https://github.com/threatstack/threatstack-puppet/pull/45
+- merged PR defaulting to default apt keyserver
+  - https://github.com/threatstack/threatstack-puppet/pull/46
+- thanks @carthik and @amlodzianowski!
+
 ## 2.0.7
 ### Changed
 - use a service resource to manage auditd vs. an exec
