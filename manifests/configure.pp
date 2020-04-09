@@ -18,7 +18,7 @@
 # Copyright 2020 Threat Stack, Inc.
 #
 class threatstack::configure {
-  $ruleset_args   = "--ruleset=${join($::threatstack::rulesets, ',')}"
+  $ruleset_args   = "--ruleset='${join($::threatstack::rulesets, ',')}'"
 
   if $::threatstack::extra_args {
     $extra_args = $::threatstack::extra_args.map | $arg | {
