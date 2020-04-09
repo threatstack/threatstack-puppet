@@ -18,17 +18,15 @@
 # Copyright 2020 Threat Stack, Inc.
 #
 class threatstack::configure {
-  $rulesets       = $::threatstack::rulesets
-  $ruleset_args   = $rulesets.map | $rule | {
-        "--ruleset='${rule}'"
-      }
+  $ruleset_args   = "--ruleset=${join($::threatstack::rulesets, ',')}"
+
   if $::threatstack::extra_args {
     $extra_args = $::threatstack::extra_args.map | $arg | {
           "--${arg.keys[0]}=${arg.values[0]}"
         }
-    $full_setup_args = "${join($ruleset_args, ' ')} ${join($extra_args, ' ')}"
+    $full_setup_args = "${ruleset_args} ${join($extra_args, ' ')}"
   } else {
-    $full_setup_args = "${join($ruleset_args, ' ')}"
+    $full_setup_args = $ruleset_args
   }
 
   $cloudsight_bin = $::threatstack::cloudsight_bin
