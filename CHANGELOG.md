@@ -2,6 +2,11 @@
 
 We'll track changes here starting with details about the 2.0 release and reference to earlier releases.
 
+## 2.0.9
+### Fixed
+- merged PR simplifying ruleset args
+  - https://github.com/threatstack/threatstack-puppet/pull/47
+
 ## 2.0.8
 ### Fixed
 - merged PR fixing amazon linux 1/upstart service compatibility
