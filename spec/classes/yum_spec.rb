@@ -5,7 +5,22 @@ describe 'threatstack::yum' do
   deploy_key = ENV['TS_DEPLOY_KEY'] ? ENV['TS_DEPLOY_KEY'] : "xKkRzesqg"
   gpgkey = 'file:///etc/pki/rpm-gpg/RPM-GPG-KEY-THREATSTACK'
 
-  context 'on RedHat' do
+  context 'on RedHat 8' do
+    let(:facts) {  { :operatingsystem => 'RedHat', 'operatingsystemrelease' => '8.2.2004', :osfamily => 'RedHat', 'operatingsystemmajrelease' => '8', 'os' => { 'release' => { 'major' => '8'}, 'name' => 'RedHat', 'family' => 'RedHat'} } }
+    let(:pre_condition) { "class { 'threatstack': deploy_key => '#{deploy_key}', gpg_key => 'https://app.threatstack.com/RPM-GPG-KEY-THREATSTACK' }" }
+
+    context 'default' do
+      it { should contain_yumrepo('threatstack').with(
+        :descr     => 'Threat Stack Package Repository',
+        :enabled   => 1,
+        :baseurl   => 'https://pkg.threatstack.com/v2/EL/7',
+        :gpgcheck  => 1,
+        :gpgkey    => 'file:///etc/pki/rpm-gpg/RPM-GPG-KEY-THREATSTACK'
+      ) }
+    end
+  end
+
+  context 'on RedHat 7' do
     let(:facts) {  { :operatingsystem => 'RedHat', 'operatingsystemrelease' => '7.6.1810', :osfamily => 'RedHat', 'operatingsystemmajrelease' => '7', 'os' => { 'release' => { 'major' => '7'}, 'name' => 'RedHat', 'family' => 'RedHat'} } }
     let(:pre_condition) { "class { 'threatstack': deploy_key => '#{deploy_key}', gpg_key => 'https://app.threatstack.com/RPM-GPG-KEY-THREATSTACK' }" }
 
@@ -20,7 +35,22 @@ describe 'threatstack::yum' do
     end
   end
 
-  context 'on CentOS' do
+  context 'on CentOS 8' do
+    let(:facts) { {:operatingsystem => 'CentOS', 'operatingsystemrelease' => '8.2.2004', :osfamily => 'RedHat', 'operatingsystemmajrelease' => '8', 'os' => { 'release' => { 'major' => '8'}, 'name' => 'CentOS', 'family' => 'RedHat'} } }
+    let(:pre_condition) { "class { 'threatstack': deploy_key => '#{deploy_key}', gpg_key => 'https://app.threatstack.com/RPM-GPG-KEY-THREATSTACK' }" }
+
+    context 'default' do
+      it { should contain_yumrepo('threatstack').with(
+        :descr     => 'Threat Stack Package Repository',
+        :enabled   => 1,
+        :baseurl   => 'https://pkg.threatstack.com/v2/EL/7',
+        :gpgcheck  => 1,
+        :gpgkey    => 'file:///etc/pki/rpm-gpg/RPM-GPG-KEY-THREATSTACK'
+      ) }
+    end
+  end
+
+  context 'on CentOS 7' do
     let(:facts) { {:operatingsystem => 'CentOS', 'operatingsystemrelease' => '7.6.1810', :osfamily => 'RedHat', 'operatingsystemmajrelease' => '7', 'os' => { 'release' => { 'major' => '7'}, 'name' => 'CentOS', 'family' => 'RedHat'} } }
     let(:pre_condition) { "class { 'threatstack': deploy_key => '#{deploy_key}', gpg_key => 'https://app.threatstack.com/RPM-GPG-KEY-THREATSTACK' }" }
 

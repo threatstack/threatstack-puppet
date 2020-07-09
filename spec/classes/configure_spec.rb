@@ -23,6 +23,24 @@ describe 'threatstack::configure' do
     )}
   end
 
+  context 'on Debian 10' do
+    let(:facts) { {:operatingsystem => 'Debian', :osfamily => 'Debian', 'os' => { 'name' => 'Debian', 'release' => {'full' => '10.4', 'major' => '10', 'minor' => '4'}, 'distro' => {'codename' => 'buster'}, 'family' => 'Debian'} } }
+    let(:pre_condition) { "class { 'threatstack': deploy_key => '#{deploy_key}', ts_hostname => '#{ts_hostname}', rulesets => ['Default Ruleset', 'Service Ruleset'], agent_config_args => [{'log.level' => 'debug'}]}" }
+
+    it { should contain_exec('threatstack-agent-setup').with(
+      :command => "/usr/bin/tsagent setup --deploy-key='#{deploy_key}' --hostname='#{ts_hostname}' --ruleset='Default Ruleset,Service Ruleset'"
+    )}
+  end
+
+  context 'on Ubuntu 20.04' do
+    let(:facts) { {:osfamily => 'Debian', 'os' => { 'name' => 'Ubuntu', 'release' => {'full' => '20.04', 'major' => '20'}, 'distro' => {'codename' => 'focal'}, 'family' => 'Debian'} }}
+    let(:pre_condition) { "class { 'threatstack': deploy_key => '#{deploy_key}', ts_hostname => '#{ts_hostname}', rulesets => ['Default Ruleset', 'Service Ruleset'], agent_config_args => [{'log.level' => 'debug'}]}" }
+
+    it { should contain_exec('threatstack-agent-setup').with(
+      :command => "/usr/bin/tsagent setup --deploy-key='#{deploy_key}' --hostname='#{ts_hostname}' --ruleset='Default Ruleset,Service Ruleset'"
+    )}
+  end
+
   context 'on Ubuntu 18.04' do
     let(:facts) { {:osfamily => 'Debian', 'os' => { 'name' => 'Ubuntu', 'release' => {'full' => '18.04', 'major' => '18.04'}, 'distro' => {'codename' => 'bionic'}, 'family' => 'Debian'} }}
     let(:pre_condition) { "class { 'threatstack': deploy_key => '#{deploy_key}', ts_hostname => '#{ts_hostname}', rulesets => ['Default Ruleset', 'Service Ruleset'], agent_config_args => [{'log.level' => 'debug'}]}" }
@@ -41,8 +59,26 @@ describe 'threatstack::configure' do
     )}
   end
 
-  context 'on Redhat' do
+  context 'on Redhat 8' do
+      let(:facts) {  { :operatingsystem => 'RedHat', :osfamily => 'RedHat', :operatingsystemrelease => '8.0', 'operatingsystemmajrelease' => '8', 'os' => { 'release' => { 'major' => '8'}, 'name' => 'RedHat', 'family' => 'RedHat'} } }
+    let(:pre_condition) { "class { 'threatstack': deploy_key => '#{deploy_key}', ts_hostname => '#{ts_hostname}', rulesets => ['Default Ruleset', 'Service Ruleset'], agent_config_args => [{'log.level' => 'debug'}]}" }
+
+    it { should contain_exec('threatstack-agent-setup').with(
+      :command => "/usr/bin/tsagent setup --deploy-key='#{deploy_key}' --hostname='#{ts_hostname}' --ruleset='Default Ruleset,Service Ruleset'"
+    )}
+  end
+
+  context 'on Redhat 7' do
       let(:facts) {  { :operatingsystem => 'RedHat', :osfamily => 'RedHat', :operatingsystemrelease => '7.0', 'operatingsystemmajrelease' => '7', 'os' => { 'release' => { 'major' => '7'}, 'name' => 'RedHat', 'family' => 'RedHat'} } }
+    let(:pre_condition) { "class { 'threatstack': deploy_key => '#{deploy_key}', ts_hostname => '#{ts_hostname}', rulesets => ['Default Ruleset', 'Service Ruleset'], agent_config_args => [{'log.level' => 'debug'}]}" }
+
+    it { should contain_exec('threatstack-agent-setup').with(
+      :command => "/usr/bin/tsagent setup --deploy-key='#{deploy_key}' --hostname='#{ts_hostname}' --ruleset='Default Ruleset,Service Ruleset'"
+    )}
+  end
+
+  context 'on CentOS 8' do
+    let(:facts) { { :operatingsystem => 'CentOS', :osfamily => 'RedHat',:operatingsystemrelease => '8.2.2004', 'operatingsystemmajrelease' => '8', 'os' => { 'release' => { 'major' => '8'}, 'name' => 'CentOS', 'family' => 'RedHat'} } }
     let(:pre_condition) { "class { 'threatstack': deploy_key => '#{deploy_key}', ts_hostname => '#{ts_hostname}', rulesets => ['Default Ruleset', 'Service Ruleset'], agent_config_args => [{'log.level' => 'debug'}]}" }
 
     it { should contain_exec('threatstack-agent-setup').with(
