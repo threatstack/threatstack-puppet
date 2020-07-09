@@ -49,6 +49,10 @@
 #   Manage agent package version.
 #   type: string
 #
+# [*repo_enabled*]
+#   Enable/disable yum repo
+#   type: string
+#
 # [*repo_url*]
 #   URL of installation repo.  Useful to change if managing own repository.  See
 #   also `gpg_key`.
@@ -119,6 +123,7 @@ class threatstack (
   $extra_args              = $::threatstack::params::extra_args,
   $agent_config_args       = undef,
   $repo_class              = $::threatstack::params::repo_class,
+  $repo_enabled            = $::threatstack::params::repo_enabled,
   $repo_url                = $::threatstack::params::repo_url,
   $gpg_key                 = $::threatstack::params::gpg_key,
   $rulesets                = $::threatstack::params::rulesets,

@@ -1,6 +1,6 @@
 {
   "name": "threatstack-threatstack",
-  "version": "2.0.9",
+  "version": "2.0.10",
   "author": "Threat Stack",
   "license": "Apache-2.0",
   "summary": "Installs the Threat Stack agent",
@@ -17,22 +17,22 @@
   "operatingsystem_support": [
     {
     "operatingsystem":"RedHat",
-    "operatingsystemrelease":[ "7.0", "7.5" ]
+    "operatingsystemrelease":[ "7.0", "7.5", "8.0" ]
     },
     {
     "operatingsystem":"CentOS",
-    "operatingsystemrelease":[ "7.0", "7.5" ]
+    "operatingsystemrelease":[ "7.0", "7.5", "8.0" ]
     },
     {
     "operatingsystem":"Amazon"
     },
     {
     "operatingsystem": "Ubuntu",
-    "operatingsystemrelease": [ "18.04", "16.04" ]
+    "operatingsystemrelease": [ "20.04", "18.04", "16.04" ]
     },
     {
     "operatingsystem": "Debian",
-    "operatingsystemrelease": [ "9", "8" ]
+    "operatingsystemrelease": [ "10", "9", "8" ]
     },
     {
     "operatingsystem": "Windows",

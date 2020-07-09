@@ -49,6 +49,7 @@ class threatstack::params {
     }
     'RedHat': {
       $repo_class       = '::threatstack::yum'
+      $repo_enabled     = '1'
       $gpg_key          = 'https://app.threatstack.com/RPM-GPG-KEY-THREATSTACK'
       $gpg_key_file     = '/etc/pki/rpm-gpg/RPM-GPG-KEY-THREATSTACK'
       $gpg_key_file_uri = "file://${gpg_key_file}"

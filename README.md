@@ -54,6 +54,7 @@ Parameters
 * `threatstack::package_version` [optional string] - version of the `threatstack-agent` package to install (Default: `installed`)
 * `threatstack::repo_class` [optional string] - name of puppet class that configures the threatstack package repo (Default: either `threatstack::apt` or `threatstack::yum`, set in `threatstack::params` based on operating system)
 * `threatstack::repo_url` [optional string] - url used by threatstack package repo (Default: defined in `threatstack::params` for Debian and RedHat operating system families.)
+* `threatstack::repo_enabled` [optional string] - enable/disable the threatstack repo (Default: defined in `threatstack::params` for RedHat operating system families.)
 * `threatstack::windows_download_url` [optional string] - url used to download Threatstack Agent MSI on Windows 
 * `threatstack::windows_install_options` [optional array] - Windows MSI install options
 * `threatstack::windows_ts_package` [optional string] - Windows MSI package name
