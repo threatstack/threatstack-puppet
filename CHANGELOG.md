@@ -2,6 +2,15 @@
 
 We'll track changes here starting with details about the 2.0 release and reference to earlier releases.
 
+## 2.0.10
+### Added
+- updated README with support for
+  - Debian 10
+  - Ubuntu 20.04
+  - CentOS/RedHat 8
+- updated tests for newer distros
+- added optional parameter to enable/disable yum repo on rhel
+
 ## 2.0.9
 ### Fixed
 - merged PR simplifying ruleset args
