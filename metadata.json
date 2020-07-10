@@ -7,6 +7,13 @@
   "source": "https://github.com/threatstack/threatstack-puppet",
   "issues_url": "https://github.com/threatstack/threatstack-puppet/issues",
   "tags": ["threatstack"],
+  "data_provider": "hiera",
+  "requirements": [
+    {
+      "name": "puppet",
+      "version_requirement": ">= 4.5.0 < 7.0.0"
+    }
+  ],
   "dependencies": [
     { "name": "puppetlabs/stdlib", "version_requirement": ">= 4.2.2" },
     {"name": "puppetlabs/apt", "version_requirement": ">= 6.2.1"},
