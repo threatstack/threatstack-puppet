@@ -7,7 +7,7 @@ describe 'threatstack::yum' do
 
   context 'on RedHat 8' do
     let(:facts) {  { :operatingsystem => 'RedHat', 'operatingsystemrelease' => '8.2.2004', :osfamily => 'RedHat', 'operatingsystemmajrelease' => '8', 'os' => { 'release' => { 'major' => '8'}, 'name' => 'RedHat', 'family' => 'RedHat'} } }
-    let(:pre_condition) { "class { 'threatstack': deploy_key => '#{deploy_key}', gpg_key => 'https://app.threatstack.com/RPM-GPG-KEY-THREATSTACK' }" }
+    let(:pre_condition) { "class { 'threatstack': deploy_key => '#{deploy_key}', gpg_key => 'https://app.threatstack.com/RPM-GPG-KEY-THREATSTACK', repo_enabled => '1'}" }
 
     context 'default' do
       it { should contain_yumrepo('threatstack').with(
@@ -37,7 +37,7 @@ describe 'threatstack::yum' do
 
   context 'on CentOS 8' do
     let(:facts) { {:operatingsystem => 'CentOS', 'operatingsystemrelease' => '8.2.2004', :osfamily => 'RedHat', 'operatingsystemmajrelease' => '8', 'os' => { 'release' => { 'major' => '8'}, 'name' => 'CentOS', 'family' => 'RedHat'} } }
-    let(:pre_condition) { "class { 'threatstack': deploy_key => '#{deploy_key}', gpg_key => 'https://app.threatstack.com/RPM-GPG-KEY-THREATSTACK' }" }
+    let(:pre_condition) { "class { 'threatstack': deploy_key => '#{deploy_key}', gpg_key => 'https://app.threatstack.com/RPM-GPG-KEY-THREATSTACK', repo_enabled => '1' }" }
 
     context 'default' do
       it { should contain_yumrepo('threatstack').with(
