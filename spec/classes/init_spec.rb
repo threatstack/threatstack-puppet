@@ -77,7 +77,7 @@ describe 'threatstack' do
   end
 
   context 'on CentOS 8' do
-    let(:facts) {  { :osfamily => 'CentOS', :operatingsystem => 'CentOS', :operatingsystemrelease => '8.2.2004', 'operatingsystemmajrelease' => '8', 'os' => { 'release' => { 'full' => '8.2.2004', 'major' => '8', 'minor' => '2'}, 'name' => 'CentOS', 'family' => 'RedHat'} } }
+    let(:facts) {  { :osfamily => 'RedHat', :operatingsystem => 'CentOS', :operatingsystemrelease => '8.2.2004', 'operatingsystemmajrelease' => '8', 'os' => { 'release' => { 'full' => '8.2.2004', 'major' => '8', 'minor' => '2'}, 'name' => 'CentOS', 'family' => 'RedHat'} } }
     let(:params) { { :deploy_key => "#{deploy_key}" } }
 
     it 'should compile' do should create_class('threatstack') end
