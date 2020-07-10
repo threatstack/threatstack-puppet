@@ -86,6 +86,7 @@ class threatstack::params {
     'Debian': {
       $repo_class         = '::threatstack::apt'
       $repo_url           = 'https://pkg.threatstack.com/v2/Ubuntu'
+      $repo_enabled       = undef
       $repo_gpg_id        = 'ACCC2B02EA3A2409557B0AB991BB3B3C6EE04BD4'
       $release            = $facts['os']['distro']['codename']
       $repos              = 'main'
