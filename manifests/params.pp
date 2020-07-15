@@ -49,6 +49,7 @@ class threatstack::params {
     }
     'RedHat': {
       $repo_class       = '::threatstack::yum'
+      $repo_enabled     = '1'
       $gpg_key          = 'https://app.threatstack.com/RPM-GPG-KEY-THREATSTACK'
       $gpg_key_file     = '/etc/pki/rpm-gpg/RPM-GPG-KEY-THREATSTACK'
       $gpg_key_file_uri = "file://${gpg_key_file}"
@@ -85,6 +86,7 @@ class threatstack::params {
     'Debian': {
       $repo_class         = '::threatstack::apt'
       $repo_url           = 'https://pkg.threatstack.com/v2/Ubuntu'
+      $repo_enabled       = undef
       $repo_gpg_id        = 'ACCC2B02EA3A2409557B0AB991BB3B3C6EE04BD4'
       $release            = $facts['os']['distro']['codename']
       $repos              = 'main'

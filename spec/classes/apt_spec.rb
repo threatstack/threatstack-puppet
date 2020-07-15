@@ -22,6 +22,22 @@ describe 'threatstack::apt' do
       }
   end
 
+  context 'on Debian 10' do
+    let(:facts) { {'operatingsystem' => 'Debian', 'osfamily' => 'Debian', 'os' => { 'name' => 'Debian', 'release' => {'full' => '10.4', 'major' => '10', 'minor' => '4'}, 'distro' => {'codename' => 'buster'}, 'family' => 'Debian'} } }
+    let(:params) { { 'location' => REPO_URL, 'release' => 'buster', 'repos' => REPO_TYPE, 'key' => GPG_KEY_ID} }
+    it {
+        is_expected.to contain_apt__source('threatstack').with(ensure: 'present', location: REPO_URL, release: 'buster', repos: REPO_TYPE)
+      }
+  end
+
+  context 'on Ubuntu 20.04' do
+    let(:facts) { {'osfamily' => 'Debian', 'os' => { 'name' => 'Ubuntu', 'release' => {'full' => '20.04', 'major' => '20.04'}, 'distro' => {'codename' => 'focal'}, 'family' => 'Debian'} }}
+    let(:params) { { 'location' => REPO_URL, 'release' => 'focal', 'repos' => REPO_TYPE, 'key' => GPG_KEY_ID} }
+    it {
+        is_expected.to contain_apt__source('threatstack').with(ensure: 'present', location: REPO_URL, release: 'focal', repos: REPO_TYPE)
+      }
+  end
+
   context 'on Ubuntu 18.04' do
     let(:facts) { {'osfamily' => 'Debian', 'os' => { 'name' => 'Ubuntu', 'release' => {'full' => '18.04', 'major' => '18.04'}, 'distro' => {'codename' => 'bionic'}, 'family' => 'Debian'} }}
     let(:params) { { 'location' => REPO_URL, 'release' => 'bionic', 'repos' => REPO_TYPE, 'key' => GPG_KEY_ID} }

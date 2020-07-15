@@ -1,4 +1,5 @@
 ---
 threatstack::params:
     repo_class: '::threatstack::yum'
+    repo_enabled: '1'
     gpg_key: 'https://app.threatstack.com/RPM-GPG-KEY-THREATSTACK'

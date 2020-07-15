@@ -39,7 +39,7 @@ class threatstack::yum inherits ::threatstack::params {
 
   yumrepo { 'threatstack':
     descr    => 'Threat Stack Package Repository',
-    enabled  => 1,
+    enabled  => $::threatstack::repo_enabled,
     baseurl  => $::threatstack::repo_url,
     gpgcheck => 1,
     gpgkey   => $::threatstack::gpg_key_file_uri,
