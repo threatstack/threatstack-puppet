@@ -106,3 +106,7 @@ Integration testing requires setting `TS_DEPLOY_KEY` in the environment to a val
 export TS_DEPLOY_KEY='<deploy_key>'
 bundle exec kitchen test
 ```
+
+Contributing enhancements/fixes
+===
+See the [CONTRIBUTING document](CONTRIBUTING.md) for details.
