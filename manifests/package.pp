@@ -25,9 +25,8 @@ class threatstack::package {
       fail('auditd is already defined or managed. please ensure the service is disabled and stopped before running Threatstack Agent.')
     } else {
       class {'auditd':
-        manage_service => true,
-        service_ensure => 'stopped',
-        service_enable => false
+        enable  => false,
+        at_boot => false
       }
     }
       $required = [ Class[$::threatstack::repo_class], Service['auditd'] ]

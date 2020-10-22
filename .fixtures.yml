@@ -5,7 +5,7 @@ fixtures:
     stdlib: "puppetlabs/stdlib"
     apt: "puppetlabs/apt"
     translate: "puppetlabs/translate"
-    auditd: "kemra102/auditd"
+    auditd: "simp/auditd"
     archive: "puppet/archive"
     remote_file: "lwf/remote_file"
     concat: "puppetlabs/concat"
