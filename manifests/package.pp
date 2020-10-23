@@ -21,15 +21,16 @@ class threatstack::package {
   class { $::threatstack::repo_class: }
 
   if $::threatstack::disable_auditd {
-    if defined(Service['auditd']) {
+    if defined(Service[auditd]) {
       fail('auditd is already defined or managed. please ensure the service is disabled and stopped before running Threatstack Agent.')
     } else {
       class {'auditd':
-        enable  => false,
-        at_boot => false
+        enable     => false,
+        at_boot    => false,
+        plugin_dir => '/etc/audisp/plugins.d'
       }
+    $required = [ Class[$::threatstack::repo_class], Class['auditd'] ]
     }
-      $required = [ Class[$::threatstack::repo_class], Service['auditd'] ]
     } else {
     $required = Class[$::threatstack::repo_class]
   }
