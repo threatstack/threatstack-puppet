@@ -6,6 +6,8 @@ fixtures:
     apt: "puppetlabs/apt"
     translate: "puppetlabs/translate"
     auditd: "simp/auditd"
+    simplib: "simp/simplib"
+    augeaslibs: "herculesteam/augeasproviders_grub"
     archive: "puppet/archive"
     remote_file: "lwf/remote_file"
     concat: "puppetlabs/concat"
