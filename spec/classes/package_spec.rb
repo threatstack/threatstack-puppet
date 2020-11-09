@@ -5,7 +5,7 @@ describe 'threatstack::package' do
 
   context 'on RedHat 8' do
       let(:facts) {  { :osfamily => 'RedHat', :operatingsystem => 'RedHat',  :operatingsystemrelease => '8.2', 'operatingsystemmajrelease' => '8', 'os' => { 'release' => { 'full' => '8.2', 'major' => '8', 'minor' => '2'}, 'name' => 'RedHat', 'family' => 'RedHat'} } }
-    let(:pre_condition) { "class { 'threatstack': deploy_key => '#{deploy_key}', gpg_key => 'https://app.threatstack.com/RPM-GPG-KEY-THREATSTACK', repo_class => '::threatstack::yum', repo_enabled => '1' }" }
+    let(:pre_condition) { "class { 'threatstack': deploy_key => '#{deploy_key}', gpg_key => 'https://app.threatstack.com/RPM-GPG-KEY-THREATSTACK', repo_class => '::threatstack::yum', repo_enabled => '1', disable_auditd => true }"  }
 
     context 'package' do
       it { should contain_package('threatstack-agent').with_ensure('installed') }
@@ -14,7 +14,7 @@ describe 'threatstack::package' do
 
   context 'on RedHat 7' do
       let(:facts) {  { :osfamily => 'RedHat', :operatingsystem => 'RedHat',  :operatingsystemrelease => '7.5', 'operatingsystemmajrelease' => '7', 'os' => { 'release' => { 'full' => '7.5', 'major' => '7', 'minor' => '5'}, 'name' => 'RedHat', 'family' => 'RedHat'} } }
-    let(:pre_condition) { "class { 'threatstack': deploy_key => '#{deploy_key}', gpg_key => 'https://app.threatstack.com/RPM-GPG-KEY-THREATSTACK', repo_class => '::threatstack::yum', repo_enabled => '1' }" }
+    let(:pre_condition) { "class { 'threatstack': deploy_key => '#{deploy_key}', gpg_key => 'https://app.threatstack.com/RPM-GPG-KEY-THREATSTACK', repo_class => '::threatstack::yum', repo_enabled => '1', disable_auditd => true }"  }
 
     context 'package' do
       it { should contain_package('threatstack-agent').with_ensure('installed') }
@@ -23,7 +23,7 @@ describe 'threatstack::package' do
 
   context 'on CentOS 8' do
     let(:facts) { {:operatingsystem => 'CentOS', :osfamily => 'RedHat', :operatingsystemrelease => '8.2.2004', 'operatingsystemmajrelease' => '8', 'os' => { 'release' => { 'major' => '8'}, 'name' => 'CentOS', 'family' => 'RedHat'} } }
-    let(:pre_condition) { "class { 'threatstack': deploy_key => '#{deploy_key}', gpg_key => 'https://app.threatstack.com/RPM-GPG-KEY-THREATSTACK', repo_class => '::threatstack::yum', repo_enabled => '1' }" }
+    let(:pre_condition) { "class { 'threatstack': deploy_key => '#{deploy_key}', gpg_key => 'https://app.threatstack.com/RPM-GPG-KEY-THREATSTACK', repo_class => '::threatstack::yum', repo_enabled => '1', disable_auditd => true }"  }
 
     context 'package' do
       it { should contain_package('threatstack-agent').with_ensure('installed') }
@@ -32,7 +32,7 @@ describe 'threatstack::package' do
 
   context 'on CentOS 7' do
     let(:facts) { {:operatingsystem => 'CentOS', :osfamily => 'RedHat', :operatingsystemrelease => '7.6.1810', 'operatingsystemmajrelease' => '7', 'os' => { 'release' => { 'major' => '7'}, 'name' => 'CentOS', 'family' => 'RedHat'} } }
-    let(:pre_condition) { "class { 'threatstack': deploy_key => '#{deploy_key}', gpg_key => 'https://app.threatstack.com/RPM-GPG-KEY-THREATSTACK', repo_class => '::threatstack::yum', repo_enabled => '1' }" }
+    let(:pre_condition) { "class { 'threatstack': deploy_key => '#{deploy_key}', gpg_key => 'https://app.threatstack.com/RPM-GPG-KEY-THREATSTACK', repo_class => '::threatstack::yum', repo_enabled => '1', disable_auditd => true }"  }
 
     context 'package' do
       it { should contain_package('threatstack-agent').with_ensure('installed') }
@@ -41,7 +41,7 @@ describe 'threatstack::package' do
 
   context 'on Amazon Linux 2' do
       let(:facts) {  { :operatingsystem => 'Amazon', :osfamily => 'RedHat', :operatingsystemrelease => '2.0', 'operatingsystemmajrelease' => '2', 'os' => {  'release' => { 'major' => '2'}, 'name' => 'Amazon', 'family' => 'RedHat'} } }
-    let(:pre_condition) { "class { 'threatstack': deploy_key => '#{deploy_key}', gpg_key => 'https://app.threatstack.com/RPM-GPG-KEY-THREATSTACK', repo_class => '::threatstack::yum', repo_enabled => '1' }" }
+    let(:pre_condition) { "class { 'threatstack': deploy_key => '#{deploy_key}', gpg_key => 'https://app.threatstack.com/RPM-GPG-KEY-THREATSTACK', repo_class => '::threatstack::yum', repo_enabled => '1', disable_auditd => true }"  }
 
     context 'package' do
       it { should contain_package('threatstack-agent').with_ensure('installed') }
@@ -50,7 +50,7 @@ describe 'threatstack::package' do
 
   context 'on Amazon Linux 1' do
     let(:facts) {  {:operatingsystem => 'Amazon', :osfamily => 'RedHat', :operatingsystemrelease => '2018', 'operatingsystemmajrelease' => '1', 'os' => {  'release' => { 'major' => '1'}, 'name' => 'Amazon', 'family' => 'RedHat'} } }
-    let(:pre_condition) { "class { 'threatstack': deploy_key => '#{deploy_key}', gpg_key => 'https://app.threatstack.com/RPM-GPG-KEY-THREATSTACK', repo_class => '::threatstack::yum', repo_enabled => '1' }" }
+    let(:pre_condition) { "class { 'threatstack': deploy_key => '#{deploy_key}', gpg_key => 'https://app.threatstack.com/RPM-GPG-KEY-THREATSTACK', repo_class => '::threatstack::yum', repo_enabled => '1', disable_auditd => true }" }
 
     context 'package' do
       it { should contain_package('threatstack-agent').with_ensure('installed') }
