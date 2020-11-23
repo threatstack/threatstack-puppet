@@ -2,6 +2,10 @@
 
 We'll track changes here starting with details about the 2.0 release and reference to earlier releases.
 
+## 2.0.11
+- switched to using [simp/auditd](https://forge.puppet.com/modules/simp/auditd) to deal with `auditd`
+  - the [kemra102/auditd](https://forge.puppet.com/modules/kemra102/auditd) module appears to be abandoned and doesn't support RHEL 8
+
 ## 2.0.10
 ### Added
 - updated README with support for
