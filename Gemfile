@@ -21,7 +21,7 @@ group :system_tests do
   gem 'serverspec',      :require => false
   gem 'test-kitchen',    :require => false
   gem 'kitchen-puppet',  :require => false
-  gem 'kitchen-vagrant', :require => false
+  gem 'kitchen-docker', :require => false
 end
 
 if facterversion = ENV['FACTER_GEM_VERSION']
