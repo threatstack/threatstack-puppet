@@ -178,3 +178,9 @@ suites:
   - name: default
     provisioner:
       manifest: site.pp
+  - name: custom
+    provisioner:
+      manifest: site.pp
+      custom_facts:
+        ts_config_args: 
+          log.maxSize: 22
