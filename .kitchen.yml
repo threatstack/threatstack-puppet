@@ -164,15 +164,6 @@ platforms:
       provision_command:
         - sed -i 's/UsePAM yes/UsePAM no/g' /etc/ssh/sshd_config
         - systemctl enable ssh.service
-  # - name: amazonlinux-2
-  # - name: centos-7
-  # - name: centos-8
-  # - name: debian-8
-  # - name: debian-9
-  # - name: debian-10
-  # - name: ubuntu-16.04
-  # - name: ubuntu-18.04
-  # - name: ubuntu-20.04
 
 suites:
   - name: default
@@ -181,6 +172,4 @@ suites:
   - name: custom
     provisioner:
       manifest: site.pp
-      custom_facts:
-        ts_config_args: 
-          log.maxSize: 22
+      facter_file: test/data/test_custom_fact.rb
