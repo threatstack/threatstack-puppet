@@ -55,7 +55,6 @@ platforms:
         - yum install -y audit initscripts
         - sed -i 's/local_events = yes/local_events = no/g' /etc/audit/auditd.conf
         - systemctl enable auditd.service
-    image: centos:7
   - name: centos-7
     driver_config:
       image: centos:7
@@ -86,6 +85,23 @@ platforms:
         - yum install -y audit initscripts
         - sed -i 's/local_events = yes/local_events = no/g' /etc/audit/auditd.conf
         - systemctl enable auditd.service
+  - name: centos-8-arm
+    provisioner:
+      puppet_yum_collections_repo: https://yum.puppet.com/puppet/puppet-release-el-8.noarch.rpm
+    driver_config:
+      image: arm64v8/centos:8
+      run_command: /sbin/init
+      cap_add:
+        - SYS_ADMIN
+      privileged: true
+      run_options:
+        env: container=docker
+      volume:
+        - /sys/fs/cgroup:/sys/fs/cgroup
+      provision_command:
+        - yum install -y audit initscripts
+        - sed -i 's/local_events = yes/local_events = no/g' /etc/audit/auditd.conf
+        - systemctl enable auditd.service
   - name: debian-8
     driver_config:
       image: debian:8
@@ -100,6 +116,8 @@ platforms:
         - sed -i 's/UsePAM yes/UsePAM no/g' /etc/ssh/sshd_config
         - systemctl enable ssh.service
   - name: debian-9
+    provisioner:
+      puppet_apt_collections_repo: http://apt.puppetlabs.com/puppet7-release-stretch.deb
     driver_config:
       image: debian:9
       run_command: /bin/systemd
@@ -152,8 +170,25 @@ platforms:
         - sed -i 's/UsePAM yes/UsePAM no/g' /etc/ssh/sshd_config
         - systemctl enable ssh.service
   - name: ubuntu-20.04
+    provisioner:
+      puppet_apt_collections_repo: https://apt.puppetlabs.com/puppet7-release-focal.deb
     driver_config:
       image: ubuntu:20.04
+      run_command: /sbin/init
+      cap_add:
+        - SYS_ADMIN
+      run_options:
+        env: container=docker
+      volume:
+        - /sys/fs/cgroup:/sys/fs/cgroup
+      provision_command:
+        - sed -i 's/UsePAM yes/UsePAM no/g' /etc/ssh/sshd_config
+        - systemctl enable ssh.service
+  - name: ubuntu-20.04-arm
+    provisioner:
+      puppet_apt_collections_repo: https://apt.puppetlabs.com/puppet7-release-focal.deb
+    driver_config:
+      image: arm64v8/ubuntu:20.04
       run_command: /sbin/init
       cap_add:
         - SYS_ADMIN
