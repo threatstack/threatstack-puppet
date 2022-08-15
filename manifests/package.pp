@@ -26,7 +26,6 @@ class threatstack::package {
     } else {
       class {'auditd':
         enable     => false,
-        at_boot    => false,
         plugin_dir => '/etc/audisp/plugins.d'
       }
     $required = [ Class[$::threatstack::repo_class], Class['auditd'] ]
